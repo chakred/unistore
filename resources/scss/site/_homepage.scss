@@ -1,0 +1,149 @@
+body *{
+    font-family: 'Montserrat', sans-serif;
+}
+.head-block {
+    >div {
+        display: flex;
+        justify-content: center;
+        padding: 5px;
+        align-items: center;
+        >div {
+            display: inline-block;
+            height: 50px;
+            text-align: center;
+            overflow: hidden;
+            vertical-align: middle;
+            img {
+                object-fit: cover;
+                height: 50px;
+            }
+        }
+        >p {
+            font-size: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 0;
+            padding: 5px;
+            >span {
+                font-size: 13px;
+                font-weight: 200;
+            }
+        }
+    }
+}
+
+.cat-block {
+    overflow: hidden;
+    >a {
+        min-height: 160px;
+        position: relative;
+        img {
+            object-fit: cover;
+            min-width: 140px;
+            max-width: 235px;
+            margin: auto;
+            display: block;
+            padding: 15px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+    }
+    .card-body {
+        >ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        a {
+            color: black;
+            font-size: 13px;
+        }
+        .card-title {
+            h4 {
+                a {
+                    font-size: 14px;
+                    color: black;
+                }
+            }
+        }
+        .card-text {
+            font-size: 13px;
+        }
+        .card-text.trade-mark {
+            font-weight: 600;
+        }
+        h5 {
+            text-align: center;
+            a {
+                text-align: center;
+                color: #272727;
+                text-transform: uppercase;
+                font-size: 15px;
+                font-weight: bold;
+            }
+        }
+        h6 {
+            text-align: left;
+            color: #28a745;
+            font-weight: 800;
+            font-size: 18px;
+        }
+    }
+    .card-footer {
+        text-align: center;
+        small {
+            a {
+                color: black;
+                text-transform: uppercase;
+                font-weight: 700;
+            }
+        }
+    }
+}
+
+.goods-image {
+    padding: 15px;
+    img {
+        margin: auto;
+    }
+}
+
+.card-body {
+    >ul {
+        list-style: none;
+        padding-left: 0;
+        >li {
+            a {
+                color:#212529;
+            }
+        }
+    }
+}
+.card-header {
+    button {
+        font-weight: bold;
+        color: #212529;
+    }
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    min-height: 50px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
