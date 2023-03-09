@@ -12,7 +12,7 @@ class Mark extends CoreModel
      * @var string[]
      */
     protected $fillable = [
-        'name_mark',
+        'name',
         'img_path',
         'slug'
     ];

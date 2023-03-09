@@ -19,6 +19,7 @@ use Inertia\Inertia;
 
 Route::get('/', App\Http\Controllers\FrontPageController::class);
 
+
 //Route::get('/', function () {
 //    return Inertia::render('Welcome', [
 //        'canLogin' => Route::has('login'),
@@ -29,7 +30,7 @@ Route::get('/', App\Http\Controllers\FrontPageController::class);
 //});
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Admin/Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

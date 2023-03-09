@@ -1,5 +1,8 @@
 <?php
 
+use Modules\Mark\Http\Controllers\IndexController;
+use Modules\Mark\Http\Controllers\StoreController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,5 +15,6 @@
 */
 
 Route::prefix('mark')->group(function() {
-    Route::get('/', 'MarkController@index');
+    Route::get('/', IndexController::class);
+    Route::post('/create', StoreController::class)->name('mark.store');
 });
