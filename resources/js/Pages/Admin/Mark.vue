@@ -71,7 +71,7 @@ export default {
     name: 'Mark',
 
     /**
-     * Components
+     * Components.
      */
     components: {
         Head,
@@ -80,7 +80,7 @@ export default {
     },
 
     /**
-     * Composition API
+     * Composition API.
      */
     setup() {
         const form = useForm({
@@ -91,6 +91,9 @@ export default {
         return { form };
     },
 
+    /**
+     * Props.
+     */
     props: {
         marks: {
             type: Object,

@@ -15,6 +15,6 @@ use Modules\Mark\Http\Controllers\StoreController;
 */
 
 Route::prefix('mark')->group(function() {
-    Route::get('/', IndexController::class);
+    Route::get('/', IndexController::class)->name('mark.index');
     Route::post('/create', StoreController::class)->name('mark.store');
 });

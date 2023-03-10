@@ -19,12 +19,19 @@
                                 Mark/Model
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item" href="#">Mark</a></li>
+                                <li>
+                                    <Link :href="route('mark.index')" class="dropdown-item">Mark</Link>
+                                </li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#">Model</a></li>
+                                <li>
+                                    <Link :href="route('model.index')" class="dropdown-item">Model</Link>
+                                </li>
                             </ul>
+                        </li>
+                        <li class="nav-item">
+                            <Link :href="route('mark.index')" class="nav-link">Categories</Link>
                         </li>
                     </ul>
                 </div>

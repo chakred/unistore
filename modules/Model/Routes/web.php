@@ -12,5 +12,5 @@
 */
 
 Route::prefix('model')->group(function() {
-    Route::get('/', 'ModelController@index');
+    Route::get('/', IndexController::class)->name('model.index');
 });

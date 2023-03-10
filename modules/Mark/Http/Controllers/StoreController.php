@@ -2,31 +2,18 @@
 
 namespace Modules\Mark\Http\Controllers;
 
-use App\ImageHandler\ImageHandler;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Str;
-use Modules\Mark\Entities\Mark;
-use Inertia\Inertia;
+use Modules\Mark\Actions\StoreMarkAction;
+use Modules\Mark\Http\Requests\StoreMarkAutoRequest;
 
 class StoreController extends Controller
 {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function __invoke(StoreMarkAutoRequest $request, StoreMarkAction $action)
     {
-
-        $folderDirectoryName = 'marks';
-        $image = ImageHandler::saveImage($request, $folderDirectoryName);
-
-
-        Mark::create([
-            'name' =>  $request->name,
-            'img_path' => $image,
-            'slug' => Str::slug($request->name, '-')
-        ]);
-        return back();
+        $action->handle($request);
+        return redirect()->route('mark.index');
     }
 }

@@ -41,10 +41,19 @@
 </template>
 
 <script>
+import { Link } from '@inertiajs/vue3';
+
 export default {
     /**
      * Name.
      */
     name: 'Nav',
+
+    /**
+     * Components.
+     */
+    components: {
+        Link,
+    },
 }
 </script>
