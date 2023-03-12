@@ -25,7 +25,7 @@ class Mark extends CoreModel
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function autoModels(): HasMany
+    public function models(): HasMany
     {
         return $this->hasMany(Model::class, 'mark_id' , 'id');
     }

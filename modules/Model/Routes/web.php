@@ -1,5 +1,8 @@
 <?php
 
+use Modules\Model\Http\Controllers\IndexController;
+use Modules\Model\Http\Controllers\StoreController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,4 +16,5 @@
 
 Route::prefix('model')->group(function() {
     Route::get('/', IndexController::class)->name('model.index');
+    Route::post('/create', StoreController::class)->name('model.store');
 });

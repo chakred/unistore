@@ -14,14 +14,24 @@ class Model extends CoreModel
     public $timestamps = false;
 
     /**
-     * @var string
+     * @var string[]
      */
-    protected $primaryKey = 'id';
+    protected $fillable = [
+        'name',
+        'year_start',
+        'year_end',
+        'engine',
+        'engine_type',
+        'transmission',
+        'transmission_type',
+        'img_path',
+        'slug'
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function autoMark(): BelongsTo
+    public function mark(): BelongsTo
     {
         return $this->belongsTo(Mark::class, 'mark_id' , 'id');
     }

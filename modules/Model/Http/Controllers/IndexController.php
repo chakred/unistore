@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Model\Entities\Model;
 use Inertia\Inertia;
+use Modules\Model\Transformers\ModelResource;
 
 class IndexController extends Controller
 {
@@ -16,8 +17,7 @@ class IndexController extends Controller
     public function __invoke(Request $request)
     {
         return Inertia::render('Admin/Model', [
-            'marks' => Model::all(),
-            'viewNumbers' => 0,
+            'models' => Model::all(),
         ]);
     }
 }

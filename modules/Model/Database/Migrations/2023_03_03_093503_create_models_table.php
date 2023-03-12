@@ -12,15 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('models', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->integer('mark_id')->unsigned();
-            $table->string('name_model');
-            $table->integer('year')->nullable();
-            $table->integer('last_year')->unsigned()->nullable();
+            $table->string('name');
+            $table->integer('year_start')->nullable();
+            $table->integer('year_end')->unsigned()->nullable();
             $table->string('engine', 100);
-            $table->string('type_of_engine')->nullable();
+            $table->string('engine_type')->nullable();
             $table->string('transmission');
-            $table->string('type_of_transmission')->nullable();
+            $table->string('transmission_type')->nullable();
             $table->string('img_path')->nullable();
             $table->string('slug', 255)->default('');
 

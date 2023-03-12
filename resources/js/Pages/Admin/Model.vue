@@ -16,17 +16,24 @@
                         <th scope="col">Engine's type</th>
                         <th scope="col">Transition</th>
                         <th scope="col">Transition's type</th>
+                        <th scope="col">Slug</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="mark in marks">
-                        <th scope="row">{{ mark.id }}</th>
+                    <tr v-for="model in models">
+                        <th scope="row">{{ model.id }}</th>
                         <td><img
-                            :src="/upload/+ mark.img_path"
+                            :src="/upload/+ model.img_path"
                             width="100"
                         ></td>
-                        <td>{{ mark.name }}</td>
-                        <td>{{ mark.slug }}</td>
+                        <td>{{ model.name }}</td>
+                        <td>{{ model.name }}</td>
+                        <td>{{ model.year_start }} - {{ model.year_end }}</td>
+                        <td>{{ model.engine }}</td>
+                        <td>{{ model.engine_type }}</td>
+                        <td>{{ model.transmission }}</td>
+                        <td>{{ model.transmission_type }}</td>
+                        <td>{{ model.slug }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -76,7 +83,7 @@ export default {
      * Props.
      */
     props: {
-        marks: {
+        models: {
             type: Object,
             default: {},
         }

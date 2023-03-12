@@ -1,7 +1,7 @@
 <template>
     <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <form @submit.prevent="" enctype="multipart/form-data">
+        <form @submit.prevent="form.post(route('model.store'))" enctype="multipart/form-data">
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -45,7 +45,7 @@
                                 <div class="form-group mb-3">
                                     <label for="startIssue">Start issue</label>
                                     <select
-                                        v-model="form.startYear"
+                                        v-model="form.year_start"
                                         class="form-control"
                                         id="startIssue"
                                     >
@@ -55,7 +55,7 @@
                                 <div class="form-group mb-3">
                                     <label for="endIssue">End issue</label>
                                     <select
-                                        v-model="form.endYear"
+                                        v-model="form.year_end"
                                         class="form-control"
                                         id="endIssue"
                                     >
@@ -63,23 +63,23 @@
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="engineValue">Engine value</label>
+                                    <label for="engine">Engine value</label>
                                     <select
-                                        v-model="form.engineValue"
+                                        v-model="form.engine"
                                         class="form-control"
-                                        id="engineValue"
+                                        id="engine"
                                     >
-                                        <option v-for="engineValue in engineValues">{{ engineValue }}</option>
+                                        <option v-for="engine in engines">{{ engine }}</option>
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="engineType">Engine type</label>
+                                    <label for="engine_type">Engine type</label>
                                     <select
-                                        v-model="form.engineType"
+                                        v-model="form.engine_type"
                                         class="form-control"
-                                        id="engineType"
+                                        id="engine_type"
                                     >
-                                        <option v-for="engineType in engineTypes">{{ engineType }}</option>
+                                        <option v-for="engine_type in engine_types">{{ engine_type }}</option>
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
@@ -93,12 +93,12 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="transmissionType" class="form-label">Transmission type</label>
+                                    <label for="transmission_type" class="form-label">Transmission type</label>
                                     <input
-                                        v-model="form.transmissionType"
+                                        v-model="form.transmission_type"
                                         type="text"
                                         class="form-control"
-                                        id="transmissionType"
+                                        id="transmission_type"
                                     >
                                 </div>
                             </div>
@@ -149,8 +149,8 @@ export default {
         }
 
         const years = fillRange(1990, new Date().getFullYear());
-        const engineValues = fillRange(0.9, 5.0, true);
-        const engineTypes = [
+        const engines = fillRange(0.9, 5.0, true);
+        const engine_types = [
             'Fuel',
             'Petrol',
             'Hybrid',
@@ -164,19 +164,19 @@ export default {
         const form = useForm({
             name: '',
             picture: null,
-            engineValue: '',
-            startYear: '',
-            endYear: '',
-            engineType: '',
+            engine: '',
+            engine_type: '',
+            year_start: '',
+            year_end: '',
             transmission: '',
-            transmissionType: '',
+            transmission_type: '',
         });
 
         return {
             form,
             years,
-            engineValues,
-            engineTypes,
+            engines,
+            engine_types,
             transmissions,
         };
     },
