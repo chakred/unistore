@@ -22,3 +22,4 @@ It includes the pack. nWidart/laravel-modules
 - **php artisan module:migrate ModuleName**
 - **php artisan module:make-seed seed_fake_module_name ModuleName**
 - **php artisan module:make-model ModuleName ModelName**
+- **php artisan module:make-migration create_fake_module_table ModuleNme**

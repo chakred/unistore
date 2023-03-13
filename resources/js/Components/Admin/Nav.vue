@@ -31,7 +31,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <Link :href="route('mark.index')" class="nav-link">Categories</Link>
+                            <Link :href="route('category.index')" class="nav-link">Categories</Link>
                         </li>
                     </ul>
                 </div>
