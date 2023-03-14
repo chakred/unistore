@@ -19,10 +19,20 @@ class StoreCategoryAction
         $folderDirectoryName = 'categories';
         $image = ImageHandler::saveImage($request, $folderDirectoryName);
 
-        return Category::create([
-            'name'     =>  $request->name,
+        $data = [
+            'name'     => $request->name,
+            'desc'     => $request->desc,
             'img_path' => $image,
             'slug'     => Str::slug($request->name, '-')
-        ]);
+        ];
+
+        if (!$request->has('parent_id')) {
+            return Category::create($data);  
+        };
+       
+        return Category::find($request->parent_id)
+            ->children()
+            ->create($data);
+
     }
 }

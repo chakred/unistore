@@ -1,11 +1,11 @@
 <template>
     <!-- Modal -->
     <div class="modal fade" id="categoryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
-        <form @submit.prevent="form.post(route('model.store'))" enctype="multipart/form-data">
+        <form @submit.prevent="form.post(route('category.store'))" enctype="multipart/form-data">
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="categoryModalLabel"><strong>Add auto's model:</strong></h1>
+                        <h1 class="modal-title fs-5" id="categoryModalLabel"><strong>Add category:</strong></h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -31,17 +31,29 @@
                                     >
                                 </div>
                                 <div class="mb-3">
-                                    <label for="model" class="form-label">Category desc.</label>
+                                    <label for="categoryDesc" class="form-label">Category desc.</label>
                                     <input
-                                        v-model="form.name"
+                                        v-model="form.desc"
                                         type="text"
                                         class="form-control"
-                                        id="model"
-                                        aria-describedby="model"
+                                        id="categoryDesc"
+                                        aria-describedby="categoryDesc"
                                     >
                                 </div>
-
-                                <div class="form-group mb-3">
+                                <div class="form-check">
+                                    <label for="subCategoryMake" class="form-label">Make sub-category</label>
+                                    <input
+                                        v-model="subCatEnable"
+                                        type="checkbox"
+                                        class="form-check-input"
+                                        id="subCategoryMake"
+                                        aria-describedby="subCategoryMake"
+                                    >
+                                </div>
+                                <div 
+                                    v-if="subCatEnable"
+                                    class="form-group mb-3"
+                                >
                                     <label for="parentCategory">Parent category</label>
                                     <select
                                         v-model="form.parent_id"
@@ -81,10 +93,19 @@ export default {
      * Props.
      */
     props: {
-      categories: {
-          type: Object,
-          default: {},
-      }
+        categories: {
+            type: Object,
+            default: {},
+        }
+    },
+
+    /**
+     * Data.
+     */
+    data() {
+        return {
+            subCatEnable: false,
+        };
     },
 
     /**

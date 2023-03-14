@@ -1,6 +1,8 @@
 <?php
 
 use Modules\Category\Http\Controllers\IndexController;
+use Modules\Category\Http\Controllers\StoreController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +16,5 @@ use Modules\Category\Http\Controllers\IndexController;
 
 Route::prefix('category')->group(function() {
     Route::get('/', IndexController::class)->name('category.index');
-//    Route::post('/create', StoreController::class)->name('category.store');
+    Route::post('/create', StoreController::class)->name('category.store');
 });

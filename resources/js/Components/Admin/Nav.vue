@@ -38,6 +38,21 @@
             </div>
         </div>
     </nav>
+    <div class="pt-5" style="background:#f6e2e2">
+        <div class="container pt-4">
+            <div class="row gx-5 pb-3">
+                <div class="col-10">
+                    {{ pageName }}
+                </div>
+                <div 
+                    v-if="createButtonAction"
+                    class="col"
+                >
+                    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" :data-bs-target="createButtonAction">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -53,5 +68,25 @@ export default {
      * Parent component.
      */
     extends: Nav,
+
+    computed: {
+        currentRouteName() {
+            return this.$route.name;
+        }
+    },
+
+    /**
+     * props.
+     */
+    props: {
+        pageName: {
+            type: String,
+            default: 'Page name',
+        },
+        createButtonAction: {
+            type: String,
+            default: null,
+        }
+    }
 }
 </script>

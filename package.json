@@ -18,6 +18,8 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
+        "@popperjs/core": "^2.11.6",
+        "bootstrap": "^5.2.3",
         "vue3-easy-data-table": "^1.5.36"
     }
 }

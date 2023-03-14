@@ -3,16 +3,26 @@
 namespace Modules\Category\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
 {
-    use HasFactory;
+    /**
+     * Fillable.
+     */
+    protected $fillable = [
+        'paremt_id',
+        'name',
+        'desc',
+        'img_path',
+        'slug'
+    ];
 
-    protected $fillable = [];
-    
-    protected static function newFactory()
+    /**
+     * Children.
+     */
+    public function children(): HasMany
     {
-        return \Modules\Category\Database\factories\CategoryFactory::new();
+        return $this->hasMany(Category::class , 'parent_id');
     }
 }

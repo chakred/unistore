@@ -1,9 +1,11 @@
 <template>
     <Head title="Model" />
-    <Nav />
+    <Nav 
+        createButtonAction="#modelModal"
+    />
     <div class="container text-center mt-20">
         <div class="row">
-            <div class="col-10">
+            <div class="col">
                 <table class="table">
                     <thead>
                     <tr>
@@ -37,9 +39,6 @@
                     </tr>
                     </tbody>
                 </table>
-            </div>
-            <div class="col-2">
-                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Create</button>
             </div>
         </div>
     </div>

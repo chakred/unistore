@@ -1,9 +1,11 @@
 <template>
     <Head title="Model" />
-    <Nav />
-    <div class="container text-center mt-20">
+    <Nav 
+        createButtonAction="#categoryModal"
+    />
+    <div class="container text-center mt-10">
         <div class="row">
-            <div class="col-10">
+            <div class="col-12">
                 <table class="table">
                     <thead>
                     <tr>
@@ -24,24 +26,23 @@
                             width="100"
                         ></td>
                         <td>{{ category.name }}</td>
-                        <td>{{ category.description }}</td>
+                        <td>{{ category.desc }}</td>
                         <td>{{ category.slug }}</td>
-                        <td>{{ category.parent_id }}</td>
+                        <td>{{ parentCategory(category) }}</td>
                         <td>{{ category.parent_id }}</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="col-2">
-                <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#categoryModal">Create</button>
-            </div>
         </div>
     </div>
-    <CreateCategoryModal />
+    <CreateCategoryModal 
+        :categories="categories"
+    />
 </template>
 
 <script>
-import { Head, useForm } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
 import Nav from '@/Components/Admin/Nav.vue';
 import CreateCategoryModal from '@/Components/Admin/CreateCategoryModal.vue';
 
@@ -57,27 +58,23 @@ export default {
     components: {
         CreateCategoryModal,
         Head,
-        Nav,
-        useForm
+        Nav
     },
 
     /**
-     * Composition API.
+     * Methods
      */
-    setup() {
-        const form = useForm({
-            name: '',
-            picture: null,
-        })
-
-        return { form };
+    methods: {
+        parentCategory(category) {
+            return category.parent_id ? category.name : '-';
+        }
     },
 
     /**
      * Props.
      */
     props: {
-        models: {
+        categories: {
             type: Object,
             default: {},
         }
