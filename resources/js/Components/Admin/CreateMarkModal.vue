@@ -27,17 +27,21 @@
                                 class="form-control"
                                 id="yearAuto"
                             >
-                                <option value="Renault" selected>Renault</option>
-                                <option value="Smart">Smart</option>
-                                <option value="Saab">Saab</option>
+                                <option 
+                                    v-for="mark in marksList" 
+                                    :key="mark"
+                                    :value="mark"
+                                >
+                                {{ mark }}
+                                </option>
                             </select>
                         </div>
                             </div>
                         </div>
                     <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-outline-success">Submit</button>
-                        </div>
+                        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-success">Submit</button>
+                    </div>
                 </div>
             </div>
         </form>
@@ -46,6 +50,7 @@
 
 <script>
 import { useForm } from '@inertiajs/vue3';
+import { marksList } from '@/Mixins/Mark'
 
 export default {
     /**
@@ -69,7 +74,7 @@ export default {
             picture: null,
         })
 
-        return { form };
+        return { form, marksList };
     },
 }
 </script>

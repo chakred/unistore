@@ -19,7 +19,7 @@
                     <tr v-for="mark in marks">
                         <th scope="row">{{ mark.id }}</th>
                         <td><img
-                            :src="/upload/+ mark.img_path"
+                            :src="`/upload${mark.img_path}`"
                             width="100"
                         ></td>
                         <td>{{ mark.name }}</td>

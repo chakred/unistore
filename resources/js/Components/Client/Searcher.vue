@@ -1,13 +1,11 @@
 <template>
     <div class="search-for-goods">
         <form action="#" method="POST" role="search">
-            <div class="input-group">
-                <input type="text" class="form-control" name="searchForGoods"
-                       placeholder="Поиск товара"> <span class="input-group-btn">
-            <button type="submit" class="btn btn-dark">
-                <i class="fas fa-search"></i>
-            </button>
-        </span>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingSearch" placeholder="Search">
+                <label for="floatingSearch">
+                    <i class="fas fa-search"></i> search...
+                </label>
             </div>
         </form>
     </div>
