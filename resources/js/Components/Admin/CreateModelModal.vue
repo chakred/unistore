@@ -23,19 +23,25 @@
                                 <div class="form-group mb-3">
                                     <label for="mark">Auto's mark</label>
                                     <select
-                                        v-model="form.name"
+                                        v-model="form.mark"
                                         class="form-control"
                                         id="mark"
                                     >
-                                        <option value="Renault" selected>Renault</option>
-                                        <option value="Smart">Smart</option>
-                                        <option value="Saab">Saab</option>
+                                        <option 
+                                            v-for="mark in marks" 
+                                            :key="mark"
+                                            :value="mark" 
+                                            selected
+                                        >
+                                        Renault
+                                        </option>
+    
                                     </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="model" class="form-label">Model</label>
                                     <input
-                                        v-model="form.name"
+                                        v-model="form.model"
                                         type="text"
                                         class="form-control"
                                         id="model"
@@ -79,7 +85,7 @@
                                         class="form-control"
                                         id="engine_type"
                                     >
-                                        <option v-for="engine_type in engine_types">{{ engine_type }}</option>
+                                        <option v-for="engineType in engineTypes">{{ engineType }}</option>
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
@@ -115,6 +121,8 @@
 
 <script>
 import { useForm } from '@inertiajs/vue3';
+import { transmissions, engineTypes } from '@/Mixins/Model';
+import { toRef } from 'vue';
 
 export default {
     /**
@@ -125,7 +133,10 @@ export default {
     /**
      * Composition API.
      */
-    setup() {
+    setup(props) {
+
+        const marks = toRef(props, 'marks');
+
         /**
          * Build an array of ranges
          * @param start
@@ -150,19 +161,9 @@ export default {
 
         const years = fillRange(1990, new Date().getFullYear());
         const engines = fillRange(0.9, 5.0, true);
-        const engine_types = [
-            'Fuel',
-            'Petrol',
-            'Hybrid',
-            'Gas',
-        ];
-        const transmissions = [
-          'Mechanic',
-          'Automatic',
-          'Robot',
-        ];
         const form = useForm({
-            name: '',
+            mark: '',
+            model: '',
             picture: null,
             engine: '',
             engine_type: '',
@@ -174,9 +175,10 @@ export default {
 
         return {
             form,
+            marks,
             years,
             engines,
-            engine_types,
+            engineTypes,
             transmissions,
         };
     },
