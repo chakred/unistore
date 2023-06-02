@@ -6,7 +6,10 @@
     <div class="container text-center mt-20">
         <div class="row">
             <div class="col">
-                <table class="table">
+                <table 
+                    v-if="hasModels"
+                    class="table"
+                >
                     <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -39,10 +42,11 @@
                     </tr>
                     </tbody>
                 </table>
+                <div v-else class="col-12">No records. Pls create a first Model</div>
             </div>
         </div>
     </div>
-    <CreateModelModal />
+    <CreateModelModal :marks="marks"/>
 </template>
 
 <script>
@@ -79,10 +83,26 @@ export default {
     },
 
     /**
+     * Computed prop
+     */
+    computed: {
+        /**
+         * Check if models exist
+         */
+        hasModels() {
+            return this.models.length;
+        }
+    },
+
+    /**
      * Props.
      */
     props: {
         models: {
+            type: Object,
+            default: {},
+        },
+        marks: {
             type: Object,
             default: {},
         }

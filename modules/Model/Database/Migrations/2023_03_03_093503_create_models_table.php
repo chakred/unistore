@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('transmission_type')->nullable();
             $table->string('img_path')->nullable();
             $table->string('slug', 255)->default('');
+            $table->boolean('active')->default(true);
 
             $table->foreign('mark_id')->references('id')->on('marks')
                 ->onUpdate('cascade');

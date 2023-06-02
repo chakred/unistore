@@ -6,7 +6,10 @@
     <div class="container text-center mt-10">
         <div class="row">
             <div class="col-12">
-                <table class="table">
+                <table 
+                    v-if="hasCategories" 
+                    class="table"
+                >
                     <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -33,6 +36,7 @@
                     </tr>
                     </tbody>
                 </table>
+                <div v-else class="col-12">No records. Pls create a first category</div>
             </div>
         </div>
     </div>
@@ -62,15 +66,6 @@ export default {
     },
 
     /**
-     * Methods
-     */
-    methods: {
-        parentCategory(category) {
-            return category.parent_id ? category.name : '-';
-        }
-    },
-
-    /**
      * Props.
      */
     props: {
@@ -78,6 +73,31 @@ export default {
             type: Object,
             default: {},
         }
-    }
+    },
+
+    /**
+     * Computed hook
+     */
+    computed: {
+        /**
+         * Check if categories exist
+         */
+        hasCategories() {
+            return this.categories.length;
+        }
+    },
+
+    /**
+     * Methods
+     */
+     methods: {
+        /**
+         * Get category name
+         * @param {*} category 
+         */
+        parentCategory(category) {
+            return category.parent_id ? category.name : '-';
+        }
+    },
 }
 </script>

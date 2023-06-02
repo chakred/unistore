@@ -15,7 +15,8 @@ class Category extends Model
         'name',
         'desc',
         'img_path',
-        'slug'
+        'slug',
+        'active'
     ];
 
     /**
