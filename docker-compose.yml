@@ -1,0 +1,43 @@
+version: "3.7"
+services:
+  app:
+    build: .
+    container_name: unistore_app
+    depends_on:
+      - mysql
+    volumes:
+      - ./:/var/www
+    networks:
+      - unistore
+
+  mysql:
+    image: mysql:5.7
+    container_name: unistore_db
+    environment:
+      MYSQL_DATABASE: unistore
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - unistore
+
+  nginx:
+    image: nginx:alpine
+    container_name: unistore_nginx
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - unistore
+
+volumes:
+  mysql:
+
+networks:
+  unistore:
+    driver: bridge
