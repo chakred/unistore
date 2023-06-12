@@ -1,7 +1,18 @@
 <template>
     <!-- Modal -->
-    <div class="modal fade" id="markModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="markModalLabel" aria-hidden="true">
-        <form @submit.prevent="form.post(route('mark.store'))" enctype="multipart/form-data">
+    <div 
+        id="markModal"
+        class="modal fade" 
+        data-bs-backdrop="static" 
+        data-bs-keyboard="false" 
+        tabindex="-1" 
+        aria-labelledby="markModalLabel" 
+        aria-hidden="true"
+    >
+        <form 
+            @submit.prevent="form.post(route('mark.store'))" 
+            enctype="multipart/form-data"
+        >
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">

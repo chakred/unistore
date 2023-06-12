@@ -2,7 +2,7 @@ const transmissions = [
     'Mechanic',
     'Automatic',
     'Robot',
-  ];
+];
 
 const engineTypes = [
     'Fuel',

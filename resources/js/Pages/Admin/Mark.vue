@@ -17,7 +17,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="mark in marks">
+                    <tr 
+                        v-for="mark in marks"
+                        :key="mark"
+                    >
                         <th scope="row">{{ mark.id }}</th>
                         <td><img
                             :src="`${imgStoragePath + mark.img_path}`"
@@ -25,7 +28,7 @@
                         ></td>
                         <td>{{ mark.name }}</td>
                         <td>{{ mark.slug }}</td>
-                        <td> - </td>
+                        <td>{{ mark.active }}</td>
                     </tr>
                     </tbody>
                 </table>

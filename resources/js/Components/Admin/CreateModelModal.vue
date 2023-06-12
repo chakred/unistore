@@ -55,7 +55,10 @@
                                         class="form-control"
                                         id="startIssue"
                                     >
-                                        <option v-for="year in years">{{ year }}</option>
+                                        <option 
+                                            v-for="year in years"
+                                            :key="year"
+                                        >{{ year }}</option>
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
@@ -65,7 +68,10 @@
                                         class="form-control"
                                         id="endIssue"
                                     >
-                                        <option v-for="year in years">{{ year }}</option>
+                                        <option 
+                                            v-for="year in years"
+                                            :key="year"
+                                        >{{ year }}</option>
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
@@ -75,7 +81,10 @@
                                         class="form-control"
                                         id="engine"
                                     >
-                                        <option v-for="engine in engines">{{ engine }}</option>
+                                        <option 
+                                            v-for="engine in engines"
+                                            :key="engine"
+                                        >{{ engine }}</option>
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
@@ -85,7 +94,7 @@
                                         class="form-control"
                                         id="engine_type"
                                     >
-                                        <option v-for="engineType in engineTypes">{{ engineType }}</option>
+                                    <Option :options="engineTypes" />
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
@@ -95,7 +104,7 @@
                                         class="form-control"
                                         id="transmission"
                                     >
-                                        <option v-for="transmission in transmissions">{{ transmission }}</option>
+                                    <Option :options="transmissions" />
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -122,7 +131,8 @@
 <script>
 import { useForm } from '@inertiajs/vue3';
 import { transmissions, engineTypes } from '@/Mixins/Model';
-import { toRef } from 'vue';
+import Option from '@/Components/Fields/Option.vue'
+
 
 export default {
     /**
@@ -131,11 +141,28 @@ export default {
     name: 'CreateModelModal',
 
     /**
+     * Components.
+     */
+    components: {
+        Option,
+    },
+
+    /**
+     * Props
+     */
+    props: {
+        marks: {
+            type: Object,
+            required: true
+        }
+    },
+
+    /**
      * Composition API.
      */
     setup(props) {
 
-        const marks = toRef(props, 'marks');
+        const marks = props.marks;
 
         /**
          * Build an array of ranges

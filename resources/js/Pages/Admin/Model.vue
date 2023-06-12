@@ -25,7 +25,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="model in models">
+                    <tr 
+                        v-for="model in models"
+                        :key="model"
+                    >
                         <th scope="row">{{ model.id }}</th>
                         <td><img
                             :src="/upload/+ model.img_path"
@@ -46,7 +49,9 @@
             </div>
         </div>
     </div>
-    <CreateModelModal :marks="marks"/>
+    <CreateModelModal 
+        :marks="marks"
+    />
 </template>
 
 <script>
@@ -106,6 +111,10 @@ export default {
             type: Object,
             default: {},
         }
+    },
+
+    created() {
+        console.log(this.marks);
     }
 }
 </script>
