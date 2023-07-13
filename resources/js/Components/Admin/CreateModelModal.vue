@@ -27,15 +27,15 @@
                                         class="form-control"
                                         id="mark"
                                     >
-                                        <option 
-                                            v-for="mark in marks" 
+                                        <option
+                                            v-for="(mark, id) in marks"
                                             :key="mark"
-                                            :value="mark" 
+                                            :value="id"
                                             selected
                                         >
-                                        Renault
+                                            {{ mark }}
                                         </option>
-    
+
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -55,7 +55,7 @@
                                         class="form-control"
                                         id="startIssue"
                                     >
-                                        <option 
+                                        <option
                                             v-for="year in years"
                                             :key="year"
                                         >{{ year }}</option>
@@ -68,7 +68,7 @@
                                         class="form-control"
                                         id="endIssue"
                                     >
-                                        <option 
+                                        <option
                                             v-for="year in years"
                                             :key="year"
                                         >{{ year }}</option>
@@ -81,7 +81,7 @@
                                         class="form-control"
                                         id="engine"
                                     >
-                                        <option 
+                                        <option
                                             v-for="engine in engines"
                                             :key="engine"
                                         >{{ engine }}</option>

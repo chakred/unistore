@@ -1,12 +1,15 @@
 <template>
     <Head title="Mark" />
-    <Nav 
+    <Nav
         createButtonAction="#markModal"
     />
     <div class="container text-center mt-20">
         <div class="row">
             <div class="col-8">
-                <table class="table">
+                <table
+                    v-if="hasMarks"
+                    class="table"
+                >
                     <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -14,10 +17,11 @@
                         <th scope="col">Name</th>
                         <th scope="col">Slug</th>
                         <th scope="col">Active</th>
+                        <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr 
+                    <tr
                         v-for="mark in marks"
                         :key="mark"
                     >
@@ -29,9 +33,20 @@
                         <td>{{ mark.name }}</td>
                         <td>{{ mark.slug }}</td>
                         <td>{{ mark.active }}</td>
+                        <td>
+                            <button
+                                type="button"
+                                class="btn btn-outline-dark"
+                                data-bs-toggle="modal"
+                                data-bs-target="createButtonAction"
+                            >
+                                Edit
+                            </button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
+                <div v-else class="col-12">No records. Pls create a first Mark</div>
             </div>
         </div>
     </div>
@@ -64,6 +79,18 @@ export default {
         Head,
         Nav,
         CreateMarkModal
+    },
+
+    /**
+     * Computed prop
+     */
+    computed: {
+        /**
+         * Check if models exist
+         */
+        hasMarks() {
+            return this.marks.length;
+        }
     },
 
     /**

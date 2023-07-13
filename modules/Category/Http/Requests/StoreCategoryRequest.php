@@ -3,6 +3,7 @@
 namespace Modules\Category\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 
 class StoreCategoryRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreCategoryRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,11 +22,12 @@ class StoreCategoryRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request): array
     {
+
         return [
-            'name'    => 'required',
-            'picture' => 'image',
+            'name'    => 'required|string|min:2|max:100',
+            'picture' => 'image:jpg,bmp,png',
         ];
     }
 }

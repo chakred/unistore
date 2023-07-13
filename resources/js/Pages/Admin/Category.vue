@@ -1,13 +1,13 @@
 <template>
     <Head title="Model" />
-    <Nav 
+    <Nav
         createButtonAction="#categoryModal"
     />
     <div class="container text-center mt-10">
         <div class="row">
             <div class="col-12">
-                <table 
-                    v-if="hasCategories" 
+                <table
+                    v-if="hasCategories"
                     class="table"
                 >
                     <thead>
@@ -25,7 +25,7 @@
                     <tr v-for="category in categories">
                         <th scope="row">{{ category.id }}</th>
                         <td><img
-                            :src="/upload/+ category.img_path"
+                            :src="`${imgStoragePath + category.img_path}`"
                             width="100"
                         ></td>
                         <td>{{ category.name }}</td>
@@ -40,7 +40,7 @@
             </div>
         </div>
     </div>
-    <CreateCategoryModal 
+    <CreateCategoryModal
         :categories="categories"
     />
 </template>
@@ -49,6 +49,7 @@
 import { Head } from '@inertiajs/vue3';
 import Nav from '@/Components/Admin/Nav.vue';
 import CreateCategoryModal from '@/Components/Admin/CreateCategoryModal.vue';
+import { imgStoragePath } from '@/Mixins/General';
 
 export default {
     /**
@@ -63,6 +64,13 @@ export default {
         CreateCategoryModal,
         Head,
         Nav
+    },
+
+    /**
+     * Composition API
+     */
+    setup() {
+        return { imgStoragePath };
     },
 
     /**
@@ -93,7 +101,7 @@ export default {
      methods: {
         /**
          * Get category name
-         * @param {*} category 
+         * @param {*} category
          */
         parentCategory(category) {
             return category.parent_id ? category.name : '-';

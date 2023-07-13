@@ -26,13 +26,12 @@ class StoreCategoryAction
             'slug'     => Str::slug($request->name, '-')
         ];
 
-        if (!$request->has('parent_id')) {
-            return Category::create($data);  
+        if (is_null($request['parent_id'])) {
+            return Category::create($data);
         };
-       
+
         return Category::find($request->parent_id)
             ->children()
             ->create($data);
-
     }
 }

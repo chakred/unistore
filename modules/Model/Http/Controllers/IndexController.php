@@ -18,7 +18,7 @@ class IndexController extends Controller
     public function __invoke(Request $request)
     {
         return Inertia::render('Admin/Model', [
-            'models' => Model::all(),
+            'models' => Model::with('mark')->get(),
             'marks'  => Mark::pluck('name', 'id'),
         ]);
     }

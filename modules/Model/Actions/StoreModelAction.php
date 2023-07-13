@@ -3,23 +3,22 @@
 namespace Modules\Model\Actions;
 
 use App\ImageHandler\ImageHandler;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Modules\Mark\Entities\Mark;
+use Modules\Model\Http\Requests\StoreModelAutoRequest;
 
 class StoreModelAction
 {
     /**
-     * Handle
-     * @param Request $request
-     * @return Mark
+     * @param StoreModelAutoRequest $request
+     * @return mixed
      */
-    public function handle(Request $request)
+    public function handle(StoreModelAutoRequest $request)
     {
         $folderDirectoryName = 'models';
         $image = ImageHandler::saveImage($request, $folderDirectoryName);
 
-        $mark = Mark::find(3);
+        $mark = Mark::find($request->mark);
 
         return $mark->models()->create([
             'name'         => $request->model,
@@ -29,7 +28,7 @@ class StoreModelAction
             'year_end'     => $request->year_end,
             'transmission' => $request->transmission,
             'img_path'     => $image,
-            'slug'         => Str::slug($request->name, '-')
+            'slug'         => Str::slug($request->model, '-')
         ]);
     }
 }

@@ -1,12 +1,12 @@
 <template>
     <Head title="Model" />
-    <Nav 
+    <Nav
         createButtonAction="#modelModal"
     />
     <div class="container text-center mt-20">
         <div class="row">
             <div class="col">
-                <table 
+                <table
                     v-if="hasModels"
                     class="table"
                 >
@@ -25,23 +25,23 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr 
+                    <tr
                         v-for="model in models"
                         :key="model"
                     >
                         <th scope="row">{{ model.id }}</th>
                         <td><img
-                            :src="/upload/+ model.img_path"
+                            :src="`${imgStoragePath + model.img_path}`"
                             width="100"
                         ></td>
-                        <td>{{ model.name }}</td>
+                        <td>{{ model.mark.name }}</td>
                         <td>{{ model.name }}</td>
                         <td>{{ model.year_start }} - {{ model.year_end }}</td>
                         <td>{{ model.engine }}</td>
                         <td>{{ model.engine_type }}</td>
                         <td>{{ model.transmission }}</td>
                         <td>{{ model.transmission_type }}</td>
-                        <td>{{ model.slug }}</td>
+                        <td><code>{{ model.slug }}</code></td>
                     </tr>
                     </tbody>
                 </table>
@@ -49,7 +49,7 @@
             </div>
         </div>
     </div>
-    <CreateModelModal 
+    <CreateModelModal
         :marks="marks"
     />
 </template>
@@ -58,6 +58,7 @@
 import { Head, useForm } from '@inertiajs/vue3';
 import Nav from '@/Components/Admin/Nav.vue';
 import CreateModelModal from '@/Components/Admin/CreateModelModal.vue';
+import { imgStoragePath } from '@/Mixins/General';
 
 export default {
     /**
@@ -84,7 +85,10 @@ export default {
             picture: null,
         })
 
-        return { form };
+        return {
+            form,
+            imgStoragePath
+        };
     },
 
     /**

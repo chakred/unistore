@@ -18,7 +18,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('parent_id')->unsigned()->nullable();
             $table->string('name', 100);
-            $table->string('desc', 255);
+            $table->string('desc', 255)->nullable();
             $table->string('img_path')->nullable();
             $table->string('slug', 255)->default('');
             $table->boolean('active')->default(true);

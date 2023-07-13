@@ -44,11 +44,18 @@
                 <div class="col-10">
                     {{ pageName }}
                 </div>
-                <div 
+                <div
                     v-if="createButtonAction"
                     class="col"
                 >
-                    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" :data-bs-target="createButtonAction">Create</button>
+                    <button
+                        type="button"
+                        class="btn btn-outline-dark"
+                        data-bs-toggle="modal"
+                        :data-bs-target="createButtonAction"
+                    >
+                        Create
+                    </button>
                 </div>
             </div>
         </div>
