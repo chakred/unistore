@@ -9,7 +9,9 @@
         </div>
         <div class="row">
             <div class="col-lg-3 mb-3">
-                <MarkAndModel />
+                <MarkAndModel 
+                    :marks="marks"
+                />
                 <br/>
                 <SidebarContacts />
                 <br/>

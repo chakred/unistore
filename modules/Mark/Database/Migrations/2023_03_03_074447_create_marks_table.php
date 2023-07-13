@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug', 255)->default('');
             $table->string('img_path')->nullable();
+            $table->boolean('active')->default(true);
         });
     }
 

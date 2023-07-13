@@ -14,7 +14,8 @@ class Mark extends CoreModel
     protected $fillable = [
         'name',
         'img_path',
-        'slug'
+        'slug',
+        'active'
     ];
 
     /**

@@ -1,7 +1,18 @@
 <template>
     <!-- Modal -->
-    <div class="modal fade" id="markModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="markModalLabel" aria-hidden="true">
-        <form @submit.prevent="form.post(route('mark.store'))" enctype="multipart/form-data">
+    <div 
+        id="markModal"
+        class="modal fade" 
+        data-bs-backdrop="static" 
+        data-bs-keyboard="false" 
+        tabindex="-1" 
+        aria-labelledby="markModalLabel" 
+        aria-hidden="true"
+    >
+        <form 
+            @submit.prevent="form.post(route('mark.store'))" 
+            enctype="multipart/form-data"
+        >
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -27,17 +38,21 @@
                                 class="form-control"
                                 id="yearAuto"
                             >
-                                <option value="Renault" selected>Renault</option>
-                                <option value="Smart">Smart</option>
-                                <option value="Saab">Saab</option>
+                                <option 
+                                    v-for="mark in marksList" 
+                                    :key="mark"
+                                    :value="mark"
+                                >
+                                {{ mark }}
+                                </option>
                             </select>
                         </div>
                             </div>
                         </div>
                     <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-outline-success">Submit</button>
-                        </div>
+                        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-success">Submit</button>
+                    </div>
                 </div>
             </div>
         </form>
@@ -46,6 +61,7 @@
 
 <script>
 import { useForm } from '@inertiajs/vue3';
+import { marksList } from '@/Mixins/Mark'
 
 export default {
     /**
@@ -69,7 +85,7 @@ export default {
             picture: null,
         })
 
-        return { form };
+        return { form, marksList };
     },
 }
 </script>

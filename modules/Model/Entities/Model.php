@@ -25,7 +25,8 @@ class Model extends CoreModel
         'transmission',
         'transmission_type',
         'img_path',
-        'slug'
+        'slug',
+        'active'
     ];
 
     /**

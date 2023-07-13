@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('desc', 255);
             $table->string('img_path')->nullable();
             $table->string('slug', 255)->default('');
+            $table->boolean('active')->default(true);
             $table->timestamps();
 
             $table->foreign('parent_id')->references('id')->on('categories')

@@ -22,7 +22,7 @@ class StoreModelAction
         $mark = Mark::find(3);
 
         return $mark->models()->create([
-            'name'         => $request->name,
+            'name'         => $request->model,
             'engine'       => $request->engine,
             'engine_type'  => $request->engine_type,
             'year_start'   => $request->year_start,

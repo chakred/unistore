@@ -1,5 +1,14 @@
 <?php
 
 return [
-    'name' => 'Mark'
+    'name' => 'Mark',
+    
+    /**
+     * Marks list
+     */
+    'marks-list' => [
+        'Renault',
+        'Smart',
+        'Volvo'
+    ],
 ];

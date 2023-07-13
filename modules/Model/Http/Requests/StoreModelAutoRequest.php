@@ -24,7 +24,8 @@ class StoreModelAutoRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'              => 'required',
+            'mark'              => 'required|max:255',
+            'model'             => 'required|string',
             'year_start'        => 'required',
             'year_end'          => 'required',
             'engine'            => 'required',
