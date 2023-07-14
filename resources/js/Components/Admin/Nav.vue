@@ -38,7 +38,7 @@
             </div>
         </div>
     </nav>
-    <div class="pt-5" style="background:#f6e2e2">
+    <div class="pt-5 nav-second">
         <div class="container pt-4">
             <div class="row gx-5 pb-3">
                 <div class="col-10">
@@ -50,11 +50,10 @@
                 >
                     <button
                         type="button"
-                        class="btn btn-outline-dark"
                         data-bs-toggle="modal"
                         :data-bs-target="createButtonAction"
                     >
-                        Create
+                        <i class="fa-solid fa-circle-plus fa-2xl"></i>
                     </button>
                 </div>
             </div>

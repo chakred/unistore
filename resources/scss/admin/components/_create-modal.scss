@@ -1,0 +1,11 @@
+.create-modal {
+    &__img-block {
+        display: flex;
+        justify-content: center;
+    }
+    &__img-preview {
+        max-width: 100%;
+        width: 100px;
+        object-fit: cover;
+    }
+}

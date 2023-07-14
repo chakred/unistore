@@ -35,10 +35,11 @@
                         <td>{{ mark.active }}</td>
                         <td>
                             <button
+                                @click="chooseItem(mark)"
                                 type="button"
                                 class="btn btn-outline-dark"
                                 data-bs-toggle="modal"
-                                data-bs-target="createButtonAction"
+                                data-bs-target="#markModalUpdate"
                             >
                                 Edit
                             </button>
@@ -51,13 +52,18 @@
         </div>
     </div>
     <CreateMarkModal />
+    <UpdateMarkModal
+        :mark="chosenMark"
+    />
 </template>
 
 <script>
 import { Head } from '@inertiajs/vue3';
 import Nav from '@/Components/Admin/Nav.vue';
 import CreateMarkModal from '@/Components/Admin/CreateMarkModal.vue';
+import UpdateMarkModal from '@/Components/Admin/UpdateMarkModal.vue';
 import { imgStoragePath } from '@/Mixins/General';
+import { ref } from 'vue';
 
 export default {
     /**
@@ -69,7 +75,8 @@ export default {
      * Composition API
      */
     setup() {
-        return { imgStoragePath };
+        const chosenMark = ref(Object);
+        return { imgStoragePath, chosenMark };
     },
 
     /**
@@ -78,7 +85,8 @@ export default {
     components: {
         Head,
         Nav,
-        CreateMarkModal
+        CreateMarkModal,
+        UpdateMarkModal
     },
 
     /**
@@ -100,6 +108,15 @@ export default {
         marks: {
             type: Object,
             default: {},
+        }
+    },
+
+    /**
+     * Methods.
+     */
+    methods: {
+        chooseItem(mark) {
+            this.chosenMark = mark;
         }
     }
 }

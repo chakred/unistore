@@ -1,23 +1,28 @@
 <template>
     <!-- Modal -->
-    <div class="modal fade" id="modelModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modelModalLabel" aria-hidden="true">
-        <form @submit.prevent="form.post(route('model.store'))" enctype="multipart/form-data">
+    <div
+        id="modelModalUpdate"
+        class="modal fade"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="modelModalUpdateLabel"
+        aria-hidden="true"
+    >
+        <form
+            @submit.prevent="form.post(route('model.store'))"
+            enctype="multipart/form-data"
+        >
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="modelModalLabel"><strong>Add auto's model:</strong></h1>
+                        <h1 class="modal-title fs-5" id="modelModalUpdateLabel">
+                            <strong>Update auto's model: {{ model.name }}</strong>
+                        </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                             <div class="custom-border silver pad-15">
-                                <div class="mb-3 create-modal__img-block">
-                                    <img
-                                        v-if="imagePreviewURL"
-                                        :src="imagePreviewURL"
-                                        alt="preview"
-                                        class="create-modal__img-preview"
-                                    />
-                                </div>
                                 <div class="mb-3">
                                         <label for="picture" class="form-label">Picture</label>
                                         <input
@@ -140,19 +145,13 @@
 import { useForm } from '@inertiajs/vue3';
 import { transmissions, engineTypes } from '@/Mixins/Model';
 import Option from '@/Components/Fields/Option.vue'
-import ImagePreviewMixin from '@/Mixins/General/ImagePreviewMixin';
 
 
 export default {
     /**
      * Name.
      */
-    name: 'CreateModelModal',
-
-    /**
-     * Mixins.
-     */
-    mixins: [ImagePreviewMixin],
+    name: 'UpdateModelModal',
 
     /**
      * Components.
@@ -166,6 +165,10 @@ export default {
      */
     props: {
         marks: {
+            type: Object,
+            required: true
+        },
+        model: {
             type: Object,
             required: true
         }
@@ -188,7 +191,6 @@ export default {
         function fillRange(start, end, float = false) {
             let values = [];
             while (start <= end) {
-
                 if (float) {
                     start = start + 0.1;
                     values.push(start.toFixed(1));
@@ -203,6 +205,7 @@ export default {
         const years = fillRange(1990, new Date().getFullYear());
         const engines = fillRange(0.9, 5.0, true);
         const form = useForm({
+            _method: 'put',
             mark: '',
             model: '',
             picture: null,

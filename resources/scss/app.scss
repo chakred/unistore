@@ -6,6 +6,10 @@
 @import 'variables';
 @import 'site/homepage';
 
+// Admin
+@import 'admin/components/nav-second';
+@import 'admin/components/create-modal';
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 

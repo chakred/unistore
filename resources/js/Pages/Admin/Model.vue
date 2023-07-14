@@ -22,6 +22,7 @@
                         <th scope="col">Transition</th>
                         <th scope="col">Transition's type</th>
                         <th scope="col">Slug</th>
+                        <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -42,6 +43,16 @@
                         <td>{{ model.transmission }}</td>
                         <td>{{ model.transmission_type }}</td>
                         <td><code>{{ model.slug }}</code></td>
+                        <td>
+                            <button
+                                @click="chooseItem(model)"
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modelModalUpdate"
+                            >
+                                <i class="fa-regular fa-pen-to-square fa-xl"></i>
+                            </button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -52,13 +63,19 @@
     <CreateModelModal
         :marks="marks"
     />
+    <UpdateModelModal
+        :marks="marks"
+        :model="chosenModel"
+    />
 </template>
 
 <script>
-import { Head, useForm } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
 import Nav from '@/Components/Admin/Nav.vue';
 import CreateModelModal from '@/Components/Admin/CreateModelModal.vue';
+import UpdateModelModal from '@/Components/Admin/UpdateModelModal.vue';
 import { imgStoragePath } from '@/Mixins/General';
+import { ref } from 'vue';
 
 export default {
     /**
@@ -71,23 +88,20 @@ export default {
      */
     components: {
         CreateModelModal,
+        UpdateModelModal,
         Head,
         Nav,
-        useForm
     },
 
     /**
      * Composition API.
      */
     setup() {
-        const form = useForm({
-            name: '',
-            picture: null,
-        })
+        const chosenModel = ref(Object);
 
         return {
-            form,
-            imgStoragePath
+            imgStoragePath,
+            chosenModel
         };
     },
 
@@ -117,8 +131,13 @@ export default {
         }
     },
 
-    created() {
-        console.log(this.marks);
+    /**
+     * Methods.
+     */
+    methods: {
+        chooseItem(model) {
+            this.chosenModel = model;
+        }
     }
 }
 </script>
