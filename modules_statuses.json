@@ -1,5 +1,6 @@
 {
     "Mark": true,
     "Model": true,
-    "Category": true
+    "Category": true,
+    "ModuleName": true
 }

@@ -16,7 +16,7 @@ class IndexController extends Controller
     public function __invoke(Request $request)
     {
         return Inertia::render('Admin/Category', [
-            'categories' => Category::all(),
+            'categories' => Category::with('parent', 'children')->get(),
         ]);
     }
 }

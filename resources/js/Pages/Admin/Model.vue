@@ -22,6 +22,7 @@
                         <th scope="col">Transition</th>
                         <th scope="col">Transition's type</th>
                         <th scope="col">Slug</th>
+                        <th scope="col">Active</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
@@ -44,13 +45,17 @@
                         <td>{{ model.transmission_type }}</td>
                         <td><code>{{ model.slug }}</code></td>
                         <td>
+                            <i v-if="model.active" class="fa-solid fa-check"></i>
+                            <i v-else class="fa-solid fa-xmark"></i>
+                        </td>
+                        <td>
                             <button
                                 @click="chooseItem(model)"
                                 type="button"
                                 data-bs-toggle="modal"
                                 data-bs-target="#modelModalUpdate"
                             >
-                                <i class="fa-regular fa-pen-to-square fa-xl"></i>
+                                <i class="fa-solid fa-gear fa-xl"></i>
                             </button>
                         </td>
                     </tr>

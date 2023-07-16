@@ -33,6 +33,9 @@
                         <li class="nav-item">
                             <Link :href="route('category.index')" class="nav-link">Categories</Link>
                         </li>
+                        <li class="nav-item">
+                            <Link :href="route('category.index')" class="nav-link">Goods</Link>
+                        </li>
                     </ul>
                 </div>
             </div>

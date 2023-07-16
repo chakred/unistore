@@ -5,7 +5,7 @@
     />
     <div class="container text-center mt-20">
         <div class="row">
-            <div class="col-8">
+            <div class="col">
                 <table
                     v-if="hasMarks"
                     class="table"
@@ -32,16 +32,18 @@
                         ></td>
                         <td>{{ mark.name }}</td>
                         <td>{{ mark.slug }}</td>
-                        <td>{{ mark.active }}</td>
+                        <td>
+                            <i v-if="mark.active" class="fa-solid fa-check"></i>
+                            <i v-else class="fa-solid fa-xmark"></i>
+                        </td>
                         <td>
                             <button
                                 @click="chooseItem(mark)"
                                 type="button"
-                                class="btn btn-outline-dark"
                                 data-bs-toggle="modal"
                                 data-bs-target="#markModalUpdate"
                             >
-                                Edit
+                                <i class="fa-solid fa-gear fa-xl"></i>
                             </button>
                         </td>
                     </tr>

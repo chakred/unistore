@@ -19,6 +19,8 @@
                         <th scope="col">Slug</th>
                         <th scope="col">Parent category</th>
                         <th scope="col">Child category</th>
+                        <th scope="col">Active</th>
+                        <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -33,6 +35,20 @@
                         <td>{{ category.slug }}</td>
                         <td>{{ parentCategory(category) }}</td>
                         <td>{{ category.parent_id }}</td>
+                        <td>
+                            <i v-if="category.active" class="fa-solid fa-check"></i>
+                            <i v-else class="fa-solid fa-xmark"></i>
+                        </td>
+                        <td>
+                            <button
+                                @click="chooseItem(category)"
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#categoryModalUpdate"
+                            >
+                                <i class="fa-solid fa-gear fa-xl"></i>
+                            </button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -43,13 +59,19 @@
     <CreateCategoryModal
         :categories="categories"
     />
+    <UpdateCategoryModal
+        :categories="categories"
+        :category="chosenCategory"
+    />
 </template>
 
 <script>
 import { Head } from '@inertiajs/vue3';
 import Nav from '@/Components/Admin/Nav.vue';
 import CreateCategoryModal from '@/Components/Admin/CreateCategoryModal.vue';
+import UpdateCategoryModal from '@/Components/Admin/UpdateCategoryModal.vue';
 import { imgStoragePath } from '@/Mixins/General';
+import { ref } from 'vue';
 
 export default {
     /**
@@ -62,6 +84,7 @@ export default {
      */
     components: {
         CreateCategoryModal,
+        UpdateCategoryModal,
         Head,
         Nav
     },
@@ -70,7 +93,11 @@ export default {
      * Composition API
      */
     setup() {
-        return { imgStoragePath };
+        const chosenCategory = ref(Object);
+        return {
+            imgStoragePath,
+            chosenCategory
+        };
     },
 
     /**
@@ -100,12 +127,21 @@ export default {
      */
      methods: {
         /**
-         * Get category name
+         * Get parent category name
          * @param {*} category
          */
         parentCategory(category) {
-            return category.parent_id ? category.name : '-';
+            return category.parent ? `${category.parent.name} (ID:${category.parent.id})` : '-';
+        },
+
+        /**
+         * Choose category
+         * @param category
+         */
+        chooseItem(category) {
+            this.chosenCategory = category;
         }
     },
+
 }
 </script>

@@ -1,11 +1,13 @@
 <template>
     <!-- Modal -->
-    <div class="modal fade" id="categoryModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal fade" id="categoryModalUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="categoryModalUpdateLabel" aria-hidden="true">
         <form @submit.prevent="form.post(route('category.store'))" enctype="multipart/form-data">
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="categoryModalLabel"><strong>Add category:</strong></h1>
+                        <h1 class="modal-title fs-5" id="categoryModalUpdateLabel">
+                            <strong>Update category: {{ category.name }}</strong>
+                        </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -94,6 +96,10 @@ export default {
      */
     props: {
         categories: {
+            type: Object,
+            default: {},
+        },
+        category: {
             type: Object,
             default: {},
         }
