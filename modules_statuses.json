@@ -2,5 +2,6 @@
     "Mark": true,
     "Model": true,
     "Category": true,
-    "ModuleName": true
+    "ModuleName": true,
+    "Good": true
 }

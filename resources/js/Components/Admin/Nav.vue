@@ -34,7 +34,7 @@
                             <Link :href="route('category.index')" class="nav-link">Categories</Link>
                         </li>
                         <li class="nav-item">
-                            <Link :href="route('category.index')" class="nav-link">Goods</Link>
+                            <Link :href="route('good.index')" class="nav-link">Goods</Link>
                         </li>
                     </ul>
                 </div>
