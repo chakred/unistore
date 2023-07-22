@@ -57,20 +57,19 @@
         </div>
     </div>
     <CreateGoodModal
-        :moleds="models"
-    />
-    <UpdateGoodModal
-        :good="chosenGood"
+        :countries="countries"
+        :marks="marks"
+        :models="models"
+        :goods="goods"
     />
 </template>
 
 <script>
 import { Head } from '@inertiajs/vue3';
 import Nav from '@/Components/Admin/Nav.vue';
-import CreateGoodModal from '@/Components/Admin/CreateGoodModal.vue';
-import UpdateGoodModal from '@/Components/Admin/UpdateGoodModal.vue';
 import { imgStoragePath } from '@/Mixins/General';
 import { ref } from 'vue';
+import CreateGoodModal from '@/Components/Admin/CreateGoodModal.vue';
 
 export default {
     /**
@@ -83,7 +82,6 @@ export default {
      */
     components: {
         CreateGoodModal,
-        UpdateGoodModal,
         Head,
         Nav
     },
@@ -108,6 +106,14 @@ export default {
             default: {},
         },
         models: {
+            type: Object,
+            default: {},
+        },
+        marks: {
+            type: Object,
+            default: {},
+        },
+        countries: {
             type: Object,
             default: {},
         }

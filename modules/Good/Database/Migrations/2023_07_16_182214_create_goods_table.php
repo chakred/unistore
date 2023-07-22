@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('good', function (Blueprint $table) {
+        Schema::create('goods', function (Blueprint $table) {
             $table->increments('id');
             $table->string('id_inner', 100);
             $table->string('name', 100);
@@ -26,11 +26,17 @@ return new class extends Migration
             $table->string('currency');
             $table->float('quantity');
             $table->string('item');
+            $table->integer('mark_id')->unsigned()->nullable();
             $table->integer('model_id')->unsigned()->nullable();
             $table->bigInteger('category_id')->unsigned()->nullable();
             $table->string('img_path')->nullable();
             $table->string('slug', 255)->default('');
             $table->boolean('active')->default(true);
+
+            $table->foreign('mark_id')
+                ->references('id')
+                ->on('marks')
+                ->onUpdate('cascade');
 
             $table->foreign('model_id')
                 ->references('id')
@@ -51,6 +57,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('good');
+        Schema::dropIfExists('goods');
     }
 };

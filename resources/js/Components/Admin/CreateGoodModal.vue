@@ -1,11 +1,11 @@
 <template>
     <!-- Modal -->
-    <div class="modal fade" id="modelModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modelModalLabel" aria-hidden="true">
+    <div class="modal fade" id="goodModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="goodModalLabel" aria-hidden="true">
         <form @submit.prevent="form.post(route('model.store'))" enctype="multipart/form-data">
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="modelModalLabel"><strong>Add auto's model:</strong></h1>
+                        <h1 class="modal-title fs-5" id="goodModalLabel"><strong>Add a new good:</strong></h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -49,81 +49,53 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="model" class="form-label">Model</label>
-                                    <input
+                                    <select
                                         v-model="form.model"
                                         type="text"
                                         class="form-control"
                                         id="model"
                                         aria-describedby="model"
                                     >
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="startIssue">Start issue</label>
-                                    <select
-                                        v-model="form.year_start"
-                                        class="form-control"
-                                        id="startIssue"
-                                    >
                                         <option
-                                            v-for="year in years"
-                                            :key="year"
-                                        >{{ year }}</option>
+                                            v-for="(model, id) in models"
+                                            :key="model"
+                                            :value="id"
+                                            selected
+                                        >
+                                            {{ model.name }} ({{ model.mark.name }})
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="endIssue">End issue</label>
-                                    <select
-                                        v-model="form.year_end"
+                                    <label for="desc">Description</label>
+                                    <textarea
+                                        v-model="form.desc"
                                         class="form-control"
-                                        id="endIssue"
+                                        id="desc"
                                     >
-                                        <option
-                                            v-for="year in years"
-                                            :key="year"
-                                        >{{ year }}</option>
-                                    </select>
+                                    </textarea>
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="engine">Engine value</label>
+                                    <label for="brand">Brand</label>
+                                    <input
+                                        v-model="form.brand"
+                                        class="form-control"
+                                        id="brand"
+                                        type="text"
+                                    >
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="country">Country</label>
                                     <select
                                         v-model="form.engine"
                                         class="form-control"
-                                        id="engine"
+                                        id="country"
                                     >
                                         <option
                                             v-for="engine in engines"
                                             :key="engine"
                                         >{{ engine }}</option>
                                     </select>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="engine_type">Engine type</label>
-                                    <select
-                                        v-model="form.engine_type"
-                                        class="form-control"
-                                        id="engine_type"
-                                    >
-                                    <Option :options="engineTypes" />
-                                    </select>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="transmission">Transmission</label>
-                                    <select
-                                        v-model="form.transmission"
-                                        class="form-control"
-                                        id="transmission"
-                                    >
-                                    <Option :options="transmissions" />
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="transmission_type" class="form-label">Transmission type</label>
-                                    <input
-                                        v-model="form.transmission_type"
-                                        type="text"
-                                        class="form-control"
-                                        id="transmission_type"
-                                    >
                                 </div>
                             </div>
                         </div>
@@ -143,12 +115,11 @@ import { transmissions, engineTypes } from '@/Mixins/Model';
 import Option from '@/Components/Fields/Option.vue'
 import ImagePreviewMixin from '@/Mixins/General/ImagePreviewMixin';
 
-
 export default {
     /**
      * Name.
      */
-    name: 'CreateModelModal',
+    name: 'CreateGoodModal',
 
     /**
      * Mixins.
@@ -166,10 +137,22 @@ export default {
      * Props
      */
     props: {
+        goods: {
+            type: Object,
+            required: true
+        },
+        models: {
+            type: Object,
+            required: true
+        },
         marks: {
             type: Object,
             required: true
-        }
+        },
+        countries: {
+            type: Object,
+            required: true
+        },
     },
 
     /**
@@ -178,39 +161,19 @@ export default {
     setup(props) {
 
         const marks = props.marks;
+        const models = props.models;
+        const countries = props.countries;
 
-        /**
-         * Build an array of ranges
-         * @param start
-         * @param end
-         * @param float
-         * @returns {*[]}
-         */
-        function fillRange(start, end, float = false) {
-            let values = [];
-            while (start <= end) {
 
-                if (float) {
-                    start = start + 0.1;
-                    values.push(start.toFixed(1));
-                } else {
-                    values.push(start++);
-                }
-            }
-
-            return values;
-        }
-
-        const years = fillRange(1990, new Date().getFullYear());
-        const engines = fillRange(0.9, 5.0, true);
         const form = useForm({
             mark: '',
             model: '',
             picture: null,
             engine: '',
             engine_type: '',
-            year_start: '',
-            year_end: '',
+            desc: '',
+            brand: '',
+            country: '',
             transmission: '',
             transmission_type: '',
         });
@@ -218,8 +181,8 @@ export default {
         return {
             form,
             marks,
-            years,
-            engines,
+            models,
+            countries,
             engineTypes,
             transmissions,
         };
