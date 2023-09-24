@@ -9,8 +9,8 @@
         </div>
         <div class="row">
             <div class="col-lg-3 mb-3">
-                <MarkAndModel 
-                    :marks="marks"
+                <SidebarCategories
+                    :categories="categories"
                 />
                 <br/>
                 <SidebarContacts />
@@ -20,7 +20,12 @@
             <!-- /.col-lg-3 -->
             <div class="col-lg-9">
                     <MainSlider />
-<!--                @include('parts.content-models')-->
+                <ContentMarks
+                    :marks="marks"
+                />
+                <ContentCategories
+                    :categories="categories"
+                />
             </div>
             <!-- /.col-lg-9 -->
         </div>
@@ -35,9 +40,11 @@ import Nav from '@/Components/Client/Nav.vue';
 import Searcher from '@/Components/Client/Searcher.vue';
 import Footer from '@/Layouts/Client/Footer.vue';
 import MainSlider from '@/Components/Client/MainSlider.vue';
-import MarkAndModel from '@/Components/Client/MarkAndModel.vue';
 import SidebarContacts from '@/Components/Client/SidebarContacts.vue';
 import SidebarWorkHours from '@/Components/Client/SidebarWorkHours.vue';
+import SidebarCategories from '@/Components/Client/SidebarCategories.vue';
+import ContentMarks from '@/Components/Client/ContentMarks.vue';
+import ContentCategories from '@/Components/Client/ContentCategories.vue';
 
 export default {
     /**
@@ -51,11 +58,13 @@ export default {
     components: {
         SidebarWorkHours,
         SidebarContacts,
-        MarkAndModel,
         MainSlider,
         Footer,
         Nav,
-        Searcher
+        Searcher,
+        ContentMarks,
+        ContentCategories,
+        SidebarCategories
     },
 
     /**
@@ -67,6 +76,10 @@ export default {
             default: {}
         },
         models: {
+            type: Object,
+            default: {}
+        },
+        categories: {
             type: Object,
             default: {}
         },
