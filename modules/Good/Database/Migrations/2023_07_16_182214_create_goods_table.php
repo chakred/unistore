@@ -15,17 +15,17 @@ return new class extends Migration
     {
         Schema::create('goods', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('id_inner', 100);
+            $table->string('id_inner', 100)->nullable();
             $table->string('name', 100);
-            $table->text('desc');
-            $table->string('brand', 100);
-            $table->string('country', 100);
+            $table->text('desc')->nullable();
+            $table->string('brand', 100)->nullable();
+            $table->string('country', 100)->nullable();
             $table->float('cost');
-            $table->float('profit');
-            $table->float('discount');
+            $table->float('profit')->default(0);
+            $table->float('discount')->default(0);
             $table->string('currency');
             $table->float('quantity');
-            $table->string('item');
+            $table->string('item')->nullable();
             $table->integer('mark_id')->unsigned()->nullable();
             $table->integer('model_id')->unsigned()->nullable();
             $table->bigInteger('category_id')->unsigned()->nullable();

@@ -1,7 +1,7 @@
 <template>
     <!-- Modal -->
-    <div class="modal fade" id="goodModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="goodModalLabel" aria-hidden="true">
-        <form @submit.prevent="form.post(route('model.store'))" enctype="multipart/form-data">
+    <div class="modal modal-lg fade" id="goodModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="goodModalLabel" aria-hidden="true">
+        <form @submit.prevent="form.post(route('good.store'))" enctype="multipart/form-data">
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -18,7 +18,8 @@
                                         class="create-modal__img-preview"
                                     />
                                 </div>
-                                <div class="mb-3">
+                                <div class="form-group row">
+                                    <div class="mb-3">
                                         <label for="picture" class="form-label">Picture</label>
                                         <input
                                             @change="onFileChange"
@@ -29,37 +30,55 @@
                                             aria-describedby="picture"
                                         >
                                     </div>
-                                <div class="form-group mb-3">
-                                    <label for="mark">Auto's mark</label>
-                                    <select
-                                        v-model="form.mark"
-                                        class="form-control"
-                                        id="mark"
+                                    <div class="mb-3">
+                                        <div class="form-check form-switch">
+                                            <input
+                                                v-model="onlyMarks"
+                                                class="form-check-input"
+                                                type="checkbox"
+                                                id="flexSwitchCheckDefault"
+                                            >
+                                            <label class="form-check-label" for="flexSwitchCheckDefault">Only Marks</label>
+                                        </div>
+                                    </div>
+                                    <div
+                                        v-if="onlyMarks"
+                                        class="mb-3"
                                     >
-                                        <option
-                                            v-for="(mark, id) in marks"
-                                            :key="mark"
-                                            :value="id"
-                                            selected
+                                        <label for="mark">Auto's mark</label>
+                                        <select
+                                            v-model="form.mark_id"
+                                            class="form-control"
+                                            id="mark"
                                         >
-                                            {{ mark }}
-                                        </option>
+                                            <option
+                                                v-for="(mark, id) in marks"
+                                                :key="mark"
+                                                :value="id"
+                                                selected
+                                            >
+                                                {{ mark }}
+                                            </option>
 
-                                    </select>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
+                                <div
+                                    v-if="!onlyMarks"
+                                    class="mb-3"
+                                >
                                     <label for="model" class="form-label">Model</label>
                                     <select
-                                        v-model="form.model"
+                                        v-model="form.model_id"
                                         type="text"
                                         class="form-control"
                                         id="model"
                                         aria-describedby="model"
                                     >
                                         <option
-                                            v-for="(model, id) in models"
-                                            :key="model"
-                                            :value="id"
+                                            v-for="model in models"
+                                            :key="model.id"
+                                            :value="model.id"
                                             selected
                                         >
                                             {{ model.name }} ({{ model.mark.name }})
@@ -76,6 +95,15 @@
                                     </textarea>
                                 </div>
                                 <div class="form-group mb-3">
+                                    <label for="brand">Name</label>
+                                    <input
+                                        v-model="form.name"
+                                        class="form-control"
+                                        id="name"
+                                        type="text"
+                                    >
+                                </div>
+                                <div class="form-group mb-3">
                                     <label for="brand">Brand</label>
                                     <input
                                         v-model="form.brand"
@@ -85,16 +113,74 @@
                                     >
                                 </div>
                                 <div class="form-group mb-3">
+                                    <label for="brand">Quantity(pcs.)</label>
+                                    <input
+                                        v-model="form.quantity"
+                                        class="form-control"
+                                        id="quantity"
+                                        type="text"
+                                    >
+                                </div>
+                                <div class="form-group mb-3">
                                     <label for="country">Country</label>
                                     <select
-                                        v-model="form.engine"
+                                        v-model="form.country"
                                         class="form-control"
                                         id="country"
                                     >
                                         <option
-                                            v-for="engine in engines"
-                                            :key="engine"
-                                        >{{ engine }}</option>
+                                            v-for="country in countries"
+                                            :key="country"
+                                        >{{ country }}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="brand">Cost</label>
+                                    <input
+                                        v-model="form.cost"
+                                        class="form-control"
+                                        id="cost"
+                                        type="text"
+                                    >
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="brand">Currency</label>
+                                    <select
+                                        v-model="form.currency"
+                                        class="form-control"
+                                        id="profit"
+                                    >
+                                        <option
+                                            v-for="currency in currencies"
+                                            :key="currency"
+                                        >{{ currency }}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="country">Profit%</label>
+                                    <select
+                                        v-model="form.profit"
+                                        class="form-control"
+                                        id="profit"
+                                    >
+                                        <option
+                                            v-for="profit in profits"
+                                            :key="profit"
+                                            :value="profit"
+                                        >{{ profit }}%</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="country">Discount%</label>
+                                    <select
+                                        v-model="form.discount"
+                                        class="form-control"
+                                        id="discount"
+                                    >
+                                        <option
+                                            v-for="discount in discounts"
+                                            :key="discount"
+                                        >{{ discount }}%</option>
                                     </select>
                                 </div>
                             </div>
@@ -114,6 +200,8 @@ import { useForm } from '@inertiajs/vue3';
 import { transmissions, engineTypes } from '@/Mixins/Model';
 import Option from '@/Components/Fields/Option.vue'
 import ImagePreviewMixin from '@/Mixins/General/ImagePreviewMixin';
+import { fillRange } from '@/Mixins/General';
+import { ref } from 'vue';
 
 export default {
     /**
@@ -124,7 +212,7 @@ export default {
     /**
      * Mixins.
      */
-    mixins: [ImagePreviewMixin],
+    mixins: [ImagePreviewMixin, fillRange],
 
     /**
      * Components.
@@ -164,10 +252,18 @@ export default {
         const models = props.models;
         const countries = props.countries;
 
+        const onlyMarks = ref(false)
 
+        const discounts = fillRange(0,100);
+        const profits = fillRange(1,100);
+        const currencies = [
+            'EUR',
+            'USD',
+            'UAH'
+        ];
         const form = useForm({
-            mark: '',
-            model: '',
+            mark_id: '',
+            model_id: '',
             picture: null,
             engine: '',
             engine_type: '',
@@ -176,6 +272,13 @@ export default {
             country: '',
             transmission: '',
             transmission_type: '',
+            cost: '',
+            profit: '',
+            discount: 0,
+            currency: '',
+            quantity: '',
+            name: '',
+            only_marks: onlyMarks
         });
 
         return {
@@ -185,6 +288,10 @@ export default {
             countries,
             engineTypes,
             transmissions,
+            discounts,
+            profits,
+            currencies,
+            onlyMarks
         };
     },
 }

@@ -14,8 +14,10 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">ID inner</th>
+                        <th scope="col">Picture</th>
                         <th scope="col">Good</th>
                         <th scope="col">Description</th>
+                        <th scope="col">Model</th>
                         <th scope="col">Brand</th>
                         <th scope="col">Country</th>
                         <th scope="col">Cost</th>
@@ -28,13 +30,19 @@
                     <tbody>
                     <tr v-for="good in goods">
                         <th scope="row">{{ good.id }}</th>
+                        <th scope="row">{{ good.id_inner ?? '-' }}</th>
                         <td><img
                             :src="`${imgStoragePath + good.img_path}`"
                             width="100"
                         ></td>
                         <td>{{ good.name }}</td>
                         <td>{{ good.desc }}</td>
+                        <td>{{ good.model?.name || '-' }}</td>
+                        <td>{{ good.brand }}</td>
+                        <td>{{ good.country }}</td>
+                        <td>{{ good.cost + good.currency }}</td>
                         <td>{{ good.slug }}</td>
+                        <td>-</td>
                         <td>
                             <i v-if="good.active" class="fa-solid fa-check"></i>
                             <i v-else class="fa-solid fa-xmark"></i>

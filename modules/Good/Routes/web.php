@@ -1,6 +1,7 @@
 <?php
 
 use Modules\Good\Http\Controllers\IndexController;
+use Modules\Good\Http\Controllers\StoreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +17,5 @@ use Modules\Good\Http\Controllers\IndexController;
 
 Route::prefix('good')->group(function() {
     Route::get('/', IndexController::class)->name('good.index');
+    Route::post('/create', StoreController::class)->name('good.store');
 });
