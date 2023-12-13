@@ -42,6 +42,22 @@
                                     aria-describedby="picture"
                                 >
                             </div>
+                            <div class="form-group mb-3">
+                                <label for="yearAuto">Auto's mark</label>
+                                <select
+                                    v-model="form.name"
+                                    class="form-control"
+                                    id="yearAuto"
+                                >
+                                    <option
+                                        v-for="mark in marksList"
+                                        :key="mark"
+                                        :value="mark"
+                                    >
+                                        {{ mark }}
+                                    </option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -85,6 +101,10 @@ export default {
         mark: {
             type: Object,
             default: {},
+        },
+        title: {
+            type: String,
+            default: 'Smart',
         }
     },
 
@@ -97,10 +117,12 @@ export default {
     /**
      * Composition API.
      */
-    setup() {
+    setup(props) {
+       console.log(props.mark);
         const form = useForm({
             _method: 'put',
             picture: null,
+            name: props.mark.name ?? ''
         })
 
         return {

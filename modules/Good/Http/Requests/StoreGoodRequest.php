@@ -24,6 +24,7 @@ class StoreGoodRequest extends FormRequest
      */
     public function rules(Request $request): array
     {
+        dd($request->all());
         return [
             'name'    => 'required|string|min:2|max:100',
             'brand'   => 'required|string|min:2|max:100',

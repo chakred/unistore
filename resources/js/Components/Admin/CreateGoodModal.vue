@@ -157,6 +157,20 @@
                                     </select>
                                 </div>
                                 <div class="form-group mb-3">
+                                    <label for="brand">Category</label>
+                                    <select
+                                        v-model="form.category_id"
+                                        class="form-control"
+                                        id="profit"
+                                    >
+                                        <option
+                                            v-for="(category, id) in categories"
+                                            :key="category"
+                                            :value="id"
+                                        >{{ category }}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3">
                                     <label for="country">Profit%</label>
                                     <select
                                         v-model="form.profit"
@@ -241,6 +255,10 @@ export default {
             type: Object,
             required: true
         },
+        categories: {
+            type: Object,
+            required: true
+        },
     },
 
     /**
@@ -251,6 +269,7 @@ export default {
         const marks = props.marks;
         const models = props.models;
         const countries = props.countries;
+        const categories = props.categories;
 
         const onlyMarks = ref(false)
 
@@ -272,6 +291,7 @@ export default {
             country: '',
             transmission: '',
             transmission_type: '',
+            category_id: null,
             cost: '',
             profit: '',
             discount: 0,
@@ -291,6 +311,7 @@ export default {
             discounts,
             profits,
             currencies,
+            categories,
             onlyMarks
         };
     },

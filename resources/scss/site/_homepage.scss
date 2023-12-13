@@ -33,6 +33,10 @@ body *{
 }
 
 .cat-block {
+    &:hover {
+        box-shadow: rgb(0 0 0 / 31%) 1px 0px 16px;
+        transition: all ease 0.3s;
+    }
     overflow: hidden;
     >a {
         min-height: 160px;
@@ -101,6 +105,7 @@ body *{
                 color: black;
                 text-transform: uppercase;
                 font-weight: 700;
+                text-decoration: none;
             }
         }
     }
@@ -114,6 +119,11 @@ body *{
 }
 
 .card-body {
+    &__children {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
     >ul {
         list-style: none;
         padding-left: 0;
@@ -125,6 +135,9 @@ body *{
     }
 }
 .card-header {
+    background: #212529 !important;
+    color: white !important;
+    font-weight: bold;
     button {
         font-weight: bold;
         color: #212529;

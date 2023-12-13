@@ -10,7 +10,9 @@
                     v-key="category.id"
                 >
                     <a href="#">
-                        <div>
+                        <div
+                            class="card-body__children"
+                        >
                             <img
                                 v-if="category.img_path"
                                 :src="`${imgStoragePath + category.img_path}`"

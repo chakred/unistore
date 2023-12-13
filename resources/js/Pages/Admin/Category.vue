@@ -26,15 +26,23 @@
                     <tbody>
                     <tr v-for="category in categories">
                         <th scope="row">{{ category.id }}</th>
-                        <td><img
-                            :src="`${imgStoragePath + category.img_path}`"
-                            width="100"
-                        ></td>
+                        <td>
+                            <img
+                                v-if="category.img_path"
+                                :src="`${imgStoragePath + category.img_path}`"
+                                width="100"
+                        >
+                            <img
+                                v-else
+                                src="http://dummyimage.com/100x100/ffffff/545454&text=No+image"
+                                width="100"
+                            />
+                        </td>
                         <td>{{ category.name }}</td>
                         <td>{{ category.desc }}</td>
                         <td>{{ category.slug }}</td>
                         <td>{{ parentCategory(category) }}</td>
-                        <td>{{ category.parent_id }}</td>
+                        <td>{{ childCategory(category) }}</td>
                         <td>
                             <i v-if="category.active" class="fa-solid fa-check"></i>
                             <i v-else class="fa-solid fa-xmark"></i>
@@ -132,6 +140,15 @@ export default {
          */
         parentCategory(category) {
             return category.parent ? `${category.parent.name} (ID:${category.parent.id})` : '-';
+        },
+
+        /**
+         * Get child category
+         * @param category
+         * @returns {string|*}
+         */
+        childCategory(category) {
+            return category.parent_id ?? '-';
         },
 
         /**

@@ -4,6 +4,7 @@ namespace Modules\Good\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Category\Entities\Category;
 use Modules\Good\Entities\Country;
 use Modules\Good\Entities\Good;
 use Inertia\Inertia;
@@ -18,10 +19,11 @@ class IndexController extends Controller
     public function __invoke(Request $request)
     {
         return Inertia::render('Admin/Good', [
-            'goods'     => Good::with('mark', 'model')->get(),
-            'models'    => Model::with('mark')->get(),
-            'marks'     => Mark::pluck('name','id'),
-            'countries' => Country::pluck('name'),
+            'goods'      => Good::with('mark', 'model')->get(),
+            'models'     => Model::with('mark')->get(),
+            'marks'      => Mark::pluck('name','id'),
+            'countries'  => Country::pluck('name'),
+            'categories' => Category::pluck('name','id')
         ]);
     }
 }

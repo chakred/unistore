@@ -4,6 +4,7 @@ namespace Modules\Mark\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Modules\Mark\Entities\Mark;
 
 class MarkDatabaseSeeder extends Seeder
@@ -17,11 +18,19 @@ class MarkDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        Mark::firstOrcreate([
-            'name' => 'test',
-            'slug' => 'test'
-        ]);
+        $marks = [
+            [
+                'name' => 'Renault',
+                'slug' => Str::slug('Renault', '-')
+            ],
+            [
+                'name' => 'Smart',
+                'slug' => Str::slug('Smart', '-')
+            ],
+        ];
 
-        // $this->call("OthersTableSeeder");
+        foreach ($marks as $mark) {
+            Mark::firstOrcreate($mark);
+        }
     }
 }

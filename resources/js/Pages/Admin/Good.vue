@@ -69,6 +69,7 @@
         :marks="marks"
         :models="models"
         :goods="goods"
+        :categories="categories"
     />
 </template>
 
@@ -124,7 +125,11 @@ export default {
         countries: {
             type: Object,
             default: {},
-        }
+        },
+        categories: {
+            type: Object,
+            default: {},
+        },
     },
 
     /**
