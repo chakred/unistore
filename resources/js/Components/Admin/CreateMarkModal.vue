@@ -84,7 +84,7 @@ export default {
      */
     mixins: [ImagePreviewMixin],
 
-        /**
+    /**
      * Components.
      */
      components: {

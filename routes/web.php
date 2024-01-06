@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FrontPageController;
+use App\Http\Controllers\CategoriesController;
+use Modules\Good\Http\Controllers\SearchController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -17,8 +19,9 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', App\Http\Controllers\FrontPageController::class);
-
+Route::get('/', FrontPageController::class);
+Route::get('/categories/{mark}/{model}', CategoriesController::class)->name('home.categories');
+Route::get('/search', SearchController::class)->name('home.search');
 
 //Route::get('/', function () {
 //    return Inertia::render('Welcome', [

@@ -1,33 +1,18 @@
 <template>
     <div
-        v-for="mark in marks.data"
         class="row"
     >
-        <div class="col-sm-12 mb-3">
-            <div class="card head-block">
-                <div>
-                    <div>
-                        <img
-                            :src="`${imgStoragePath + mark.img_path}`"
-                            width="50"
-                        >
-                    </div>
-                    <p>{{ mark.name }}</p>
-                    <p>- parts for models</p>
-                </div>
-            </div>
-        </div>
         <div
-            v-for="model in mark.models"
+            v-for="good in goods.data"
             class="col-lg-4 col-md-6 mb-4"
         >
             <div class="card h-100 cat-block">
                 <a
-                    :href="route('home.categories', { mark: mark.name, model:model.name })"
+                    href="#"
                 >
                     <img
-                        v-if="model.img_path"
-                        :src="`${imgStoragePath + model.img_path}`"
+                        v-if="good.img_path"
+                        :src="`${imgStoragePath + good.img_path}`"
                     />
                     <img
                         v-else
@@ -37,12 +22,12 @@
                 <div class="card-body">
                     <h5 class="card-title">
                         <a
-                            :href="route('home.categories', { mark: mark.name, model:model.name })"
-                        >{{mark.name+' '+model.name}}</a>
+                            href="route('home.categories', { mark: mark.name, model:model.name })"
+                        >{{good.name}}</a>
                     </h5>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">Years: {{model.year_start+' - '+model.year_end }}</small>
+                    <small class="text-muted">test</small>
                 </div>
             </div>
         </div>
@@ -57,13 +42,13 @@ export default {
     /**
      * Name.
      */
-    name: 'ContentMarks',
+    name: 'ContentGoods',
 
     /**
      * Props.
      */
     props: {
-        marks: {
+        goods: {
             type: Object,
             default: {},
         },
