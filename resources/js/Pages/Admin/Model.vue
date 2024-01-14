@@ -5,6 +5,14 @@
     />
     <div class="container text-center mt-20">
         <div class="row">
+            <div class="col-12">
+                <Searcher
+                    :request="request.keyWord ?? ''"
+                    action_route="model.index"
+                />
+            </div>
+        </div>
+        <div class="row">
             <div class="col">
                 <table
                     v-if="hasModels"
@@ -28,7 +36,7 @@
                     </thead>
                     <tbody>
                     <tr
-                        v-for="model in models"
+                        v-for="model in models.data"
                         :key="model"
                     >
                         <th scope="row">{{ model.id }}</th>
@@ -64,6 +72,11 @@
                 <div v-else class="col-12">No records. Pls create a first Model</div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-12">
+                <Pagination :items="models"/>
+            </div>
+        </div>
     </div>
     <CreateModelModal
         :marks="marks"
@@ -81,6 +94,8 @@ import CreateModelModal from '@/Components/Admin/CreateModelModal.vue';
 import UpdateModelModal from '@/Components/Admin/UpdateModelModal.vue';
 import { imgStoragePath } from '@/Mixins/General';
 import { ref } from 'vue';
+import Searcher from '@/Components/Admin/Searcher.vue';
+import Pagination from '@/Components/Pagination.vue';
 
 export default {
     /**
@@ -92,6 +107,8 @@ export default {
      * Components.
      */
     components: {
+        Pagination,
+        Searcher,
         CreateModelModal,
         UpdateModelModal,
         Head,
@@ -118,7 +135,7 @@ export default {
          * Check if models exist
          */
         hasModels() {
-            return this.models.length;
+            return this.models.data.length;
         }
     },
 
@@ -131,6 +148,10 @@ export default {
             default: {},
         },
         marks: {
+            type: Object,
+            default: {},
+        },
+        request: {
             type: Object,
             default: {},
         }

@@ -6,6 +6,14 @@
     <div class="container text-center mt-10">
         <div class="row">
             <div class="col-12">
+                <Searcher
+                    :request="request.keyWord ?? ''"
+                    action_route="category.index"
+                />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
                 <table
                     v-if="hasCategories"
                     class="table"
@@ -24,7 +32,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="category in categories">
+                    <tr v-for="category in categories.data">
                         <th scope="row">{{ category.id }}</th>
                         <td>
                             <img
@@ -63,12 +71,17 @@
                 <div v-else class="col-12">No records. Pls create a first category</div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-12">
+                <Pagination :items="categories"/>
+            </div>
+        </div>
     </div>
     <CreateCategoryModal
-        :categories="categories"
+        :categories="categories.data"
     />
     <UpdateCategoryModal
-        :categories="categories"
+        :categories="categories.data"
         :category="chosenCategory"
     />
 </template>
@@ -80,6 +93,8 @@ import CreateCategoryModal from '@/Components/Admin/CreateCategoryModal.vue';
 import UpdateCategoryModal from '@/Components/Admin/UpdateCategoryModal.vue';
 import { imgStoragePath } from '@/Mixins/General';
 import { ref } from 'vue';
+import Searcher from '@/Components/Admin/Searcher.vue';
+import Pagination from '@/Components/Pagination.vue';
 
 export default {
     /**
@@ -91,6 +106,8 @@ export default {
      * Components.
      */
     components: {
+        Pagination,
+        Searcher,
         CreateCategoryModal,
         UpdateCategoryModal,
         Head,
@@ -115,6 +132,10 @@ export default {
         categories: {
             type: Object,
             default: {},
+        },
+        request: {
+            type: Object,
+            default: {},
         }
     },
 
@@ -126,7 +147,7 @@ export default {
          * Check if categories exist
          */
         hasCategories() {
-            return this.categories.length;
+            return this.categories.data.length;
         }
     },
 

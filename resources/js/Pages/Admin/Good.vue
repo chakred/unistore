@@ -6,9 +6,17 @@
     <div class="container text-center mt-10">
         <div class="row">
             <div class="col-12">
+                <Searcher
+                    :request="request.keyWord ?? ''"
+                    action_route="good.index"
+                />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
                 <table
                     v-if="hasGoods"
-                    class="table"
+                    class="table sortable-table"
                 >
                     <thead>
                     <tr>
@@ -28,7 +36,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="good in goods">
+                    <tr v-for="good in goods.data">
                         <th scope="row">{{ good.id }}</th>
                         <th scope="row">{{ good.id_inner ?? '-' }}</th>
                         <td><img
@@ -63,12 +71,17 @@
                 <div v-else class="col-12">No records. Pls create a first good</div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-12">
+                <Pagination :items="goods"/>
+            </div>
+        </div>
     </div>
     <CreateGoodModal
         :countries="countries"
         :marks="marks"
         :models="models"
-        :goods="goods"
+        :goods="goods.data"
         :categories="categories"
     />
 </template>
@@ -79,6 +92,8 @@ import Nav from '@/Components/Admin/Nav.vue';
 import { imgStoragePath } from '@/Mixins/General';
 import { ref } from 'vue';
 import CreateGoodModal from '@/Components/Admin/CreateGoodModal.vue';
+import Searcher from '@/Components/Admin/Searcher.vue';
+import Pagination from '@/Components/Pagination.vue';
 
 export default {
     /**
@@ -90,6 +105,8 @@ export default {
      * Components.
      */
     components: {
+        Pagination,
+        Searcher,
         CreateGoodModal,
         Head,
         Nav
@@ -130,6 +147,10 @@ export default {
             type: Object,
             default: {},
         },
+        request: {
+            type: Object,
+            default: {},
+        }
     },
 
     /**
@@ -140,7 +161,7 @@ export default {
          * Check if categories exist
          */
         hasGoods() {
-            return this.goods.length;
+            return this.goods.data.length;
         }
     },
 

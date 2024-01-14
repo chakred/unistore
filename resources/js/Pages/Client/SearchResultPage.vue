@@ -20,6 +20,9 @@
             <!-- /.col-lg-3 -->
             <div class="col-lg-9">
                     <MainSlider />
+                <br/>
+                <Sorting />
+                <br/>
                 <ContentGoods
                     :goods="goods"
                 />
@@ -44,6 +47,7 @@ import SidebarCategories from '@/Components/Client/SidebarCategories.vue';
 import ContentMarks from '@/Components/Client/ContentMarks.vue';
 import ContentGoods from '@/Components/Client/ContentGoods.vue';
 import Pagination from '@/Components/Pagination.vue';
+import Sorting from '@/Components/Sorting.vue';
 
 export default {
     /**
@@ -55,6 +59,7 @@ export default {
      * Components.
      */
     components: {
+        Sorting,
         SidebarWorkHours,
         SidebarContacts,
         MainSlider,
@@ -64,7 +69,7 @@ export default {
         ContentMarks,
         ContentGoods,
         SidebarCategories,
-        Pagination
+        Pagination,
     },
 
     /**

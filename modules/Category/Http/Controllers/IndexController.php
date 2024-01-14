@@ -16,7 +16,11 @@ class IndexController extends Controller
     public function __invoke(Request $request)
     {
         return Inertia::render('Admin/Category', [
-            'categories' => Category::with('parent', 'children')->get(),
+            'categories' => Category::with('parent', 'children')
+                ->where('name', 'like', '%'.$request->keyWord.'%')
+                ->orWhere('desc','like', '%'.$request->keyWord.'%')
+                ->paginate(5),
+            'request' => $request->all()
         ]);
     }
 }

@@ -5,10 +5,12 @@
 // Variables
 @import 'variables';
 @import 'site/homepage';
+@import 'site/pagination';
 
 // Admin
 @import 'admin/components/nav-second';
 @import 'admin/components/create-modal';
+@import 'admin/components/searcher';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';

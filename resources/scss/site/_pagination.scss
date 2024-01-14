@@ -1,0 +1,16 @@
+.pagination {
+    .active a {
+        background-color: #212529;
+        border-color: #212529;
+        color: white;
+        &:hover {
+            color: white;
+        }
+    }
+    a {
+        color: #212529;
+        &:hover {
+            color: #212529;
+        }
+    }
+}

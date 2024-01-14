@@ -1,5 +1,8 @@
 <template>
-    <nav aria-label="Page navigation example">
+    <nav
+        v-if="items.data.length"
+        aria-label="Page navigation example"
+    >
         <ul class="pagination">
 <!--            <li class="page-item">-->
 <!--                <a-->
@@ -19,7 +22,7 @@
                     :href="link.url"
                     class="page-link"
                 >
-                    <span>
+                    <span aria-hidden="true">
                         {{link.label}}
                     </span>
                 </a>
