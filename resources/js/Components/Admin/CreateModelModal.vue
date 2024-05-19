@@ -125,6 +125,17 @@
                                         id="transmission_type"
                                     >
                                 </div>
+                                <div class="mb-3">
+                                    <input
+                                        v-model="form.active"
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        id="active"
+                                    >
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        {{ form.active ? 'Active': 'Not active' }}
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     <div class="modal-footer">
@@ -213,6 +224,7 @@ export default {
             year_end: '',
             transmission: '',
             transmission_type: '',
+            active: ''
         });
 
         return {

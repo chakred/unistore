@@ -52,7 +52,7 @@
                                             v-for="(mark, id) in marks"
                                             :key="mark"
                                             :value="id"
-                                            selected
+                                            :selected="form.mark == id ? 'selected' : ''"
                                         >
                                             {{ mark }}
                                         </option>
@@ -136,6 +136,17 @@
                                         class="form-control"
                                         id="transmission_type"
                                     >
+                                </div>
+                                <div class="mb-3">
+                                    <input
+                                        v-model="form.active"
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        id="active"
+                                    >
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        {{ form.active ? 'Active': 'Not active' }}
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -224,6 +235,7 @@ export default {
             year_end: '',
             transmission: '',
             transmission_type: '',
+            active: ''
         });
 
         return {
@@ -239,7 +251,25 @@ export default {
 
     computed: {
         imgUrl() {
+            console.log(this.model);
             return this.model.img_path ? this.imgStoragePath + this.model.img_path : this.imagePreviewURL;
+        }
+    },
+
+    /**
+     * Watchers.
+     */
+    watch: {
+        'model'(newValue) {
+            this.form.model = newValue.name;
+            this.form.engine_type = newValue.engine_type;
+            this.form.engine = newValue.engine;
+            this.form.transmission = newValue.transmission;
+            this.form.transmission_type = newValue.transmission_type;
+            this.form.year_start = newValue.year_start;
+            this.form.year_end = newValue.year_end;
+            this.form.mark = newValue.mark.id;
+            this.form.active = newValue.mark.active ? true : false;
         }
     }
 }

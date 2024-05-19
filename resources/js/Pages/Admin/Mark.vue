@@ -55,6 +55,7 @@
     </div>
     <CreateMarkModal />
     <UpdateMarkModal
+        v-if="chosenMark"
         :mark="chosenMark"
     />
 </template>

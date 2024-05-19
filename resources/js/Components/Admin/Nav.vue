@@ -16,7 +16,7 @@
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Mark/Model
+                                Class
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark">
                                 <li>
@@ -28,10 +28,13 @@
                                 <li>
                                     <Link :href="route('model.index')" class="dropdown-item">Model</Link>
                                 </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <Link :href="route('category.index')" class="nav-link">Categories</Link>
+                                </li>
                             </ul>
-                        </li>
-                        <li class="nav-item">
-                            <Link :href="route('category.index')" class="nav-link">Categories</Link>
                         </li>
                         <li class="nav-item">
                             <Link :href="route('good.index')" class="nav-link">Goods</Link>

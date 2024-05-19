@@ -129,5 +129,15 @@ export default {
             form,
         };
     },
+
+    /**
+     * Watchers.
+     */
+    watch: {
+        'category'(newValue) {
+            this.form.name = newValue.name;
+            this.form.desc = newValue.desc;
+        }
+    }
 }
 </script>

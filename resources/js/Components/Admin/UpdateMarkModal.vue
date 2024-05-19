@@ -53,6 +53,7 @@
                                         v-for="mark in marksList"
                                         :key="mark"
                                         :value="mark"
+                                        :selected="form.name == mark ? 'selected' : ''"
                                     >
                                         {{ mark }}
                                     </option>
@@ -94,20 +95,6 @@ export default {
         useForm
     },
 
-    /**
-     * Props.
-     */
-    props: {
-        mark: {
-            type: Object,
-            default: {},
-        },
-        title: {
-            type: String,
-            default: 'Smart',
-        }
-    },
-
     computed: {
         imgUrl() {
             return this.mark.img_path ? this.imgStoragePath + this.mark.img_path : this.imagePreviewURL;
@@ -115,14 +102,27 @@ export default {
     },
 
     /**
+     * Props.
+     */
+    props: {
+        mark: {
+            type: Object
+        },
+        title: {
+            type: String,
+            default: 'Smart',
+        }
+    },
+
+    /**
      * Composition API.
      */
     setup(props) {
-       console.log(props.mark);
+        // const mark = props.mark;
         const form = useForm({
             _method: 'put',
             picture: null,
-            name: props.mark.name ?? ''
+            name: ''
         })
 
         return {
@@ -131,5 +131,14 @@ export default {
             imgStoragePath,
         };
     },
+
+    /**
+     * Watchers.
+     */
+    watch: {
+        'mark'(newValue) {
+            this.form.name = newValue.name;
+        }
+    }
 }
 </script>
