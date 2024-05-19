@@ -12,6 +12,14 @@
                     </div>
                     <div class="modal-body">
                             <div class="custom-border silver pad-15">
+                                <div class="mb-3 create-modal__img-block">
+                                    <img
+                                        v-if="imgUrl"
+                                        :src="imgUrl"
+                                        alt="preview"
+                                        class="create-modal__img-preview"
+                                    />
+                                </div>
                                 <div class="mb-3">
                                         <label for="picture" class="form-label">Picture</label>
                                         <input
@@ -57,6 +65,7 @@
                                     class="form-group mb-3"
                                 >
                                     <label for="parentCategory">Parent category</label>
+
                                     <select
                                         v-model="form.parent_id"
                                         class="form-control"
@@ -65,6 +74,7 @@
                                         <option
                                             v-for="category in categories"
                                             :value="category.id"
+                                            :selected="form.parent_id == category.parent.id ? 'selected' : ''"
                                         >
                                             {{ category.name }}
                                         </option>
@@ -84,12 +94,33 @@
 
 <script>
 import { useForm } from '@inertiajs/vue3';
+import ImagePreviewMixin from '@/Mixins/General/ImagePreviewMixin';
+import { imgStoragePath } from '@/Mixins/General';
 
 export default {
     /**
      * Name.
      */
     name: 'CreateCategoryModal',
+
+    /**
+     * Mixins.
+     */
+    mixins: [ImagePreviewMixin],
+
+
+    /**
+     * Components.
+     */
+    components: {
+        useForm
+    },
+
+    computed: {
+        imgUrl() {
+            return this.category.img_path ? this.imgStoragePath + this.category.img_path : this.imagePreviewURL;
+        }
+    },
 
     /**
      * Props.
@@ -127,6 +158,7 @@ export default {
 
         return {
             form,
+            imgStoragePath,
         };
     },
 
@@ -137,6 +169,9 @@ export default {
         'category'(newValue) {
             this.form.name = newValue.name;
             this.form.desc = newValue.desc;
+            this.form.parent_id = newValue.parent_id;
+
+            console.log(newValue)
         }
     }
 }

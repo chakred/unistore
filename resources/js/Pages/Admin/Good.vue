@@ -81,8 +81,14 @@
         :countries="countries"
         :marks="marks"
         :models="models"
-        :goods="goods.data"
         :categories="categories"
+    />
+    <UpdateGoodModal
+        :countries="countries"
+        :marks="marks"
+        :models="models"
+        :categories="categories"
+        :good="chosenGood"
     />
 </template>
 
@@ -92,6 +98,7 @@ import Nav from '@/Components/Admin/Nav.vue';
 import { imgStoragePath } from '@/Mixins/General';
 import { ref } from 'vue';
 import CreateGoodModal from '@/Components/Admin/CreateGoodModal.vue';
+import UpdateGoodModal from '@/Components/Admin/UpdateGoodModal.vue';
 import Searcher from '@/Components/Admin/Searcher.vue';
 import Pagination from '@/Components/Pagination.vue';
 
@@ -108,6 +115,7 @@ export default {
         Pagination,
         Searcher,
         CreateGoodModal,
+        UpdateGoodModal,
         Head,
         Nav
     },
@@ -174,6 +182,7 @@ export default {
          * @param good
          */
         chooseItem(good) {
+            console.log(good);
             this.chosenGood = good;
         }
     },

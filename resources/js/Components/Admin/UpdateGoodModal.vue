@@ -1,11 +1,21 @@
 <template>
     <!-- Modal -->
-    <div class="modal modal-lg fade" id="goodModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="goodModalLabel" aria-hidden="true">
-        <form @submit.prevent="form.post(route('good.store'))" enctype="multipart/form-data">
+    <div
+        class="modal modal-lg fade"
+        id="goodModalUpdate"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="goodModalUpdateLabel"
+        aria-hidden="true"
+    >
+        <form @submit.prevent="form.post(route('good.update'))" enctype="multipart/form-data">
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="goodModalLabel"><strong>Add a new good:</strong></h1>
+                        <h1 class="modal-title fs-5" id="goodModalUpdateLabel">
+                            <strong>Update the good: {{ good.name }}</strong>
+                        </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -221,7 +231,7 @@ export default {
     /**
      * Name.
      */
-    name: 'CreateGoodModal',
+    name: 'UpdateGoodModal',
 
     /**
      * Mixins.
@@ -239,6 +249,10 @@ export default {
      * Props
      */
     props: {
+        good: {
+            type: Object,
+            default: {},
+        },
         models: {
             type: Object,
             required: true
@@ -311,5 +325,30 @@ export default {
             onlyMarks
         };
     },
+
+    /**
+     * Watchers.
+     */
+    watch: {
+        'good'(newValue) {
+            this.form.name = newValue.name;
+            this.form.desc = newValue.desc;
+            this.form.active = newValue.active ? true : false;
+            this.form.brand = newValue.brand;
+            this.form.category_id = newValue.category_id;
+            this.form.cost = newValue.cost;
+            this.form.country = newValue.country;
+            this.form.currency = newValue.currency;
+            this.form.discount = newValue.discount;
+            this.form.id_inner =  newValue.id_inner;
+            this.form.item = newValue.item;
+            this.form.mark = newValue.mark?.name;
+            this.form.mark_id = newValue.mark?.id;
+            this.form.model = newValue.model?.name;
+            this.form.model_id = newValue.model?.id;
+            this.form.profit = newValue.profit;
+            this.form.quantity = newValue.quantity;
+        }
+    }
 }
 </script>
