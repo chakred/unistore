@@ -65,6 +65,15 @@
                             >
                                 <i class="fa-solid fa-gear fa-xl"></i>
                             </button>
+                            <br>
+                            <button
+                                @click="deleteItem(model)"
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modalDelete"
+                            >
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
                         </td>
                     </tr>
                     </tbody>
@@ -85,6 +94,11 @@
         :marks="marks"
         :model="chosenModel"
     />
+    <DeleteItemModal
+        v-if="deleteItem"
+        :item="chosenItemForDelete"
+        :routeName="moduleName"
+    />
 </template>
 
 <script>
@@ -92,6 +106,7 @@ import { Head } from '@inertiajs/vue3';
 import Nav from '@/Components/Admin/Nav.vue';
 import CreateModelModal from '@/Components/Admin/CreateModelModal.vue';
 import UpdateModelModal from '@/Components/Admin/UpdateModelModal.vue';
+import DeleteItemModal from '@/Components/Admin/DeleteItemModal.vue';
 import { imgStoragePath } from '@/Mixins/General';
 import { ref } from 'vue';
 import Searcher from '@/Components/Admin/Searcher.vue';
@@ -111,6 +126,7 @@ export default {
         Searcher,
         CreateModelModal,
         UpdateModelModal,
+        DeleteItemModal,
         Head,
         Nav,
     },
@@ -120,10 +136,14 @@ export default {
      */
     setup() {
         const chosenModel = ref(Object);
+        const chosenItemForDelete = ref(Object);
+        const moduleName = 'model';
 
         return {
             imgStoragePath,
-            chosenModel
+            chosenModel,
+            chosenItemForDelete,
+            moduleName
         };
     },
 
@@ -163,6 +183,9 @@ export default {
     methods: {
         chooseItem(model) {
             this.chosenModel = model;
+        },
+        deleteItem(model) {
+            this.chosenItemForDelete = model;
         }
     }
 }

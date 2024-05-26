@@ -3,6 +3,7 @@
 use Modules\Mark\Http\Controllers\IndexController;
 use Modules\Mark\Http\Controllers\StoreController;
 use Modules\Mark\Http\Controllers\UpdateController;
+use Modules\Mark\Http\Controllers\DeleteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,5 @@ Route::prefix('mark')->group(function() {
     Route::get('/', IndexController::class)->name('mark.index');
     Route::post('/create', StoreController::class)->name('mark.store');
     Route::put('/update/{id}', UpdateController::class)->name('mark.update');
+    Route::delete('/delete/{id}', DeleteController::class)->name('mark.delete');
 });

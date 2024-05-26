@@ -4,10 +4,13 @@ namespace Modules\Model\Entities;
 
 use Illuminate\Database\Eloquent\Model as CoreModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Mark\Entities\Mark;
 
 class Model extends CoreModel
 {
+    use SoftDeletes;
+
     /**
      * @var bool
      */

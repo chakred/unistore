@@ -28,7 +28,7 @@
                         <th scope="row">{{ mark.id }}</th>
                         <td><img
                             :src="`${imgStoragePath + mark.img_path}`"
-                            width="100"
+                            width="70"
                         ></td>
                         <td>{{ mark.name }}</td>
                         <td>{{ mark.slug }}</td>
@@ -45,6 +45,15 @@
                             >
                                 <i class="fa-solid fa-gear fa-xl"></i>
                             </button>
+                            <br>
+                            <button
+                                @click="deleteItem(mark)"
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modalDelete"
+                            >
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
                         </td>
                     </tr>
                     </tbody>
@@ -58,6 +67,11 @@
         v-if="chosenMark"
         :mark="chosenMark"
     />
+    <DeleteItemModal
+        v-if="deleteItem"
+        :item="chosenItemForDelete"
+        :routeName="moduleName"
+    />
 </template>
 
 <script>
@@ -65,6 +79,7 @@ import { Head } from '@inertiajs/vue3';
 import Nav from '@/Components/Admin/Nav.vue';
 import CreateMarkModal from '@/Components/Admin/CreateMarkModal.vue';
 import UpdateMarkModal from '@/Components/Admin/UpdateMarkModal.vue';
+import DeleteItemModal from '@/Components/Admin/DeleteItemModal.vue';
 import { imgStoragePath } from '@/Mixins/General';
 import { ref } from 'vue';
 
@@ -79,7 +94,15 @@ export default {
      */
     setup() {
         const chosenMark = ref(Object);
-        return { imgStoragePath, chosenMark };
+        const chosenItemForDelete = ref(Object);
+        const moduleName = 'mark';
+
+        return {
+            imgStoragePath,
+            chosenMark,
+            chosenItemForDelete,
+            moduleName
+        };
     },
 
     /**
@@ -89,7 +112,8 @@ export default {
         Head,
         Nav,
         CreateMarkModal,
-        UpdateMarkModal
+        UpdateMarkModal,
+        DeleteItemModal
     },
 
     /**
@@ -120,6 +144,10 @@ export default {
     methods: {
         chooseItem(mark) {
             this.chosenMark = mark;
+        },
+
+        deleteItem(mark) {
+            this.chosenItemForDelete = mark;
         }
     }
 }

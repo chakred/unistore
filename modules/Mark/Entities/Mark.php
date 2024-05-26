@@ -5,9 +5,12 @@ namespace Modules\Mark\Entities;
 use Illuminate\Database\Eloquent\Model as CoreModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Model\Entities\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Mark extends CoreModel
 {
+    use SoftDeletes;
+
     /**
      * @var string[]
      */

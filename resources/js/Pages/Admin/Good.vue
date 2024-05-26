@@ -64,6 +64,15 @@
                             >
                                 <i class="fa-solid fa-gear fa-xl"></i>
                             </button>
+                            <br>
+                            <button
+                                @click="deleteItem(good)"
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modalDelete"
+                            >
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
                         </td>
                     </tr>
                     </tbody>
@@ -90,6 +99,11 @@
         :categories="categories"
         :good="chosenGood"
     />
+    <DeleteItemModal
+        v-if="deleteItem"
+        :item="chosenItemForDelete"
+        :routeName="moduleName"
+    />
 </template>
 
 <script>
@@ -99,6 +113,7 @@ import { imgStoragePath } from '@/Mixins/General';
 import { ref } from 'vue';
 import CreateGoodModal from '@/Components/Admin/CreateGoodModal.vue';
 import UpdateGoodModal from '@/Components/Admin/UpdateGoodModal.vue';
+import DeleteItemModal from '@/Components/Admin/DeleteItemModal.vue';
 import Searcher from '@/Components/Admin/Searcher.vue';
 import Pagination from '@/Components/Pagination.vue';
 
@@ -116,6 +131,7 @@ export default {
         Searcher,
         CreateGoodModal,
         UpdateGoodModal,
+        DeleteItemModal,
         Head,
         Nav
     },
@@ -125,9 +141,13 @@ export default {
      */
     setup() {
         const chosenGood = ref(Object);
+        const chosenItemForDelete = ref(Object);
+        const moduleName = 'good';
         return {
             imgStoragePath,
-            chosenGood
+            chosenGood,
+            chosenItemForDelete,
+            moduleName
         };
     },
 
@@ -182,8 +202,15 @@ export default {
          * @param good
          */
         chooseItem(good) {
-            console.log(good);
             this.chosenGood = good;
+        },
+
+        /**
+         *
+         * @param good
+         */
+        deleteItem(good) {
+            this.chosenItemForDelete = good;
         }
     },
 

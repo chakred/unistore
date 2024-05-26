@@ -2,6 +2,7 @@
 
 use Modules\Category\Http\Controllers\IndexController;
 use Modules\Category\Http\Controllers\StoreController;
+use Modules\Category\Http\Controllers\DeleteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,4 +18,5 @@ use Modules\Category\Http\Controllers\StoreController;
 Route::prefix('category')->group(function() {
     Route::get('/', IndexController::class)->name('category.index');
     Route::post('/create', StoreController::class)->name('category.store');
+    Route::delete('/delete/{id}', DeleteController::class)->name('category.delete');
 });

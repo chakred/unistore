@@ -64,6 +64,15 @@
                             >
                                 <i class="fa-solid fa-gear fa-xl"></i>
                             </button>
+                            <br>
+                            <button
+                                @click="deleteItem(category)"
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modalDelete"
+                            >
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
                         </td>
                     </tr>
                     </tbody>
@@ -84,6 +93,11 @@
         :categories="categories.data"
         :category="chosenCategory"
     />
+    <DeleteItemModal
+        v-if="deleteItem"
+        :item="chosenItemForDelete"
+        :routeName="moduleName"
+    />
 </template>
 
 <script>
@@ -91,6 +105,7 @@ import { Head } from '@inertiajs/vue3';
 import Nav from '@/Components/Admin/Nav.vue';
 import CreateCategoryModal from '@/Components/Admin/CreateCategoryModal.vue';
 import UpdateCategoryModal from '@/Components/Admin/UpdateCategoryModal.vue';
+import DeleteItemModal from '@/Components/Admin/DeleteItemModal.vue';
 import { imgStoragePath } from '@/Mixins/General';
 import { ref } from 'vue';
 import Searcher from '@/Components/Admin/Searcher.vue';
@@ -110,6 +125,7 @@ export default {
         Searcher,
         CreateCategoryModal,
         UpdateCategoryModal,
+        DeleteItemModal,
         Head,
         Nav
     },
@@ -119,9 +135,13 @@ export default {
      */
     setup() {
         const chosenCategory = ref(Object);
+        const chosenItemForDelete = ref(Object);
+        const moduleName = 'category';
         return {
             imgStoragePath,
-            chosenCategory
+            chosenCategory,
+            chosenItemForDelete,
+            moduleName
         };
     },
 
@@ -178,6 +198,14 @@ export default {
          */
         chooseItem(category) {
             this.chosenCategory = category;
+        },
+
+        /**
+         *
+         * @param category
+         */
+        deleteItem(category) {
+            this.chosenItemForDelete = category;
         }
     },
 

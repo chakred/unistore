@@ -5,10 +5,12 @@ namespace Modules\Good\Entities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Category\Entities\Category;
 use Modules\Model\Entities\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Good extends Model
 {
-    use HasFactory;
+    use HasFactory,
+        SoftDeletes;
 
     protected $fillable = [
         'id_inner',

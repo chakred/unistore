@@ -2,6 +2,7 @@
 
 use Modules\Good\Http\Controllers\IndexController;
 use Modules\Good\Http\Controllers\StoreController;
+use Modules\Good\Http\Controllers\DeleteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +19,5 @@ use Modules\Good\Http\Controllers\StoreController;
 Route::prefix('good')->group(function() {
     Route::get('/', IndexController::class)->name('good.index');
     Route::post('/create', StoreController::class)->name('good.store');
+    Route::delete('/delete/{id}', DeleteController::class)->name('good.delete');
 });
