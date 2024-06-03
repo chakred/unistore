@@ -31,7 +31,7 @@
                             width="70"
                         ></td>
                         <td>{{ mark.name }}</td>
-                        <td>{{ mark.slug }}</td>
+                        <td><code>{{ mark.slug }}</code></td>
                         <td>
                             <i v-if="mark.active" class="fa-solid fa-check"></i>
                             <i v-else class="fa-solid fa-xmark"></i>

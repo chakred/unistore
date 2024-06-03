@@ -48,7 +48,7 @@
                         </td>
                         <td>{{ category.name }}</td>
                         <td>{{ category.desc }}</td>
-                        <td>{{ category.slug }}</td>
+                        <td><code>{{ category.slug }}</code></td>
                         <td>{{ parentCategory(category) }}</td>
                         <td>{{ childCategory(category) }}</td>
                         <td>

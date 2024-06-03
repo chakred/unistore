@@ -42,6 +42,17 @@
                                     aria-describedby="picture"
                                 >
                             </div>
+                            <div class="mb-3">
+                                <div class="form-check form-switch">
+                                    <input
+                                        v-model="form.active"
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        id="flexSwitchCheckDefault"
+                                    >
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Active</label>
+                                </div>
+                            </div>
                             <div class="form-group mb-3">
                                 <label for="yearAuto">Auto's mark</label>
                                 <select
@@ -118,11 +129,11 @@ export default {
      * Composition API.
      */
     setup(props) {
-        // const mark = props.mark;
         const form = useForm({
             _method: 'put',
             picture: null,
-            name: ''
+            name: '',
+            active: true
         })
 
         return {
@@ -138,6 +149,7 @@ export default {
     watch: {
         'mark'(newValue) {
             this.form.name = newValue.name;
+            this.form.active = newValue.active ? true : false;
         }
     }
 }
