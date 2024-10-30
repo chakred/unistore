@@ -5,6 +5,8 @@ namespace Modules\Model\Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Modules\Model\Entities\Model as CarModel;
+use Modules\Mark\Entities\Mark;
 
 class ModelDatabaseSeeder extends Seeder
 {
@@ -16,12 +18,20 @@ class ModelDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
+        $markId = Mark::whereSlug('renault')->first()->id;
+
+        // Warning.
+        if ($markId) {
+            $this->command->error('Error! Mark id is not found. Marks table must be seeded firstly.');
+            return;
+        }
 
         $models = [
             [
                 'name' => 'Megane 1',
+                'mark_id' => $markId,
                 'year_start' => 2001,
-                'year_end' => 2003,
+                'year_end' => 2006,
                 'engine' => "1.5",
                 'engine_type' => 'fuel',
                 'transmission' => 'manual',
@@ -30,8 +40,9 @@ class ModelDatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Megane 2',
-                'year_start' => 2002,
-                'year_end' => 2009,
+                'mark_id' => $markId,
+                'year_start' => 2006,
+                'year_end' => 2010,
                 'engine' => "1.5",
                 'engine_type' => 'fuel',
                 'transmission' => 'manual',
@@ -40,7 +51,8 @@ class ModelDatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Megane 3',
-                'year_start' => 2008,
+                'mark_id' => $markId,
+                'year_start' => 2010,
                 'year_end' => 2014,
                 'engine' => "1.5",
                 'engine_type' => 'fuel',
@@ -50,6 +62,9 @@ class ModelDatabaseSeeder extends Seeder
             ]
         ];
 
+        foreach ($models as $model) {
+            CarModel::firstOrcreate($model);
+        }
         // $this->call("OthersTableSeeder");
     }
 }
