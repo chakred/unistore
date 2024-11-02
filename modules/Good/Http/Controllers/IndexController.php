@@ -19,7 +19,7 @@ class IndexController extends Controller
     public function __invoke(Request $request)
     {
         return Inertia::render('Admin/Good', [
-            'goods'      => Good::with('mark', 'model')
+            'goods'      => Good::with('mark', 'model', 'category')
                 ->where('name', 'like', '%'.$request->keyWord.'%')
                 ->orWhere('desc','like', '%'.$request->keyWord.'%')
                 ->paginate(5),

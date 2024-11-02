@@ -5,7 +5,6 @@ namespace Modules\Good\Actions;
 use App\ImageHandler\ImageHandler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Modules\Category\Entities\Category;
 use Modules\Good\Entities\Good;
 
 class StoreGoodAction
@@ -17,6 +16,7 @@ class StoreGoodAction
      */
     public function handle(Request $request): Good
     {
+
         $folderDirectoryName = 'goods';
         $image = ImageHandler::saveImage($request, $folderDirectoryName);
 
@@ -24,7 +24,7 @@ class StoreGoodAction
             'name'              => $request->name,
             'desc'              => $request->desc,
             'img_path'          => $image,
-            'slug'              => Str::slug($request->name, '-'),
+            'slug'              => Str::slug(implode(' ', [$request->name, $request->desc, $request->brand, $request->category_id]), '-'),
             'brand'             => $request->brand,
             'country'           => $request->country,
             'cost'              => $request->cost,
@@ -37,6 +37,7 @@ class StoreGoodAction
             'engine_type'       => $request->engine_type,
             'model_id'          => $request->model_id,
             'mark_id'           => $request->mark_id,
+            'category_id'       => $request->category_id
         ];
 
         return Good::create($data);

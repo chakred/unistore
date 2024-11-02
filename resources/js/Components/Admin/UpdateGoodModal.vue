@@ -22,8 +22,8 @@
                             <div class="custom-border silver pad-15">
                                 <div class="mb-3 create-modal__img-block">
                                     <img
-                                        v-if="imagePreviewURL"
-                                        :src="imagePreviewURL"
+                                        v-if="imgUrl"
+                                        :src="imgUrl"
                                         alt="preview"
                                         class="create-modal__img-preview"
                                     />
@@ -91,7 +91,7 @@
                                             :value="model.id"
                                             selected
                                         >
-                                            {{ model.name }} ({{ model.mark.name }})
+                                            {{ model.mark.name }}, {{ model.name }}, {{ model.year_start }}-{{ model.year_end }}, {{ model.engine }} {{ model.engine_type }}
                                         </option>
                                     </select>
                                 </div>
@@ -224,7 +224,7 @@ import { useForm } from '@inertiajs/vue3';
 import { transmissions, engineTypes } from '@/Mixins/Model';
 import Option from '@/Components/Fields/Option.vue'
 import ImagePreviewMixin from '@/Mixins/General/ImagePreviewMixin';
-import { fillRange } from '@/Mixins/General';
+import {fillRange, imgStoragePath} from '@/Mixins/General';
 import { ref } from 'vue';
 
 export default {
@@ -243,6 +243,12 @@ export default {
      */
     components: {
         Option,
+    },
+
+    computed: {
+        imgUrl() {
+            return this.good.img_path ? this.imgStoragePath + this.good.img_path : this.imagePreviewURL;
+        }
     },
 
     /**
@@ -322,7 +328,8 @@ export default {
             profits,
             currencies,
             categories,
-            onlyMarks
+            onlyMarks,
+            imgStoragePath,
         };
     },
 

@@ -50,7 +50,7 @@
                         <td>{{ good.country }}</td>
                         <td>{{ good.cost + good.currency }}</td>
                         <td><code>{{ good.slug }}</code></td>
-                        <td>-</td>
+                        <td>{{ good.category?.name || '-' }}</td>
                         <td>
                             <i v-if="good.active" class="fa-solid fa-check"></i>
                             <i v-else class="fa-solid fa-xmark"></i>

@@ -75,13 +75,14 @@
                                         id="model"
                                         aria-describedby="model"
                                     >
+
                                         <option
                                             v-for="model in models"
                                             :key="model.id"
                                             :value="model.id"
                                             selected
                                         >
-                                            {{ model.name }} ({{ model.mark.name }})
+                                            {{ model.mark.name }}, {{ model.name }}, {{ model.year_start }}-{{ model.year_end }}, {{ model.engine }} {{ model.engine_type }}
                                         </option>
                                     </select>
                                 </div>
