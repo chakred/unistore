@@ -78,6 +78,7 @@
                     </tr>
                     </tbody>
                 </table>
+                <div v-else-if="isSearchRequestEmpty" class="col-12">No records found</div>
                 <div v-else class="col-12">No records. Pls create a first Model</div>
             </div>
         </div>
@@ -156,6 +157,13 @@ export default {
          */
         hasModels() {
             return this.models.data.length;
+        },
+
+        /**
+         * Check if not records within search request
+         */
+        isSearchRequestEmpty() {
+            return !(this.hasModels && !!this.request.keyWord);
         }
     },
 
