@@ -39,6 +39,9 @@
                         <li class="nav-item">
                             <Link :href="route('good.index')" class="nav-link">Goods <i class="fa-solid fa-boxes-packing"></i></Link>
                         </li>
+                        <li class="nav-item">
+                            <Link :href="route('order.index')" class="nav-link">Orders <i class="fa-solid fa-cart-arrow-down"></i></Link>
+                        </li>
                     </ul>
                 </div>
             </div>

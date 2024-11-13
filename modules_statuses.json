@@ -3,5 +3,6 @@
     "Model": true,
     "Category": true,
     "ModuleName": true,
-    "Good": true
+    "Good": true,
+    "Order": true
 }
