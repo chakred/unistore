@@ -25,6 +25,7 @@
                         <th scope="col">Bought price</th>
                         <th scope="col">Currency</th>
                         <th scope="col">Buyer name</th>
+                        <th scope="col">Buyer email</th>
                         <th scope="col">Buyer cell.</th>
                         <th scope="col">Status</th>
                         <th scope="col">Comments</th>
@@ -43,6 +44,7 @@
                         <td>{{ order.buyer_phone }}</td>
                         <td>{{ order.status }}</td>
                         <td>{{ order.comments || '-' }}</td>
+                        <td>{{ order.created_at }}</td>
                         <td>
                             <button
                                 @click="chooseItem(order)"

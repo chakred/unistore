@@ -18,7 +18,14 @@
                             <a class="nav-link active" aria-current="page" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <button
+                                class="nav-link"
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#cartModal"
+                            >
+                                <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                            </button>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -38,10 +45,12 @@
             </div>
         </div>
     </nav>
+    <CartModal />
 </template>
 
 <script>
 import { Link } from '@inertiajs/vue3';
+import CartModal from '@/Components/Client/CartModal.vue';
 
 export default {
     /**
@@ -54,6 +63,7 @@ export default {
      */
     components: {
         Link,
+        CartModal
     },
 }
 </script>
