@@ -13,7 +13,16 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
+            <div class="col-3">
+                <div>
+                    <Filters
+                        :request="request.filter?.mark ?? ''"
+                        action_route="good.index"
+                        :filter_inputs="{'marks':marks, 'models':models, 'cost':cost}"
+                    />
+                </div>
+            </div>
+            <div class="col-9" style="overflow:scroll">
                 <table
                     v-if="hasGoods"
                     class="table sortable-table"
@@ -116,6 +125,7 @@ import UpdateGoodModal from '@/Components/Admin/UpdateGoodModal.vue';
 import DeleteItemModal from '@/Components/Admin/DeleteItemModal.vue';
 import Searcher from '@/Components/Admin/Searcher.vue';
 import Pagination from '@/Components/Pagination.vue';
+import Filters from '@/Components/Admin/Filters.vue';
 
 export default {
     /**
@@ -133,7 +143,8 @@ export default {
         UpdateGoodModal,
         DeleteItemModal,
         Head,
-        Nav
+        Nav,
+        Filters
     },
 
     /**
@@ -164,6 +175,10 @@ export default {
             default: {},
         },
         marks: {
+            type: Object,
+            default: {},
+        },
+        cost: {
             type: Object,
             default: {},
         },
