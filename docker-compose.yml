@@ -11,15 +11,16 @@ services:
       - unistore
 
   mysql:
-    image: mysql:5.7
+    image: mysql/mysql-server:8.0
     container_name: unistore_db
     environment:
       MYSQL_DATABASE: unistore
       MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_HOST: "%"
     volumes:
       - mysql:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - unistore
 
