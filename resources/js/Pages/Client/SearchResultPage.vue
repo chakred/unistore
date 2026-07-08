@@ -33,7 +33,7 @@
         <!-- /.row -->
     </div>
     <!-- /.container -->
-    <Footer />
+    <Footer :viewNumbers="viewNumbers" />
 </template>
 
 <script>

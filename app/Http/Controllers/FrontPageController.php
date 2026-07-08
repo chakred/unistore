@@ -23,7 +23,6 @@ class FrontPageController extends Controller
             ),
             'models' => Mark::all(),
             'categories' => Category::all(),
-            'viewNumbers' => 0,
         ]);
     }
 }

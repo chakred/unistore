@@ -44,14 +44,21 @@ body *{
     overflow: hidden;
     >a {
         min-height: 160px;
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        overflow: hidden;
+        color: inherit;
+        text-decoration: none;
+    }
+    .cat-block-media {
         position: relative;
-        display: block;
+        flex: 7 1 0%;
         overflow: hidden;
         img {
             object-fit: cover;
             min-width: 140px;
             max-width: 235px;
-            margin: auto;
             display: block;
             padding: 15px;
             position: absolute;
@@ -61,6 +68,9 @@ body *{
             bottom: 0;
             margin: auto;
         }
+    }
+    .cat-block-info {
+        flex: 3 1 0%;
     }
     .card-btn {
         margin: 0 auto;

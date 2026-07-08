@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FrontPageController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CategoryGoodsController;
 use Modules\Good\Http\Controllers\SearchController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -19,9 +20,12 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', FrontPageController::class);
-Route::get('/categories/{mark}/{model}', CategoriesController::class)->name('home.categories');
-Route::get('/search', SearchController::class)->name('home.search');
+Route::middleware('track.view')->group(function () {
+    Route::get('/', FrontPageController::class);
+    Route::get('/categories/{mark}/{model}', CategoriesController::class)->name('home.categories');
+    Route::get('/category/{category}', CategoryGoodsController::class)->name('home.category');
+    Route::get('/search', SearchController::class)->name('home.search');
+});
 
 //Route::get('/', function () {
 //    return Inertia::render('Welcome', [

@@ -6,15 +6,44 @@
                 &copy;
                 <strong>MOTRIO</strong>
                 <br/>
-               12.02.2023
+                {{ currentYear }}
             </p>
-            @isset($viewNumbers)
-            <p class="m-0 text-center text-white">
+            <p
+                v-if="viewNumbers"
+                class="m-0 text-center text-white"
+            >
                 <i class="fas fa-eye"></i>
-                <span>{{$viewNumbers}}</span>
+                <span class="ms-1">{{ viewNumbers }}</span>
             </p>
-            @endisset
         </div>
         <!-- /.container -->
     </footer>
 </template>
+
+<script>
+export default {
+    /**
+     * Name.
+     */
+    name: 'Footer',
+
+    /**
+     * Props.
+     */
+    props: {
+        viewNumbers: {
+            type: Number,
+            default: 0
+        },
+    },
+
+    /**
+     * Composition API
+     */
+    setup() {
+        return {
+            currentYear: new Date().getFullYear(),
+        };
+    },
+}
+</script>

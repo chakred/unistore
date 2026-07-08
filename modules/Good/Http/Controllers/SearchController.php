@@ -31,7 +31,6 @@ class SearchController extends Controller
                 ->orWhere('desc','like', '%'.$request->keyWord.'%')
                 ->orWhere('brand','like', '%'.$request->keyWord.'%')
                 ->paginate(1),
-            'viewNumbers' => 0,
         ]);
     }
 }

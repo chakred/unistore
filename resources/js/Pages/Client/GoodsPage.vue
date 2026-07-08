@@ -9,23 +9,33 @@
         </div>
         <div class="row">
             <div class="col-lg-3 mb-3">
+                <SidebarCategories
+                    :categories="categories"
+                />
+                <br/>
                 <SidebarContacts />
                 <br/>
                 <SidebarWorkHours />
             </div>
             <!-- /.col-lg-3 -->
             <div class="col-lg-9">
-                    <MainSlider />
-                <ContentCategories
-                    :categories="categories"
+                <MainSlider />
+                <div v-if="heading" class="card head-block mb-3">
+                    <div>
+                        <p><span>{{ heading }}</span></p>
+                    </div>
+                </div>
+                <ContentGoods
+                    :goods="goods"
                 />
+                <Pagination :items="goods"/>
             </div>
             <!-- /.col-lg-9 -->
         </div>
         <!-- /.row -->
     </div>
     <!-- /.container -->
-    <Footer />
+    <Footer :viewNumbers="viewNumbers" />
 </template>
 
 <script>
@@ -36,8 +46,8 @@ import MainSlider from '@/Components/Client/MainSlider.vue';
 import SidebarContacts from '@/Components/Client/SidebarContacts.vue';
 import SidebarWorkHours from '@/Components/Client/SidebarWorkHours.vue';
 import SidebarCategories from '@/Components/Client/SidebarCategories.vue';
-import ContentMarks from '@/Components/Client/ContentMarks.vue';
-import ContentCategories from '@/Components/Client/ContentCategories.vue';
+import ContentGoods from '@/Components/Client/ContentGoods.vue';
+import Pagination from '@/Components/Pagination.vue';
 
 export default {
     /**
@@ -55,9 +65,9 @@ export default {
         Footer,
         Nav,
         Searcher,
-        ContentMarks,
-        ContentCategories,
-        SidebarCategories
+        ContentGoods,
+        SidebarCategories,
+        Pagination,
     },
 
     /**
@@ -68,13 +78,17 @@ export default {
             type: Object,
             default: {}
         },
-        models: {
-            type: Object,
-            default: {}
-        },
         categories: {
             type: Object,
             default: {}
+        },
+        goods: {
+            type: Object,
+            default: {}
+        },
+        heading: {
+            type: String,
+            default: ''
         },
         viewNumbers: {
             type: Number,
@@ -83,4 +97,3 @@ export default {
     },
 }
 </script>
-

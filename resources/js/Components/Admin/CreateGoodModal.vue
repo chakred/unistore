@@ -76,6 +76,14 @@
                                         aria-describedby="model"
                                     >
                                         <option
+                                            v-if="!models || !models.length"
+                                            value=""
+                                            disabled
+                                            selected
+                                        >
+                                            no models created
+                                        </option>
+                                        <option
                                             v-for="model in models"
                                             :key="model.id"
                                             :value="model.id"

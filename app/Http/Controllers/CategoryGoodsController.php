@@ -8,19 +8,15 @@ use Modules\Category\Entities\Category;
 use Modules\Good\Entities\Good;
 use Modules\Mark\Entities\Mark;
 use Modules\Mark\Transformers\MarksResource;
-use Modules\Model\Entities\Model as CarModel;
 
-class CategoriesController extends Controller
+class CategoryGoodsController extends Controller
 {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request, string $mark, string $model)
+    public function __invoke(Request $request, string $category)
     {
-        $carModel = CarModel::with('mark')
-            ->whereHas('mark', fn ($query) => $query->where('slug', $mark))
-            ->where('slug', $model)
-            ->firstOrFail();
+        $categoryEntity = Category::where('slug', $category)->firstOrFail();
 
         return Inertia::render('Client/GoodsPage', [
             'marks' => new MarksResource(
@@ -29,9 +25,9 @@ class CategoriesController extends Controller
                     ->get()
             ),
             'categories' => Category::all(),
-            'heading' => $carModel->mark->name.' '.$carModel->name,
+            'heading' => $categoryEntity->name,
             'goods' => Good::with(['model.mark', 'category'])
-                ->where('model_id', $carModel->id)
+                ->where('category_id', $categoryEntity->id)
                 ->paginate(12),
         ]);
     }

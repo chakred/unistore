@@ -23,27 +23,27 @@
         >
             <div class="card h-100 cat-block">
                 <a
-                    :href="route('home.categories', { mark: mark.name, model:model.name })"
+                    :href="route('home.categories', { mark: mark.slug, model: model.slug })"
                 >
-                    <img
-                        v-if="model.img_path"
-                        :src="`${imgStoragePath + model.img_path}`"
-                    />
-                    <img
-                        v-else
-                        src="http://dummyimage.com/450x350/ffffff/545454&text=No+image"
-                    />
+                    <div class="cat-block-media">
+                        <img
+                            v-if="model.img_path"
+                            :src="`${imgStoragePath + model.img_path}`"
+                        />
+                        <img
+                            v-else
+                            src="http://dummyimage.com/450x350/ffffff/545454&text=No+image"
+                        />
+                    </div>
+                    <div class="cat-block-info">
+                        <div class="card-body">
+                            <h5 class="card-title">{{mark.name+' '+model.name}}</h5>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Years: {{model.year_start+' - '+model.year_end }}</small>
+                        </div>
+                    </div>
                 </a>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a
-                            :href="route('home.categories', { mark: mark.name, model:model.name })"
-                        >{{mark.name+' '+model.name}}</a>
-                    </h5>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Years: {{model.year_start+' - '+model.year_end }}</small>
-                </div>
             </div>
         </div>
 

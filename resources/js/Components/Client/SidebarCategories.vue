@@ -9,7 +9,7 @@
                     v-for="category in categories"
                     v-key="category.id"
                 >
-                    <a href="#">
+                    <a :href="route('home.category', { category: category.slug })">
                         <div
                             class="card-body__children"
                         >
