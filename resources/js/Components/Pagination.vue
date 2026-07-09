@@ -1,6 +1,6 @@
 <template>
     <nav
-        v-if="items.data.length"
+        v-if="items.data.length && items.last_page > 1"
         aria-label="Page navigation example"
     >
         <ul class="pagination">
@@ -22,7 +22,7 @@
                     :href="link.url"
                     class="page-link"
                 >
-                    <span aria-hidden="true" v-html="link.label"></span>
+                    <span aria-hidden="true" v-html="formatLabel(link.label)"></span>
                 </a>
             </li>
 <!--            <li class="page-item">-->
@@ -53,6 +53,29 @@ export default {
         items: {
             type: Object,
             default: {},
+        },
+    },
+
+    /**
+     * Methods.
+     */
+    methods: {
+        /**
+         * Strip the "Previous"/"Next" wording and keep only the arrow.
+         *
+         * @param label
+         * @return {string}
+         */
+        formatLabel(label) {
+            if (label.includes('Previous')) {
+                return '&laquo;';
+            }
+
+            if (label.includes('Next')) {
+                return '&raquo;';
+            }
+
+            return label;
         },
     },
 }

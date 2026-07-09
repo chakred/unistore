@@ -20,18 +20,18 @@
                 >
                     <thead>
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">ID inner</th>
+                        <SortableTh label="ID" field="id" :current-sort="sort" :query="request" />
+                        <SortableTh label="ID inner" field="id_inner" :current-sort="sort" :query="request" />
                         <th scope="col">Picture</th>
-                        <th scope="col">Good</th>
-                        <th scope="col">Description</th>
+                        <SortableTh label="Good" field="name" :current-sort="sort" :query="request" />
+                        <SortableTh label="Description" field="desc" :current-sort="sort" :query="request" />
                         <th scope="col">Model</th>
-                        <th scope="col">Brand</th>
-                        <th scope="col">Country</th>
-                        <th scope="col">Cost</th>
-                        <th scope="col">Slug</th>
+                        <SortableTh label="Brand" field="brand" :current-sort="sort" :query="request" />
+                        <SortableTh label="Country" field="country" :current-sort="sort" :query="request" />
+                        <SortableTh label="Cost" field="cost" :current-sort="sort" :query="request" />
+                        <SortableTh label="Slug" field="slug" :current-sort="sort" :query="request" />
                         <th scope="col">Category</th>
-                        <th scope="col">Active</th>
+                        <SortableTh label="Active" field="active" :current-sort="sort" :query="request" />
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
@@ -50,7 +50,7 @@
                         <td>{{ good.country }}</td>
                         <td>{{ good.cost + good.currency }}</td>
                         <td>{{ good.slug }}</td>
-                        <td>-</td>
+                        <td>{{ good.category?.name || '-' }}</td>
                         <td>
                             <i v-if="good.active" class="fa-solid fa-check"></i>
                             <i v-else class="fa-solid fa-xmark"></i>
@@ -115,6 +115,7 @@ import CreateGoodModal from '@/Components/Admin/CreateGoodModal.vue';
 import UpdateGoodModal from '@/Components/Admin/UpdateGoodModal.vue';
 import DeleteItemModal from '@/Components/Admin/DeleteItemModal.vue';
 import Searcher from '@/Components/Admin/Searcher.vue';
+import SortableTh from '@/Components/Admin/SortableTh.vue';
 import Pagination from '@/Components/Pagination.vue';
 
 export default {
@@ -129,6 +130,7 @@ export default {
     components: {
         Pagination,
         Searcher,
+        SortableTh,
         CreateGoodModal,
         UpdateGoodModal,
         DeleteItemModal,
@@ -178,6 +180,10 @@ export default {
         request: {
             type: Object,
             default: {},
+        },
+        sort: {
+            type: Object,
+            default: () => ({ by: 'id', dir: 'asc' }),
         }
     },
 
