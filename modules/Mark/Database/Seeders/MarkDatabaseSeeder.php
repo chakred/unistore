@@ -19,18 +19,23 @@ class MarkDatabaseSeeder extends Seeder
         Model::unguard();
 
         $marks = [
-            [
-                'name' => 'Renault',
-                'slug' => Str::slug('Renault', '-')
-            ],
-            [
-                'name' => 'Smart',
-                'slug' => Str::slug('Smart', '-')
-            ],
+            'Renault',
+            'Smart',
+            'Volkswagen',
+            'Toyota',
+            'BMW',
+            'Ford',
+            'Skoda',
+            'Audi',
+            'Hyundai',
+            'Opel',
         ];
 
         foreach ($marks as $mark) {
-            Mark::firstOrcreate($mark);
+            Mark::firstOrcreate([
+                'name' => $mark,
+                'slug' => Str::slug($mark, '-')
+            ]);
         }
     }
 }

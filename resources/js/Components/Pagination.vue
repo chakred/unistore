@@ -22,9 +22,7 @@
                     :href="link.url"
                     class="page-link"
                 >
-                    <span aria-hidden="true">
-                        {{link.label}}
-                    </span>
+                    <span aria-hidden="true" v-html="link.label"></span>
                 </a>
             </li>
 <!--            <li class="page-item">-->
