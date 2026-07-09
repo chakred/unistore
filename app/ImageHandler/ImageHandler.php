@@ -17,7 +17,7 @@ class ImageHandler
      */
     public static function saveImage($request, $folderDirectoryName, $resizment = null)
     {
-        if ($request->has('picture')) {
+        if ($request->hasFile('picture')) {
             $file = $request->picture;
             $pictureName = '/'.$folderDirectoryName.'/'.uniqid().'-'.$file->getClientOriginalName();
             $request->picture->storeAs('/public/upload/', $pictureName);

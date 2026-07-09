@@ -24,7 +24,7 @@ class UpdateMarkAutoRequest extends FormRequest
     public function rules()
     {
         return [
-            'picture' => 'image:jpg,bmp,png'
+            'picture' => 'nullable|image:jpg,bmp,png'
         ];
     }
 }

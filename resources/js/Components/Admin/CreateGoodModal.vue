@@ -26,9 +26,11 @@
                                             @input="form.picture = $event.target.files[0]"
                                             type="file"
                                             class="form-control"
+                                            :class="{ 'is-invalid': form.errors.picture }"
                                             id="picture"
                                             aria-describedby="picture"
                                         >
+                                        <div v-if="form.errors.picture" class="text-danger small mt-1">{{ form.errors.picture }}</div>
                                     </div>
                                     <div class="mb-3">
                                         <div class="form-check form-switch">
@@ -49,6 +51,7 @@
                                         <select
                                             v-model="form.mark_id"
                                             class="form-control"
+                                            :class="{ 'is-invalid': form.errors.mark_id }"
                                             id="mark"
                                         >
                                             <option
@@ -61,6 +64,7 @@
                                             </option>
 
                                         </select>
+                                        <div v-if="form.errors.mark_id" class="text-danger small mt-1">{{ form.errors.mark_id }}</div>
                                     </div>
                                 </div>
                                 <div
@@ -72,6 +76,7 @@
                                         v-model="form.model_id"
                                         type="text"
                                         class="form-control"
+                                        :class="{ 'is-invalid': form.errors.model_id }"
                                         id="model"
                                         aria-describedby="model"
                                     >
@@ -92,33 +97,40 @@
                                             {{ model.name }} ({{ model.mark.name }})
                                         </option>
                                     </select>
+                                    <div v-if="form.errors.model_id" class="text-danger small mt-1">{{ form.errors.model_id }}</div>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="desc">Description</label>
                                     <textarea
                                         v-model="form.desc"
                                         class="form-control"
+                                        :class="{ 'is-invalid': form.errors.desc }"
                                         id="desc"
                                     >
                                     </textarea>
+                                    <div v-if="form.errors.desc" class="text-danger small mt-1">{{ form.errors.desc }}</div>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="brand">Name</label>
                                     <input
                                         v-model="form.name"
                                         class="form-control"
+                                        :class="{ 'is-invalid': form.errors.name }"
                                         id="name"
                                         type="text"
                                     >
+                                    <div v-if="form.errors.name" class="text-danger small mt-1">{{ form.errors.name }}</div>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="brand">Brand</label>
                                     <input
                                         v-model="form.brand"
                                         class="form-control"
+                                        :class="{ 'is-invalid': form.errors.brand }"
                                         id="brand"
                                         type="text"
                                     >
+                                    <div v-if="form.errors.brand" class="text-danger small mt-1">{{ form.errors.brand }}</div>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="brand">Quantity(pcs.)</label>
@@ -147,9 +159,11 @@
                                     <input
                                         v-model="form.cost"
                                         class="form-control"
+                                        :class="{ 'is-invalid': form.errors.cost }"
                                         id="cost"
                                         type="text"
                                     >
+                                    <div v-if="form.errors.cost" class="text-danger small mt-1">{{ form.errors.cost }}</div>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="brand">Currency</label>
@@ -278,7 +292,7 @@ export default {
         const onlyMarks = ref(false)
 
         const discounts = fillRange(0,100);
-        const profits = fillRange(1,100);
+        const profits = fillRange(0,100);
         const currencies = [
             'EUR',
             'USD',
@@ -292,14 +306,14 @@ export default {
             engine_type: '',
             desc: '',
             brand: '',
-            country: '',
+            country: Object.values(countries)[0] ?? '',
             transmission: '',
             transmission_type: '',
             category_id: null,
             cost: '',
-            profit: '',
+            profit: 0,
             discount: 0,
-            currency: '',
+            currency: currencies[0],
             quantity: '',
             name: '',
             only_marks: onlyMarks

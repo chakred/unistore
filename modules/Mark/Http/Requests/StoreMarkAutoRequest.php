@@ -25,7 +25,7 @@ class StoreMarkAutoRequest extends FormRequest
     {
         return [
             'name'    => 'required|unique:marks|min:2|max:255',
-            'picture' => 'image:jpg,bmp,png'
+            'picture' => 'nullable|image:jpg,bmp,png'
         ];
     }
 }

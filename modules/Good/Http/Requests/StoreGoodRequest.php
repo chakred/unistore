@@ -30,7 +30,7 @@ class StoreGoodRequest extends FormRequest
 //            'engine' => 'string|min:2|max:100',
 //            'engine_type' => 'string|min:2|max:100',
             'desc'    => 'required|string|min:2|max:255',
-            'picture' => 'image:jpg,bmp,png',
+            'picture' => 'nullable|image:jpg,bmp,png',
             'cost'    => 'required|integer',
             'model_id'   => 'required_unless:only_marks,null',
             'mark_id'   => 'required_if:only_marks,null'
