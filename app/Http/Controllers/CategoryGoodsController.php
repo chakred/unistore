@@ -18,6 +18,33 @@ class CategoryGoodsController extends Controller
     {
         $categoryEntity = Category::where('slug', $category)->firstOrFail();
 
+        $priceRange = Good::where('category_id', $categoryEntity->id)
+            ->selectRaw('min(cost) as min, max(cost) as max')
+            ->first();
+
+        $goodsQuery = Good::with(['model.mark', 'category'])
+            ->where('category_id', $categoryEntity->id);
+
+        if ($request->filled('price_min')) {
+            $goodsQuery->where('cost', '>=', $request->input('price_min'));
+        }
+
+        if ($request->filled('price_max')) {
+            $goodsQuery->where('cost', '<=', $request->input('price_max'));
+        }
+
+        switch ($request->input('sort')) {
+            case 'price_asc':
+                $goodsQuery->orderBy('cost', 'asc');
+                break;
+            case 'price_desc':
+                $goodsQuery->orderBy('cost', 'desc');
+                break;
+            case 'availability':
+                $goodsQuery->orderBy('quantity', 'desc');
+                break;
+        }
+
         return Inertia::render('Client/GoodsPage', [
             'marks' => new MarksResource(
                 Mark::with('models')
@@ -26,9 +53,18 @@ class CategoryGoodsController extends Controller
             ),
             'categories' => Category::all(),
             'heading' => $categoryEntity->name,
-            'goods' => Good::with(['model.mark', 'category'])
-                ->where('category_id', $categoryEntity->id)
-                ->paginate(12),
+            'priceRange' => [
+                'min' => (float) ($priceRange->min ?? 0),
+                'max' => (float) ($priceRange->max ?? 0),
+            ],
+            'filters' => [
+                'price_min' => $request->input('price_min'),
+                'price_max' => $request->input('price_max'),
+                'sort' => $request->input('sort'),
+            ],
+            'goods' => $goodsQuery
+                ->paginate(12)
+                ->appends($request->query()),
         ]);
     }
 }

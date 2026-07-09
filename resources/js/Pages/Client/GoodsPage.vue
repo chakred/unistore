@@ -13,6 +13,11 @@
                     :categories="categories"
                 />
                 <br/>
+                <SidebarPriceFilter
+                    :price-range="priceRange"
+                    :filters="filters"
+                />
+                <br/>
                 <SidebarContacts />
                 <br/>
                 <SidebarWorkHours />
@@ -25,6 +30,9 @@
                         <p><span>{{ heading }}</span></p>
                     </div>
                 </div>
+                <GoodsSorter
+                    :filters="filters"
+                />
                 <ContentGoods
                     :goods="goods"
                 />
@@ -46,6 +54,8 @@ import MainSlider from '@/Components/Client/MainSlider.vue';
 import SidebarContacts from '@/Components/Client/SidebarContacts.vue';
 import SidebarWorkHours from '@/Components/Client/SidebarWorkHours.vue';
 import SidebarCategories from '@/Components/Client/SidebarCategories.vue';
+import SidebarPriceFilter from '@/Components/Client/SidebarPriceFilter.vue';
+import GoodsSorter from '@/Components/Client/GoodsSorter.vue';
 import ContentGoods from '@/Components/Client/ContentGoods.vue';
 import Pagination from '@/Components/Pagination.vue';
 
@@ -67,6 +77,8 @@ export default {
         Searcher,
         ContentGoods,
         SidebarCategories,
+        SidebarPriceFilter,
+        GoodsSorter,
         Pagination,
     },
 
@@ -93,6 +105,14 @@ export default {
         viewNumbers: {
             type: Number,
             default: 0
+        },
+        priceRange: {
+            type: Object,
+            default: () => ({ min: 0, max: 0 })
+        },
+        filters: {
+            type: Object,
+            default: () => ({})
         },
     },
 }
