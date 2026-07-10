@@ -4,6 +4,15 @@
             <a class="navbar-brand" href="/">
                 <strong style="letter-spacing: 3px;">MOTRIO</strong>
             </a>
+            <button type="button" class="btn btn-link nav-cart-btn text-white position-relative" @click="openCart">
+                <i class="fas fa-shopping-cart"></i>
+                <span
+                    v-if="cartState.count"
+                    class="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle"
+                >
+                    {{ cartState.count }}
+                </span>
+            </button>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -38,10 +47,13 @@
             </div>
         </div>
     </nav>
+    <CartModal />
 </template>
 
 <script>
 import { Link } from '@inertiajs/vue3';
+import CartModal from '@/Components/Client/CartModal.vue';
+import { cartState, openCart, fetchCart } from '@/Components/Stores/Cart';
 
 export default {
     /**
@@ -54,6 +66,24 @@ export default {
      */
     components: {
         Link,
+        CartModal,
+    },
+
+    /**
+     * Composition API
+     */
+    setup() {
+        return {
+            cartState,
+            openCart,
+        };
+    },
+
+    /**
+     * Mounted.
+     */
+    mounted() {
+        fetchCart();
     },
 }
 </script>

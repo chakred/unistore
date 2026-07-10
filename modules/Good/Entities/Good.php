@@ -2,12 +2,13 @@
 
 namespace Modules\Good\Entities;
 
+use Binafy\LaravelCart\Cartable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Category\Entities\Category;
 use Modules\Model\Entities\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Good extends Model
+class Good extends Model implements Cartable
 {
     use HasFactory,
         SoftDeletes;
@@ -49,5 +50,13 @@ class Good extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id' , 'id');
+    }
+
+    /**
+     * Price used by the cart.
+     */
+    public function getPrice(): float
+    {
+        return (float) $this->cost;
     }
 }

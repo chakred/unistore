@@ -35,17 +35,7 @@
                     </p>
                 </div>
                 <div class="card-footer buttons-area">
-                    <button type="button" class="define-goods card-btn-cart card-btn"
-                            data-goods-id="1"
-                            data-goods-name="1"
-                            data-goods-image="1"
-                            data-goods-price="1"
-                            data-goods-mark="1"
-                            data-fixed-rate="1"
-                            data-currency-name="1"
-                            data-bought-price="1"
-                            data-toggle="modal"
-                            data-target="#buyProductModal">
+                    <button type="button" class="card-btn-cart card-btn" @click="addToCart(good.id)">
                         <i class="fas fa-cart-plus"></i>
                     </button>
                     <button type="button" class="define-goods card-btn-buy card-btn"
@@ -77,6 +67,7 @@
 
 <script>
 import { imgStoragePath } from '@/Mixins/General';
+import { addToCart, openCart } from '@/Components/Stores/Cart';
 
 export default {
     /**
@@ -101,6 +92,15 @@ export default {
         return {
             imgStoragePath,
         };
+    },
+
+    /**
+     * Methods.
+     */
+    methods: {
+        addToCart(goodId) {
+            addToCart(goodId).then(openCart);
+        },
     },
 }
 </script>
