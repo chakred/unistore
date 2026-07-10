@@ -67,3 +67,13 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+.col-lg-4.col-md-6.mb-4 {
+    min-height: 280px;
+}
+
+.cat-block {
+    min-height: 280px;
+}
+</style>

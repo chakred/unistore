@@ -20,6 +20,7 @@ class Model extends CoreModel
      * @var string[]
      */
     protected $fillable = [
+        'mark_id',
         'name',
         'year_start',
         'year_end',

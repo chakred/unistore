@@ -10,7 +10,7 @@
         aria-hidden="true"
     >
         <form
-            @submit.prevent="form.post(route('model.store'))"
+            @submit.prevent="form.post(route('model.update', model.id))"
             enctype="multipart/form-data"
         >
             <div class="modal-dialog modal-dialog-scrollable">
@@ -269,7 +269,7 @@ export default {
             this.form.year_start = newValue.year_start;
             this.form.year_end = newValue.year_end;
             this.form.mark = newValue.mark.id;
-            this.form.active = newValue.mark.active ? true : false;
+            this.form.active = newValue.active ? true : false;
         }
     }
 }

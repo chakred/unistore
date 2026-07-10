@@ -1,4 +1,4 @@
-export const imgStoragePath = 'storage/upload';
+export const imgStoragePath = '/storage/upload';
 export const fillRange = function (start, end, float = false) {
     let values = [];
     while (start <= end) {

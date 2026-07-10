@@ -2,6 +2,7 @@
 
 use Modules\Model\Http\Controllers\IndexController;
 use Modules\Model\Http\Controllers\StoreController;
+use Modules\Model\Http\Controllers\UpdateController;
 use Modules\Model\Http\Controllers\DeleteController;
 
 /*
@@ -18,5 +19,6 @@ use Modules\Model\Http\Controllers\DeleteController;
 Route::prefix('model')->group(function() {
     Route::get('/', IndexController::class)->name('model.index');
     Route::post('/create', StoreController::class)->name('model.store');
+    Route::put('/update/{id}', UpdateController::class)->name('model.update');
     Route::delete('/delete/{id}', DeleteController::class)->name('model.delete');
 });
