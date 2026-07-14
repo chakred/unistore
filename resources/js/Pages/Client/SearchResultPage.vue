@@ -8,6 +8,11 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-12">
+                <Breadcrumbs :items="breadcrumbItems" />
+            </div>
+        </div>
+        <div class="row">
             <div class="col-lg-3 mb-3">
                 <SidebarCategories
                     :categories="categories"
@@ -39,6 +44,7 @@
 <script>
 import Nav from '@/Components/Client/Nav.vue';
 import Searcher from '@/Components/Client/Searcher.vue';
+import Breadcrumbs from '@/Components/Client/Breadcrumbs.vue';
 import Footer from '@/Layouts/Client/Footer.vue';
 import MainSlider from '@/Components/Client/MainSlider.vue';
 import SidebarContacts from '@/Components/Client/SidebarContacts.vue';
@@ -66,6 +72,7 @@ export default {
         Footer,
         Nav,
         Searcher,
+        Breadcrumbs,
         ContentMarks,
         ContentGoods,
         SidebarCategories,
@@ -95,6 +102,18 @@ export default {
         viewNumbers: {
             type: Number,
             default: 0
+        },
+    },
+
+    /**
+     * Computed prop
+     */
+    computed: {
+        breadcrumbItems() {
+            return [
+                { label: 'Главная', href: '/' },
+                { label: 'Результаты поиска' },
+            ];
         },
     },
 }
