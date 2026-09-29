@@ -1,6 +1,6 @@
 <template>
     <!-- Modal -->
-    <div class="modal modal-lg fade" id="goodModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="goodModalLabel" aria-hidden="true">
+    <div class="modal modal-xl fade" id="goodModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="goodModalLabel" aria-hidden="true">
         <form @submit.prevent="form.post(route('good.store'))" enctype="multipart/form-data">
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
@@ -18,8 +18,8 @@
                                         class="create-modal__img-preview"
                                     />
                                 </div>
-                                <div class="form-group row">
-                                    <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
                                         <label for="picture" class="form-label">Picture</label>
                                         <input
                                             @change="onFileChange"
@@ -32,7 +32,7 @@
                                         >
                                         <div v-if="form.errors.picture" class="text-danger small mt-1">{{ form.errors.picture }}</div>
                                     </div>
-                                    <div class="mb-3">
+                                    <div class="col-md-6 mb-3 d-flex align-items-end">
                                         <div class="form-check form-switch">
                                             <input
                                                 v-model="onlyMarks"
@@ -43,9 +43,11 @@
                                             <label class="form-check-label" for="flexSwitchCheckDefault">Only Marks</label>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div
                                         v-if="onlyMarks"
-                                        class="mb-3"
+                                        class="col-md-6 mb-3"
                                     >
                                         <label for="mark">Auto's mark</label>
                                         <select
@@ -66,170 +68,178 @@
                                         </select>
                                         <div v-if="form.errors.mark_id" class="text-danger small mt-1">{{ form.errors.mark_id }}</div>
                                     </div>
-                                </div>
-                                <div
-                                    v-if="!onlyMarks"
-                                    class="mb-3"
-                                >
-                                    <label for="model" class="form-label">Model</label>
-                                    <select
-                                        v-model="form.model_id"
-                                        type="text"
-                                        class="form-control"
-                                        :class="{ 'is-invalid': form.errors.model_id }"
-                                        id="model"
-                                        aria-describedby="model"
+                                    <div
+                                        v-if="!onlyMarks"
+                                        class="col-md-6 mb-3"
                                     >
-                                        <option
-                                            v-if="!models || !models.length"
-                                            value=""
-                                            disabled
-                                            selected
+                                        <label for="model" class="form-label">Model</label>
+                                        <select
+                                            v-model="form.model_id"
+                                            type="text"
+                                            class="form-control"
+                                            :class="{ 'is-invalid': form.errors.model_id }"
+                                            id="model"
+                                            aria-describedby="model"
                                         >
-                                            no models created
-                                        </option>
-                                        <option
-                                            v-for="model in models"
-                                            :key="model.id"
-                                            :value="model.id"
-                                            selected
+                                            <option
+                                                v-if="!models || !models.length"
+                                                value=""
+                                                disabled
+                                                selected
+                                            >
+                                                no models created
+                                            </option>
+                                            <option
+                                                v-for="model in models"
+                                                :key="model.id"
+                                                :value="model.id"
+                                                selected
+                                            >
+                                                {{ model.name }} ({{ model.mark.name }})
+                                            </option>
+                                        </select>
+                                        <div v-if="form.errors.model_id" class="text-danger small mt-1">{{ form.errors.model_id }}</div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="name">Name</label>
+                                        <input
+                                            v-model="form.name"
+                                            class="form-control"
+                                            :class="{ 'is-invalid': form.errors.name }"
+                                            id="name"
+                                            type="text"
                                         >
-                                            {{ model.name }} ({{ model.mark.name }})
-                                        </option>
-                                    </select>
-                                    <div v-if="form.errors.model_id" class="text-danger small mt-1">{{ form.errors.model_id }}</div>
+                                        <div v-if="form.errors.name" class="text-danger small mt-1">{{ form.errors.name }}</div>
+                                    </div>
                                 </div>
-                                <div class="form-group mb-3">
-                                    <label for="desc">Description</label>
-                                    <textarea
-                                        v-model="form.desc"
-                                        class="form-control"
-                                        :class="{ 'is-invalid': form.errors.desc }"
-                                        id="desc"
-                                    >
-                                    </textarea>
-                                    <div v-if="form.errors.desc" class="text-danger small mt-1">{{ form.errors.desc }}</div>
+                                <div class="row">
+                                    <div class="col-12 mb-3">
+                                        <label for="desc">Description</label>
+                                        <textarea
+                                            v-model="form.desc"
+                                            class="form-control"
+                                            :class="{ 'is-invalid': form.errors.desc }"
+                                            id="desc"
+                                        >
+                                        </textarea>
+                                        <div v-if="form.errors.desc" class="text-danger small mt-1">{{ form.errors.desc }}</div>
+                                    </div>
                                 </div>
-                                <div class="form-group mb-3">
-                                    <label for="brand">Name</label>
-                                    <input
-                                        v-model="form.name"
-                                        class="form-control"
-                                        :class="{ 'is-invalid': form.errors.name }"
-                                        id="name"
-                                        type="text"
-                                    >
-                                    <div v-if="form.errors.name" class="text-danger small mt-1">{{ form.errors.name }}</div>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="brand">Brand</label>
+                                        <input
+                                            v-model="form.brand"
+                                            class="form-control"
+                                            :class="{ 'is-invalid': form.errors.brand }"
+                                            id="brand"
+                                            type="text"
+                                        >
+                                        <div v-if="form.errors.brand" class="text-danger small mt-1">{{ form.errors.brand }}</div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="country">Country</label>
+                                        <select
+                                            v-model="form.country"
+                                            class="form-control"
+                                            id="country"
+                                        >
+                                            <option
+                                                v-for="country in countries"
+                                                :key="country"
+                                            >{{ country }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="quantity">Quantity(pcs.)</label>
+                                        <input
+                                            v-model="form.quantity"
+                                            class="form-control"
+                                            id="quantity"
+                                            type="text"
+                                        >
+                                    </div>
                                 </div>
-                                <div class="form-group mb-3">
-                                    <label for="brand">Brand</label>
-                                    <input
-                                        v-model="form.brand"
-                                        class="form-control"
-                                        :class="{ 'is-invalid': form.errors.brand }"
-                                        id="brand"
-                                        type="text"
-                                    >
-                                    <div v-if="form.errors.brand" class="text-danger small mt-1">{{ form.errors.brand }}</div>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="cost">Cost</label>
+                                        <input
+                                            v-model="form.cost"
+                                            class="form-control"
+                                            :class="{ 'is-invalid': form.errors.cost }"
+                                            id="cost"
+                                            type="text"
+                                        >
+                                        <div v-if="form.errors.cost" class="text-danger small mt-1">{{ form.errors.cost }}</div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="currency">Currency</label>
+                                        <select
+                                            v-model="form.currency"
+                                            class="form-control"
+                                            id="currency"
+                                        >
+                                            <option
+                                                v-for="currency in currencies"
+                                                :key="currency"
+                                            >{{ currency }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="category_id">Category</label>
+                                        <select
+                                            v-model="form.category_id"
+                                            class="form-control"
+                                            id="category_id"
+                                        >
+                                            <option
+                                                v-for="(category, id) in categories"
+                                                :key="category"
+                                                :value="id"
+                                            >{{ category }}</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="form-group mb-3">
-                                    <label for="brand">Quantity(pcs.)</label>
-                                    <input
-                                        v-model="form.quantity"
-                                        class="form-control"
-                                        id="quantity"
-                                        type="text"
-                                    >
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="country">Country</label>
-                                    <select
-                                        v-model="form.country"
-                                        class="form-control"
-                                        id="country"
-                                    >
-                                        <option
-                                            v-for="country in countries"
-                                            :key="country"
-                                        >{{ country }}</option>
-                                    </select>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="brand">Cost</label>
-                                    <input
-                                        v-model="form.cost"
-                                        class="form-control"
-                                        :class="{ 'is-invalid': form.errors.cost }"
-                                        id="cost"
-                                        type="text"
-                                    >
-                                    <div v-if="form.errors.cost" class="text-danger small mt-1">{{ form.errors.cost }}</div>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="brand">Currency</label>
-                                    <select
-                                        v-model="form.currency"
-                                        class="form-control"
-                                        id="profit"
-                                    >
-                                        <option
-                                            v-for="currency in currencies"
-                                            :key="currency"
-                                        >{{ currency }}</option>
-                                    </select>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="brand">Category</label>
-                                    <select
-                                        v-model="form.category_id"
-                                        class="form-control"
-                                        id="profit"
-                                    >
-                                        <option
-                                            v-for="(category, id) in categories"
-                                            :key="category"
-                                            :value="id"
-                                        >{{ category }}</option>
-                                    </select>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="country">Profit%</label>
-                                    <select
-                                        v-model="form.profit"
-                                        class="form-control"
-                                        id="profit"
-                                    >
-                                        <option
-                                            v-for="profit in profits"
-                                            :key="profit"
-                                            :value="profit"
-                                        >{{ profit }}%</option>
-                                    </select>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="country">Discount%</label>
-                                    <select
-                                        v-model="form.discount"
-                                        class="form-control"
-                                        id="discount"
-                                    >
-                                        <option
-                                            v-for="discount in discounts"
-                                            :key="discount"
-                                        >{{ discount }}%</option>
-                                    </select>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label for="is_original">Original/Analog</label>
-                                    <select
-                                        v-model="form.is_original"
-                                        class="form-control"
-                                        id="is_original"
-                                    >
-                                        <option :value="null">Unknown</option>
-                                        <option :value="true">Original</option>
-                                        <option :value="false">Analog</option>
-                                    </select>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label for="profit">Profit%</label>
+                                        <select
+                                            v-model="form.profit"
+                                            class="form-control"
+                                            id="profit"
+                                        >
+                                            <option
+                                                v-for="profit in profits"
+                                                :key="profit"
+                                                :value="profit"
+                                            >{{ profit }}%</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="discount">Discount%</label>
+                                        <select
+                                            v-model="form.discount"
+                                            class="form-control"
+                                            id="discount"
+                                        >
+                                            <option
+                                                v-for="discount in discounts"
+                                                :key="discount"
+                                            >{{ discount }}%</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="is_original">Original/Analog</label>
+                                        <select
+                                            v-model="form.is_original"
+                                            class="form-control"
+                                            id="is_original"
+                                        >
+                                            <option :value="null">Unknown</option>
+                                            <option :value="true">Original</option>
+                                            <option :value="false">Analog</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
