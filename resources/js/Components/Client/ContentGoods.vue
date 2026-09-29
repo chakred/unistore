@@ -22,7 +22,7 @@
                         <h4>
                             <a href="#">{{good.name}}</a>
                         </h4>
-                        <h6>{{good.cost}} {{good.currency}}</h6>
+                        <h6>{{good.price_uah}} грн</h6>
                     </div>
                     <p class="card-text">
                         {{good.desc}}

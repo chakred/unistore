@@ -37,7 +37,7 @@
                         <p v-else class="text-center mb-0">Корзина пуста</p>
                     </div>
                     <div class="modal-footer d-flex justify-content-between align-items-center">
-                        <strong v-if="cartState.items.length">Итого: {{ cartState.total }}</strong>
+                        <strong v-if="cartState.items.length">Итого: {{ cartState.total }} грн</strong>
                         <span v-else></span>
                         <button type="button" class="btn btn-secondary" @click="closeCart">Закрыть</button>
                     </div>

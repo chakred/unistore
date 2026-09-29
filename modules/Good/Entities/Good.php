@@ -5,6 +5,7 @@ namespace Modules\Good\Entities;
 use Binafy\LaravelCart\Cartable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Category\Entities\Category;
+use Modules\CurrentCurrency\Entities\CurrentCurrency;
 use Modules\Model\Entities\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -12,6 +13,10 @@ class Good extends Model implements Cartable
 {
     use HasFactory,
         SoftDeletes;
+
+    protected $appends = [
+        'price_uah',
+    ];
 
     protected $fillable = [
         'id_inner',
@@ -53,10 +58,27 @@ class Good extends Model implements Cartable
     }
 
     /**
-     * Price used by the cart.
+     * Price used by the cart, always converted to UAH.
      */
     public function getPrice(): float
     {
-        return (float) $this->cost;
+        return $this->price_uah;
+    }
+
+    /**
+     * Cost converted to UAH using the active rate for the good's currency.
+     * Falls back to the raw cost if no active rate is found.
+     */
+    public function getPriceUahAttribute(): float
+    {
+        $currency = strtoupper($this->currency);
+
+        if ($currency === 'UAH') {
+            return round((float) $this->cost, 2);
+        }
+
+        $rate = CurrentCurrency::activeRate($currency);
+
+        return round((float) $this->cost * ($rate ?? 1), 2);
     }
 }

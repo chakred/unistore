@@ -110,7 +110,7 @@ class CartController extends Controller
                 'image' => $good->img_path,
                 'brand' => $good->brand,
                 'price' => $good->getPrice(),
-                'currency' => $good->currency,
+                'currency' => 'грн',
                 'quantity' => $quantity,
                 'subtotal' => $subtotal,
             ];
