@@ -1,5 +1,10 @@
 <?php
 
+use Modules\CurrentCurrency\Http\Controllers\IndexController;
+use Modules\CurrentCurrency\Http\Controllers\StoreController;
+use Modules\CurrentCurrency\Http\Controllers\UpdateController;
+use Modules\CurrentCurrency\Http\Controllers\DeleteController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +16,9 @@
 |
 */
 
-Route::prefix('currentcurrency')->group(function() {
-    Route::get('/', 'CurrentCurrencyController@index');
+Route::prefix('current-currency')->group(function() {
+    Route::get('/', IndexController::class)->name('currentcurrency.index');
+    Route::post('/create', StoreController::class)->name('currentcurrency.store');
+    Route::put('/update/{id}', UpdateController::class)->name('currentcurrency.update');
+    Route::delete('/delete/{id}', DeleteController::class)->name('currentcurrency.delete');
 });

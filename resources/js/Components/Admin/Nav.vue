@@ -39,6 +39,9 @@
                         <li class="nav-item">
                             <Link :href="route('good.index')" class="nav-link">Goods <i class="fa-solid fa-boxes-packing"></i></Link>
                         </li>
+                        <li class="nav-item">
+                            <Link :href="route('currentcurrency.index')" class="nav-link">Currency <i class="fa-solid fa-money-bill-transfer"></i></Link>
+                        </li>
                     </ul>
                 </div>
             </div>
