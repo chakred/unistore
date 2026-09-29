@@ -1,0 +1,11 @@
+{
+    "name": "CurrentCurrency",
+    "alias": "currentcurrency",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\CurrentCurrency\\Providers\\CurrentCurrencyServiceProvider"
+    ],
+    "files": []
+}
