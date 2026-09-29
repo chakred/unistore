@@ -20,28 +20,18 @@
                     </div>
                     <div class="modal-body">
                             <div class="custom-border silver pad-15">
-                                <div class="mb-3 create-modal__img-block">
-                                    <img
-                                        v-if="imgUrl"
-                                        :src="imgUrl"
-                                        alt="preview"
-                                        class="create-modal__img-preview"
-                                    />
-                                </div>
                                 <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="picture" class="form-label">Picture</label>
-                                        <input
+                                    <div class="col-md-3 mb-3">
+                                        <ImageUploadBox
+                                            id="picture"
+                                            :img-url="imgUrl"
+                                            :error="form.errors.picture"
                                             @change="onFileChange"
                                             @input="form.picture = $event.target.files[0]"
-                                            type="file"
-                                            class="form-control"
-                                            id="picture"
-                                            aria-describedby="picture"
-                                        >
+                                        />
                                     </div>
-                                    <div class="col-md-6 mb-3 d-flex align-items-end">
-                                        <div class="form-check form-switch">
+                                    <div class="col-md-3 mb-3">
+                                        <div class="form-check form-switch mb-2">
                                             <input
                                                 v-model="onlyMarks"
                                                 class="form-check-input"
@@ -50,60 +40,58 @@
                                             >
                                             <label class="form-check-label" for="flexSwitchCheckDefault">Only Marks</label>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div
-                                        v-if="onlyMarks"
-                                        class="col-md-6 mb-3"
-                                    >
-                                        <label for="mark">Auto's mark</label>
-                                        <select
-                                            v-model="form.mark_id"
-                                            class="form-control"
-                                            id="mark"
+                                        <div
+                                            v-if="onlyMarks"
+                                            class="mb-2"
                                         >
-                                            <option
-                                                v-for="(mark, id) in marks"
-                                                :key="mark"
-                                                :value="id"
-                                                selected
+                                            <label for="mark">Auto's mark</label>
+                                            <select
+                                                v-model="form.mark_id"
+                                                class="form-control"
+                                                id="mark"
                                             >
-                                                {{ mark }}
-                                            </option>
+                                                <option
+                                                    v-for="(mark, id) in marks"
+                                                    :key="mark"
+                                                    :value="id"
+                                                    selected
+                                                >
+                                                    {{ mark }}
+                                                </option>
 
-                                        </select>
-                                    </div>
-                                    <div
-                                        v-if="!onlyMarks"
-                                        class="col-md-6 mb-3"
-                                    >
-                                        <label for="model" class="form-label">Model</label>
-                                        <select
-                                            v-model="form.model_id"
-                                            type="text"
-                                            class="form-control"
-                                            id="model"
-                                            aria-describedby="model"
+                                            </select>
+                                        </div>
+                                        <div
+                                            v-else
+                                            class="mb-2"
                                         >
-                                            <option
-                                                v-for="model in models"
-                                                :key="model.id"
-                                                :value="model.id"
-                                                selected
+                                            <label for="model" class="form-label">Model</label>
+                                            <select
+                                                v-model="form.model_id"
+                                                type="text"
+                                                class="form-control"
+                                                id="model"
+                                                aria-describedby="model"
                                             >
-                                                {{ model.name }} ({{ model.mark.name }})
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="name">Name</label>
-                                        <input
-                                            v-model="form.name"
-                                            class="form-control"
-                                            id="name"
-                                            type="text"
-                                        >
+                                                <option
+                                                    v-for="model in models"
+                                                    :key="model.id"
+                                                    :value="model.id"
+                                                    selected
+                                                >
+                                                    {{ model.name }} ({{ model.mark.name }})
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="name">Name</label>
+                                            <input
+                                                v-model="form.name"
+                                                class="form-control"
+                                                id="name"
+                                                type="text"
+                                            >
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -245,6 +233,7 @@
 import { useForm } from '@inertiajs/vue3';
 import { transmissions, engineTypes } from '@/Mixins/Model';
 import Option from '@/Components/Fields/Option.vue'
+import ImageUploadBox from '@/Components/Admin/ImageUploadBox.vue'
 import ImagePreviewMixin from '@/Mixins/General/ImagePreviewMixin';
 import { fillRange, imgStoragePath } from '@/Mixins/General';
 import { ref } from 'vue';
@@ -265,6 +254,7 @@ export default {
      */
     components: {
         Option,
+        ImageUploadBox,
     },
 
     /**
