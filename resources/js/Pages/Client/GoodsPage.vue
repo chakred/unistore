@@ -23,6 +23,12 @@
                     :filters="filters"
                 />
                 <br/>
+                <SidebarGoodsFilters
+                    :brands="brands"
+                    :countries="countries"
+                    :filters="filters"
+                />
+                <br/>
                 <SidebarContacts />
                 <br/>
                 <SidebarWorkHours />
@@ -61,6 +67,7 @@ import SidebarContacts from '@/Components/Client/SidebarContacts.vue';
 import SidebarWorkHours from '@/Components/Client/SidebarWorkHours.vue';
 import SidebarCategories from '@/Components/Client/SidebarCategories.vue';
 import SidebarPriceFilter from '@/Components/Client/SidebarPriceFilter.vue';
+import SidebarGoodsFilters from '@/Components/Client/SidebarGoodsFilters.vue';
 import GoodsSorter from '@/Components/Client/GoodsSorter.vue';
 import ContentGoods from '@/Components/Client/ContentGoods.vue';
 import Pagination from '@/Components/Pagination.vue';
@@ -85,6 +92,7 @@ export default {
         ContentGoods,
         SidebarCategories,
         SidebarPriceFilter,
+        SidebarGoodsFilters,
         GoodsSorter,
         Pagination,
     },
@@ -116,6 +124,14 @@ export default {
         priceRange: {
             type: Object,
             default: () => ({ min: 0, max: 0 })
+        },
+        brands: {
+            type: Array,
+            default: () => []
+        },
+        countries: {
+            type: Array,
+            default: () => []
         },
         filters: {
             type: Object,

@@ -30,6 +30,7 @@ class StoreGoodAction
             'cost'              => $request->cost,
             'profit'            => $request->profit ?? 0,
             'discount'          => $request->discount ?? 0,
+            'is_original'       => $request->filled('is_original') ? (bool) $request->is_original : null,
             'currency'          => $request->currency ?? 'USD',
             'quantity'          => $request->quantity ?? 0,
             'transmission'      => $request->transmission,

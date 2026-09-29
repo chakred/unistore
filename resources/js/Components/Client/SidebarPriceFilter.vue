@@ -95,6 +95,7 @@ export default {
 
         const applyFilter = () => {
             router.get(window.location.pathname, {
+                ...props.filters,
                 price_min: minValue.value,
                 price_max: maxValue.value,
             }, {

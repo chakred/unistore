@@ -207,6 +207,18 @@
                                         >{{ discount }}%</option>
                                     </select>
                                 </div>
+                                <div class="form-group mb-3">
+                                    <label for="is_original">Original/Analog</label>
+                                    <select
+                                        v-model="form.is_original"
+                                        class="form-control"
+                                        id="is_original"
+                                    >
+                                        <option :value="null">Unknown</option>
+                                        <option :value="true">Original</option>
+                                        <option :value="false">Analog</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     <div class="modal-footer">
@@ -305,6 +317,7 @@ export default {
             cost: '',
             profit: '',
             discount: 0,
+            is_original: null,
             currency: '',
             quantity: '',
             name: '',
@@ -340,6 +353,7 @@ export default {
             this.form.country = newValue.country;
             this.form.currency = newValue.currency;
             this.form.discount = newValue.discount;
+            this.form.is_original = newValue.is_original;
             this.form.id_inner =  newValue.id_inner;
             this.form.item = newValue.item;
             this.form.mark = newValue.mark?.name;

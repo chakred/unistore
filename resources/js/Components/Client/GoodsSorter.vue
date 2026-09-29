@@ -12,6 +12,8 @@
                 <option value="price_desc">Цена: сначала дороже</option>
                 <option value="price_asc">Цена: сначала дешевле</option>
                 <option value="availability">По наличию</option>
+                <option value="discount">По размеру скидки</option>
+                <option value="new">Сначала новые</option>
             </select>
         </div>
     </div>

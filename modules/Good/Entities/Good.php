@@ -28,6 +28,7 @@ class Good extends Model implements Cartable
         'cost',
         'profit',
         'discount',
+        'is_original',
         'currency',
         'quantity',
         'item',
