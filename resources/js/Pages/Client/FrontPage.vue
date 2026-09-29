@@ -8,6 +8,11 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-12">
+                <CarSelectorWidget :marks="marks" />
+            </div>
+        </div>
+        <div class="row">
             <div class="col-lg-3 mb-3">
                 <SidebarCategories
                     :categories="categories"
@@ -43,6 +48,7 @@ import MainSlider from '@/Components/Client/MainSlider.vue';
 import SidebarContacts from '@/Components/Client/SidebarContacts.vue';
 import SidebarWorkHours from '@/Components/Client/SidebarWorkHours.vue';
 import SidebarCategories from '@/Components/Client/SidebarCategories.vue';
+import CarSelectorWidget from '@/Components/Client/CarSelectorWidget.vue';
 import ContentMarks from '@/Components/Client/ContentMarks.vue';
 import ContentCategories from '@/Components/Client/ContentCategories.vue';
 
@@ -62,6 +68,7 @@ export default {
         Footer,
         Nav,
         Searcher,
+        CarSelectorWidget,
         ContentMarks,
         ContentCategories,
         SidebarCategories

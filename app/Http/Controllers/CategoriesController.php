@@ -29,7 +29,7 @@ class CategoriesController extends Controller
                     ->get()
             ),
             'categories' => Category::all(),
-            'heading' => $carModel->mark->name.' '.$carModel->name,
+            'heading' => trim($carModel->mark->name.' '.$carModel->name.' '.$request->input('year', '')),
             'goods' => Good::with(['model.mark', 'category'])
                 ->where('model_id', $carModel->id)
                 ->paginate(12),
