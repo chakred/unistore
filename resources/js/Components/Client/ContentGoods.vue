@@ -6,7 +6,10 @@
         <div
             v-for="good in goods.data"
             class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100 cat-block">
+            <div
+                class="card h-100 cat-block"
+                :class="{ 'cat-block--out-of-stock': isOutOfStock(good) }"
+            >
                 <a href="#">
                     <img
                         v-if="good.img_path"
@@ -33,12 +36,30 @@
                     >
                         TM: {{good.brand}}
                     </p>
+                    <p
+                        v-if="isOutOfStock(good)"
+                        class="card-text stock-status stock-status--out"
+                    >
+                        Нет в наличии
+                    </p>
+                    <p
+                        v-else-if="isLowStock(good)"
+                        class="card-text stock-status stock-status--low"
+                    >
+                        Товар заканчивается
+                    </p>
                 </div>
                 <div class="card-footer buttons-area">
-                    <button type="button" class="card-btn-cart card-btn" @click="addToCart(good.id)">
+                    <button
+                        type="button"
+                        class="card-btn-cart card-btn"
+                        :disabled="isOutOfStock(good)"
+                        @click="addToCart(good.id)"
+                    >
                         <i class="fas fa-cart-plus"></i>
                     </button>
                     <button type="button" class="define-goods card-btn-buy card-btn"
+                            :disabled="isOutOfStock(good)"
                             data-goods-id="1"
                             data-goods-name="1"
                             data-goods-image="1"
@@ -101,6 +122,34 @@ export default {
         addToCart(goodId) {
             addToCart(goodId).then(openCart);
         },
+
+        isOutOfStock(good) {
+            return Number(good.quantity) <= 0;
+        },
+
+        isLowStock(good) {
+            return Number(good.quantity) > 0 && Number(good.quantity) < 3;
+        },
     },
 }
 </script>
+
+<style scoped>
+.cat-block--out-of-stock {
+    filter: grayscale(1);
+    opacity: .6;
+}
+
+.stock-status {
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.stock-status--out {
+    color: #6c757d;
+}
+
+.stock-status--low {
+    color: #dc3545;
+}
+</style>
