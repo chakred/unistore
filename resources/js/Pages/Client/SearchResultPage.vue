@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row" style="margin-top: 100px">
             <div class="col-12">
-                <Searcher />
+                <Searcher :keyword="keyword" />
             </div>
         </div>
         <div class="row">
@@ -25,9 +25,9 @@
             <!-- /.col-lg-3 -->
             <div class="col-lg-9">
                     <MainSlider />
-                <br/>
-                <Sorting />
-                <br/>
+                <GoodsSorter
+                    :filters="filters"
+                />
                 <ContentGoods
                     :goods="goods"
                 />
@@ -53,7 +53,7 @@ import SidebarCategories from '@/Components/Client/SidebarCategories.vue';
 import ContentMarks from '@/Components/Client/ContentMarks.vue';
 import ContentGoods from '@/Components/Client/ContentGoods.vue';
 import Pagination from '@/Components/Pagination.vue';
-import Sorting from '@/Components/Sorting.vue';
+import GoodsSorter from '@/Components/Client/GoodsSorter.vue';
 
 export default {
     /**
@@ -65,7 +65,7 @@ export default {
      * Components.
      */
     components: {
-        Sorting,
+        GoodsSorter,
         SidebarWorkHours,
         SidebarContacts,
         MainSlider,
@@ -95,6 +95,14 @@ export default {
             type: Object,
             default: {}
         },
+        keyword: {
+            type: String,
+            default: ''
+        },
+        filters: {
+            type: Object,
+            default: () => ({})
+        },
         goods: {
             type: Object,
             default: {}
@@ -110,9 +118,13 @@ export default {
      */
     computed: {
         breadcrumbItems() {
+            const label = this.keyword
+                ? `Результаты поиска: «${this.keyword}»`
+                : 'Результаты поиска';
+
             return [
                 { label: 'Главная', href: '/' },
-                { label: 'Результаты поиска' },
+                { label },
             ];
         },
     },

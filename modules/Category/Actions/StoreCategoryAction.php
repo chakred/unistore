@@ -23,6 +23,7 @@ class StoreCategoryAction
             'name'     => $request->name,
             'desc'     => $request->desc,
             'img_path' => $image,
+            'icon'     => $request->icon,
             'slug'     => Str::slug($request->name, '-')
         ];
 

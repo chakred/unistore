@@ -26,13 +26,22 @@
                     @input="onMaxInput"
                 >
             </div>
-            <button
-                type="button"
-                class="btn btn-outline-dark w-100 mt-2"
-                @click="applyFilter"
-            >
-                Применить фильтр
-            </button>
+            <div class="price-filter__actions">
+                <button
+                    type="button"
+                    class="price-filter__reset"
+                    @click="resetFilter"
+                >
+                    <i class="fa-solid fa-rotate-left"></i> Сбросить
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-dark btn-sm price-filter__apply"
+                    @click="applyFilter"
+                >
+                    Применить
+                </button>
+            </div>
         </div>
     </div>
 </template>
@@ -105,6 +114,19 @@ export default {
             });
         };
 
+        const resetFilter = () => {
+            minValue.value = bounds.min;
+            maxValue.value = bounds.max;
+
+            const { price_min, price_max, ...rest } = props.filters;
+
+            router.get(window.location.pathname, rest, {
+                preserveScroll: true,
+                preserveState: true,
+                replace: true,
+            });
+        };
+
         return {
             bounds,
             minValue,
@@ -112,6 +134,7 @@ export default {
             onMinInput,
             onMaxInput,
             applyFilter,
+            resetFilter,
         };
     },
 }
@@ -145,5 +168,31 @@ export default {
 
 .price-filter__range::-moz-range-thumb {
     pointer-events: auto;
+}
+
+.price-filter__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: .75rem;
+}
+
+.price-filter__reset {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: .8rem;
+    color: #6c757d;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.price-filter__reset:hover {
+    color: #212529;
+}
+
+.price-filter__apply {
+    padding: .3rem 1rem;
+    font-size: .8rem;
 }
 </style>

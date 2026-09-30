@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <strong style="letter-spacing: 3px;">MOTRIO</strong>
+                <strong style="letter-spacing: 3px;">UNISTORE</strong>
             </a>
             <button type="button" class="btn btn-link nav-cart-btn text-white position-relative" @click="openCart">
                 <i class="fas fa-shopping-cart"></i>

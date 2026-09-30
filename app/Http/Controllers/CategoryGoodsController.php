@@ -91,7 +91,7 @@ class CategoryGoodsController extends Controller
                     ->whereHas('models')
                     ->get()
             ),
-            'categories' => Category::all(),
+            'categories' => Category::withCount('goods')->get(),
             'heading' => $categoryEntity->name,
             'priceRange' => [
                 'min' => (float) ($priceRange->min ?? 0),

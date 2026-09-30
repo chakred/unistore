@@ -50,6 +50,29 @@
                                         aria-describedby="categoryDesc"
                                     >
                                 </div>
+                                <div class="mb-3">
+                                    <label for="categoryIcon" class="form-label">Icon</label>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i
+                                            class="category-icon-preview"
+                                            :class="form.icon || defaultCategoryIcon"
+                                        ></i>
+                                        <select
+                                            v-model="form.icon"
+                                            class="form-control"
+                                            id="categoryIcon"
+                                        >
+                                            <option value="">Без иконки</option>
+                                            <option
+                                                v-for="icon in categoryIcons"
+                                                :key="icon.value"
+                                                :value="icon.value"
+                                            >
+                                                {{ icon.label }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="form-check">
                                     <label for="subCategoryMake" class="form-label">Make sub-category</label>
                                     <input
@@ -96,6 +119,7 @@
 import { useForm } from '@inertiajs/vue3';
 import ImagePreviewMixin from '@/Mixins/General/ImagePreviewMixin';
 import { imgStoragePath } from '@/Mixins/General';
+import { categoryIcons, defaultCategoryIcon } from '@/Mixins/Category/CategoryIcons';
 
 export default {
     /**
@@ -153,12 +177,15 @@ export default {
             name: '',
             picture: null,
             desc: '',
+            icon: '',
             parent_id: '',
         });
 
         return {
             form,
             imgStoragePath,
+            categoryIcons,
+            defaultCategoryIcon,
         };
     },
 
@@ -169,10 +196,18 @@ export default {
         'category'(newValue) {
             this.form.name = newValue.name;
             this.form.desc = newValue.desc;
+            this.form.icon = newValue.icon;
             this.form.parent_id = newValue.parent_id;
-
-            console.log(newValue)
         }
     }
 }
 </script>
+
+<style scoped>
+.category-icon-preview {
+    font-size: 1.5rem;
+    width: 2rem;
+    text-align: center;
+    flex-shrink: 0;
+}
+</style>

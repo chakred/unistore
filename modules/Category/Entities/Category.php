@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Good\Entities\Good;
 
 class Category extends Model
 {
@@ -18,6 +19,7 @@ class Category extends Model
         'name',
         'desc',
         'img_path',
+        'icon',
         'slug',
         'active'
     ];
@@ -40,5 +42,15 @@ class Category extends Model
     public function parent(): BelongsTo
     {
         return $this->belongsTo(Category::class , 'parent_id');
+    }
+
+    /**
+     * Goods in this category.
+     *
+     * @return HasMany
+     */
+    public function goods(): HasMany
+    {
+        return $this->hasMany(Good::class, 'category_id');
     }
 }

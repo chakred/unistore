@@ -3,7 +3,7 @@
     <div class="container">
         <p class="m-0 text-center text-white">
             &copy;
-            <strong>MOTRIO</strong>
+            <strong>UNISTORE</strong>
             <br/>
             {{date('Y')}}
         </p>

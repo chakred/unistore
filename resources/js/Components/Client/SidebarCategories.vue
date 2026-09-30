@@ -1,42 +1,31 @@
 <template>
-    <div>
-        <div class="card">
-            <div class="card-header">
-                <span>Categories:</span>
-            </div>
-            <div class="card-body">
-                <div
-                    v-for="category in categories"
-                    v-key="category.id"
-                >
-                    <a :href="route('home.category', { category: category.slug })">
-                        <div
-                            class="card-body__children"
-                        >
-                            <img
-                                v-if="category.img_path"
-                                :src="`${imgStoragePath + category.img_path}`"
-                                width="50"
-                            />
-                            <img
-                                v-else
-                                src="http://dummyimage.com/50x50/ffffff/545454&text=No+image"
-                                width="50"
-                            />
-                            <small class="text-muted">
-                                {{ category.name }}
-                            </small>
-                        </div>
-                    </a>
-                    <hr>
-                </div>
-            </div>
+    <div class="card sidebar-categories">
+        <div class="card-header">
+            <span>Категории</span>
+        </div>
+        <div class="list-group list-group-flush">
+            <a
+                v-for="category in categories"
+                :key="category.id"
+                :href="route('home.category', { category: category.slug })"
+                class="list-group-item list-group-item-action sidebar-categories__item"
+            >
+                <i
+                    class="sidebar-categories__icon"
+                    :class="category.icon || defaultCategoryIcon"
+                ></i>
+                <span class="sidebar-categories__name">{{ category.name }}</span>
+                <span
+                    v-if="category.goods_count !== undefined && category.goods_count !== null"
+                    class="sidebar-categories__count"
+                >{{ category.goods_count }}</span>
+            </a>
         </div>
     </div>
 </template>
 
 <script>
-import { imgStoragePath } from '@/Mixins/General';
+import { defaultCategoryIcon } from '@/Mixins/Category/CategoryIcons';
 
 export default {
     /**
@@ -55,13 +44,53 @@ export default {
     },
 
     /**
-     * Composition API
+     * Composition API.
      */
     setup() {
         return {
-            imgStoragePath,
+            defaultCategoryIcon,
         };
     },
 }
 </script>
 
+<style scoped>
+.sidebar-categories__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+    color: #212529;
+    text-decoration: none;
+    transition: background-color .15s ease;
+}
+
+.sidebar-categories__item:hover {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+.sidebar-categories__icon {
+    width: 1.35rem;
+    text-align: center;
+    color: #6c757d;
+    flex-shrink: 0;
+}
+
+.sidebar-categories__name {
+    font-size: .9rem;
+    flex-grow: 1;
+}
+
+.sidebar-categories__count {
+    background-color: #e9ecef;
+    color: #495057;
+    font-weight: 600;
+    font-size: .75rem;
+    line-height: 1;
+    padding: .35em .55em;
+    border-radius: 10rem;
+    min-width: 1.75rem;
+    text-align: center;
+}
+</style>

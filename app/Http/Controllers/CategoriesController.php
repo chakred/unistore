@@ -28,7 +28,7 @@ class CategoriesController extends Controller
                     ->whereHas('models')
                     ->get()
             ),
-            'categories' => Category::all(),
+            'categories' => Category::withCount('goods')->get(),
             'heading' => trim($carModel->mark->name.' '.$carModel->name.' '.$request->input('year', '')),
             'goods' => Good::with(['model.mark', 'category'])
                 ->where('model_id', $carModel->id)

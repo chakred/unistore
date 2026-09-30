@@ -22,7 +22,7 @@ class FrontPageController extends Controller
                     ->get()
             ),
             'models' => Mark::all(),
-            'categories' => Category::all(),
+            'categories' => Category::withCount('goods')->get(),
         ]);
     }
 }

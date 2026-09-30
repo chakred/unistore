@@ -70,13 +70,22 @@
                 </div>
             </div>
 
-            <button
-                type="button"
-                class="btn btn-outline-dark w-100 mt-2"
-                @click="applyFilter"
-            >
-                Применить фильтр
-            </button>
+            <div class="goods-filters__actions">
+                <button
+                    type="button"
+                    class="goods-filters__reset"
+                    @click="resetFilter"
+                >
+                    <i class="fa-solid fa-rotate-left"></i> Сбросить
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-dark btn-sm goods-filters__apply"
+                    @click="applyFilter"
+                >
+                    Применить
+                </button>
+            </div>
         </div>
     </div>
 </template>
@@ -134,6 +143,24 @@ export default {
             });
         };
 
+        const resetFilter = () => {
+            selectedBrands.value = [];
+            selectedCountries.value = [];
+            original.value = '';
+            inStock.value = false;
+            withDiscount.value = false;
+
+            const {
+                brand, country, original: originalFilter, in_stock, with_discount, ...rest
+            } = props.filters;
+
+            router.get(window.location.pathname, rest, {
+                preserveScroll: true,
+                preserveState: true,
+                replace: true,
+            });
+        };
+
         return {
             selectedBrands,
             selectedCountries,
@@ -141,6 +168,7 @@ export default {
             inStock,
             withDiscount,
             applyFilter,
+            resetFilter,
         };
     },
 }
@@ -158,5 +186,31 @@ export default {
 .goods-filters__title {
     font-weight: 600;
     margin-bottom: .5rem;
+}
+
+.goods-filters__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: .75rem;
+}
+
+.goods-filters__reset {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: .8rem;
+    color: #6c757d;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.goods-filters__reset:hover {
+    color: #212529;
+}
+
+.goods-filters__apply {
+    padding: .3rem 1rem;
+    font-size: .8rem;
 }
 </style>

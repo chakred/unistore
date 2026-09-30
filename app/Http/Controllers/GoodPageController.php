@@ -28,7 +28,7 @@ class GoodPageController extends Controller
             ->get();
 
         return Inertia::render('Client/GoodPage', [
-            'categories' => Category::all(),
+            'categories' => Category::withCount('goods')->get(),
             'good' => $goodEntity,
             'similarGoods' => [
                 'data' => $similarGoods,
