@@ -10,7 +10,7 @@
                 class="card h-100 cat-block"
                 :class="{ 'cat-block--out-of-stock': isOutOfStock(good) }"
             >
-                <a href="#">
+                <a :href="route('home.good', good.slug)">
                     <img
                         v-if="good.img_path"
                         :src="`${imgStoragePath + good.img_path}`"
@@ -23,7 +23,7 @@
                 <div class="card-body">
                     <div class="card-title">
                         <h4>
-                            <a href="#">{{good.name}}</a>
+                            <a :href="route('home.good', good.slug)">{{good.name}}</a>
                         </h4>
                         <h6>{{good.price_uah}} грн</h6>
                     </div>
@@ -88,6 +88,7 @@
 
 <script>
 import { imgStoragePath } from '@/Mixins/General';
+import { isOutOfStock, isLowStock } from '@/Mixins/General/StockStatus';
 import { addToCart, openCart } from '@/Components/Stores/Cart';
 
 export default {
@@ -123,13 +124,9 @@ export default {
             addToCart(goodId).then(openCart);
         },
 
-        isOutOfStock(good) {
-            return Number(good.quantity) <= 0;
-        },
+        isOutOfStock,
 
-        isLowStock(good) {
-            return Number(good.quantity) > 0 && Number(good.quantity) < 3;
-        },
+        isLowStock,
     },
 }
 </script>
