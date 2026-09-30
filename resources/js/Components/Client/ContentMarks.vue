@@ -1,63 +1,51 @@
 <template>
-    <div
+    <section
         v-for="mark in marks.data"
-        class="row"
+        :key="mark.id"
+        class="mark-section"
     >
-        <div class="col-sm-12 mb-3">
-            <div class="card head-block">
+        <div class="card head-block mb-3">
+            <div>
                 <div>
-                    <div>
-                        <img
-                            :src="`${imgStoragePath + mark.img_path}`"
-                            width="50"
-                        >
-                    </div>
-                    <p>{{ mark.name }}</p>
-                    <p>- parts for models</p>
+                    <img
+                        v-if="mark.img_path"
+                        :src="`${imgStoragePath + mark.img_path}`"
+                        width="50"
+                    >
                 </div>
+                <p>{{ mark.name }}</p>
+                <p>- parts for models</p>
             </div>
         </div>
-        <div
-            v-for="model in mark.models"
-            class="col-lg-4 col-md-6 mb-4"
-        >
-            <div class="card h-100 cat-block">
-                <a
-                    :href="route('home.categories', { mark: mark.slug, model: model.slug })"
-                >
-                    <div class="cat-block-media">
-                        <img
-                            v-if="model.img_path"
-                            :src="`${imgStoragePath + model.img_path}`"
-                        />
-                        <img
-                            v-else
-                            src="http://dummyimage.com/450x350/ffffff/545454&text=No+image"
-                        />
-                    </div>
-                    <div class="cat-block-info">
-                        <div class="card-body">
-                            <h5 class="card-title">{{mark.name+' '+model.name}}</h5>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Years: {{model.year_start+' - '+model.year_end }}</small>
-                        </div>
-                    </div>
-                </a>
-            </div>
+        <div class="tile-grid">
+            <ImageTile
+                v-for="model in mark.models"
+                :key="model.id"
+                :href="route('home.categories', { mark: mark.slug, model: model.slug })"
+                :img-src="model.img_path ? (imgStoragePath + model.img_path) : ''"
+                :title="`${mark.name} ${model.name}`"
+                :subtitle="yearsLabel(model)"
+            />
         </div>
-
-    </div>
+    </section>
 </template>
 
 <script>
 import { imgStoragePath } from '@/Mixins/General';
+import ImageTile from '@/Components/Client/ImageTile.vue';
 
 export default {
     /**
      * Name.
      */
     name: 'ContentMarks',
+
+    /**
+     * Components.
+     */
+    components: {
+        ImageTile,
+    },
 
     /**
      * Props.
@@ -77,5 +65,42 @@ export default {
             imgStoragePath,
         };
     },
+
+    /**
+     * Methods.
+     */
+    methods: {
+        yearsLabel(model) {
+            if (!model.year_start) {
+                return '';
+            }
+
+            return `${model.year_start}–${model.year_end || 'н.в.'}`;
+        },
+    },
 }
 </script>
+
+<style scoped>
+.mark-section {
+    margin-bottom: 1.5rem;
+}
+
+.tile-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+@media (min-width: 576px) {
+    .tile-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 992px) {
+    .tile-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+</style>

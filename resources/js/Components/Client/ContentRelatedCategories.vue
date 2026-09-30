@@ -22,7 +22,7 @@
                     />
                     <img
                         v-else
-                        src="http://dummyimage.com/450x350/ffffff/545454&text=No+image"
+                        src="http://dummyimage.com/270x132/ffffff/545454&text=No+image"
                     />
                 </a>
                 <div class="card-footer">
