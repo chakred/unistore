@@ -119,11 +119,11 @@ export default {
     computed: {
         breadcrumbItems() {
             const label = this.keyword
-                ? `Результаты поиска: «${this.keyword}»`
-                : 'Результаты поиска';
+                ? this.$t('searchPage.resultsFor', { keyword: this.keyword })
+                : this.$t('searchPage.results');
 
             return [
-                { label: 'Главная', href: '/' },
+                { label: this.$t('common.home'), href: '/' },
                 { label },
             ];
         },

@@ -14,7 +14,7 @@
         </td>
         <td>
             {{ item.name }}
-            <div v-if="item.brand" class="text-muted small">TM: {{ item.brand }}</div>
+            <div v-if="item.brand" class="text-muted small">{{ $t('common.tm', { brand: item.brand }) }}</div>
         </td>
         <td>{{ item.price }} {{ item.currency }}</td>
         <td>

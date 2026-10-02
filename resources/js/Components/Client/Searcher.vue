@@ -11,16 +11,16 @@
                     type="text"
                     class="form-control"
                     id="floatingSearch"
-                    placeholder="Search"
+                    :placeholder="$t('search.placeholder')"
                 >
                 <label for="floatingSearch">
-                    <i class="fas fa-search"></i> search...
+                    <i class="fas fa-search"></i> {{ $t('search.label') }}
                 </label>
                 <button
                     v-if="form.keyWord"
                     type="button"
                     class="search-for-goods__clear"
-                    aria-label="Очистить поиск"
+                    :aria-label="$t('search.clear')"
                     @click="clearSearch"
                 >
                     <i class="fas fa-times"></i>

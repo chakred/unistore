@@ -14,7 +14,7 @@
                     >
                 </div>
                 <p>{{ mark.name }}</p>
-                <p>- parts for models</p>
+                <p>{{ $t('home.partsForModels') }}</p>
             </div>
         </div>
         <div class="tile-grid">
@@ -75,7 +75,7 @@ export default {
                 return '';
             }
 
-            return `${model.year_start}–${model.year_end || 'н.в.'}`;
+            return `${model.year_start}–${model.year_end || this.$t('home.yearsUntilNow')}`;
         },
     },
 }

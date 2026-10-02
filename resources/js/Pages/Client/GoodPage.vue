@@ -41,26 +41,26 @@
                         <div class="col-md-7">
                             <div class="card-body">
                                 <h1 class="good-page__title">{{ good.name }}</h1>
-                                <p v-if="good.brand" class="text-muted mb-1">TM: {{ good.brand }}</p>
-                                <p v-if="good.country" class="text-muted mb-1">Страна: {{ good.country }}</p>
+                                <p v-if="good.brand" class="text-muted mb-1">{{ $t('common.tm', { brand: good.brand }) }}</p>
+                                <p v-if="good.country" class="text-muted mb-1">{{ $t('goodPage.country', { country: good.country }) }}</p>
                                 <p v-if="good.is_original !== null" class="mb-2">
                                     <span
                                         class="badge"
                                         :class="good.is_original ? 'bg-success' : 'bg-secondary'"
-                                    >{{ good.is_original ? 'Оригинал' : 'Аналог' }}</span>
+                                    >{{ good.is_original ? $t('goodPage.original') : $t('goodPage.analog') }}</span>
                                 </p>
-                                <h3 class="good-page__price">{{ good.price_uah }} грн</h3>
+                                <h3 class="good-page__price">{{ good.price_uah }} {{ $t('common.currency') }}</h3>
                                 <p
                                     v-if="outOfStock"
                                     class="stock-status stock-status--out"
                                 >
-                                    Нет в наличии
+                                    {{ $t('stock.out') }}
                                 </p>
                                 <p
                                     v-else-if="lowStock"
                                     class="stock-status stock-status--low"
                                 >
-                                    Товар заканчивается
+                                    {{ $t('stock.lowFull') }}
                                 </p>
                                 <p class="good-page__desc">{{ good.desc }}</p>
                                 <button
@@ -69,7 +69,7 @@
                                     :disabled="outOfStock"
                                     @click="addToCart(good.id)"
                                 >
-                                    <i class="fas fa-cart-plus"></i> В корзину
+                                    <i class="fas fa-cart-plus"></i> {{ $t('goodCard.addToCart') }}
                                 </button>
                             </div>
                         </div>
@@ -77,25 +77,25 @@
                 </div>
 
                 <div class="card mb-4">
-                    <div class="card-header">Применимость к автомобилю</div>
+                    <div class="card-header">{{ $t('goodPage.carFitmentTitle') }}</div>
                     <div class="card-body">
                         <p v-if="good.model" class="mb-0">
                             {{ good.model.mark?.name }} {{ good.model.name }}
                             <span v-if="good.model.year_start">
-                                ({{ good.model.year_start }}&ndash;{{ good.model.year_end || 'н.в.' }})
+                                ({{ good.model.year_start }}&ndash;{{ good.model.year_end || $t('home.yearsUntilNow') }})
                             </span>
                         </p>
                         <p v-else-if="good.mark" class="mb-0">
-                            Подходит для всех моделей {{ good.mark.name }}
+                            {{ $t('goodPage.fitsAllModelsOf', { mark: good.mark.name }) }}
                         </p>
                         <p v-else class="mb-0">
-                            Универсальный товар — подходит для любого автомобиля
+                            {{ $t('goodPage.universal') }}
                         </p>
                     </div>
                 </div>
 
                 <div v-if="similarGoods.data.length" class="card">
-                    <div class="card-header">Похожие товары</div>
+                    <div class="card-header">{{ $t('goodPage.similarGoods') }}</div>
                     <div class="card-body">
                         <ContentGoods :goods="similarGoods" />
                     </div>
@@ -178,7 +178,7 @@ export default {
      */
     computed: {
         breadcrumbItems() {
-            const items = [{ label: 'Главная', href: '/' }];
+            const items = [{ label: this.$t('common.home'), href: '/' }];
 
             if (this.good.category) {
                 items.push({

@@ -1,7 +1,7 @@
 <template>
     <div class="card sidebar-categories">
         <div class="card-header">
-            <span>Категории</span>
+            <span>{{ $t('sidebar.categories.title') }}</span>
         </div>
         <div class="list-group list-group-flush">
             <a

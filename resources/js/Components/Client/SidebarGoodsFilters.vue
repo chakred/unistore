@@ -1,11 +1,11 @@
 <template>
     <div class="card goods-filters">
         <div class="card-header">
-            <span>Дополнительные фильтры:</span>
+            <span>{{ $t('sidebar.goodsFilters.title') }}</span>
         </div>
         <div class="card-body">
             <div v-if="brands.length" class="goods-filters__group">
-                <div class="goods-filters__title">Бренд</div>
+                <div class="goods-filters__title">{{ $t('sidebar.goodsFilters.brand') }}</div>
                 <div
                     v-for="brand in brands"
                     :key="brand"
@@ -23,7 +23,7 @@
             </div>
 
             <div v-if="countries.length" class="goods-filters__group">
-                <div class="goods-filters__title">Страна-производитель</div>
+                <div class="goods-filters__title">{{ $t('sidebar.goodsFilters.country') }}</div>
                 <div
                     v-for="country in countries"
                     :key="country"
@@ -41,11 +41,11 @@
             </div>
 
             <div class="goods-filters__group">
-                <div class="goods-filters__title">Оригинал / Аналог</div>
+                <div class="goods-filters__title">{{ $t('sidebar.goodsFilters.originalAnalog') }}</div>
                 <select v-model="original" class="form-select">
-                    <option value="">Все</option>
-                    <option value="original">Только оригинал</option>
-                    <option value="analog">Только аналог</option>
+                    <option value="">{{ $t('sidebar.goodsFilters.all') }}</option>
+                    <option value="original">{{ $t('sidebar.goodsFilters.onlyOriginal') }}</option>
+                    <option value="analog">{{ $t('sidebar.goodsFilters.onlyAnalog') }}</option>
                 </select>
             </div>
 
@@ -57,7 +57,7 @@
                         class="form-check-input"
                         type="checkbox"
                     >
-                    <label class="form-check-label" for="in_stock">Только в наличии</label>
+                    <label class="form-check-label" for="in_stock">{{ $t('sidebar.goodsFilters.inStock') }}</label>
                 </div>
                 <div class="form-check">
                     <input
@@ -66,7 +66,7 @@
                         class="form-check-input"
                         type="checkbox"
                     >
-                    <label class="form-check-label" for="with_discount">Только со скидкой</label>
+                    <label class="form-check-label" for="with_discount">{{ $t('sidebar.goodsFilters.withDiscount') }}</label>
                 </div>
             </div>
 
@@ -76,14 +76,14 @@
                     class="goods-filters__reset"
                     @click="resetFilter"
                 >
-                    <i class="fa-solid fa-rotate-left"></i> Сбросить
+                    <i class="fa-solid fa-rotate-left"></i> {{ $t('actions.reset') }}
                 </button>
                 <button
                     type="button"
                     class="btn btn-dark btn-sm goods-filters__apply"
                     @click="applyFilter"
                 >
-                    Применить
+                    {{ $t('actions.apply') }}
                 </button>
             </div>
         </div>

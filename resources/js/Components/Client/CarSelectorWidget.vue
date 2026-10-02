@@ -3,19 +3,19 @@
         <div class="car-selector__heading">
             <span class="car-selector__icon"><i class="fa-solid fa-car"></i></span>
             <div>
-                <h2 class="car-selector__title">Подбор запчастей по автомобилю</h2>
-                <p class="car-selector__subtitle">Укажите марку, модель и год — покажем только подходящие товары</p>
+                <h2 class="car-selector__title">{{ $t('carSelector.title') }}</h2>
+                <p class="car-selector__subtitle">{{ $t('carSelector.subtitle') }}</p>
             </div>
         </div>
         <div class="car-selector__fields">
             <div class="car-selector__field">
-                <label class="car-selector__label" for="car-selector-mark">Марка</label>
+                <label class="car-selector__label" for="car-selector-mark">{{ $t('carSelector.mark') }}</label>
                 <select
                     id="car-selector-mark"
                     v-model="selectedMarkId"
                     class="form-select car-selector__select"
                 >
-                    <option value="" disabled>Выберите марку</option>
+                    <option value="" disabled>{{ $t('carSelector.selectMark') }}</option>
                     <option
                         v-for="mark in marksList"
                         :key="mark.id"
@@ -24,14 +24,14 @@
                 </select>
             </div>
             <div class="car-selector__field">
-                <label class="car-selector__label" for="car-selector-model">Модель</label>
+                <label class="car-selector__label" for="car-selector-model">{{ $t('carSelector.model') }}</label>
                 <select
                     id="car-selector-model"
                     v-model="selectedModelId"
                     class="form-select car-selector__select"
                     :disabled="!selectedMarkId"
                 >
-                    <option value="" disabled>Выберите модель</option>
+                    <option value="" disabled>{{ $t('carSelector.selectModel') }}</option>
                     <option
                         v-for="model in modelsForSelectedMark"
                         :key="model.id"
@@ -40,14 +40,14 @@
                 </select>
             </div>
             <div class="car-selector__field car-selector__field--year">
-                <label class="car-selector__label" for="car-selector-year">Год</label>
+                <label class="car-selector__label" for="car-selector-year">{{ $t('carSelector.year') }}</label>
                 <select
                     id="car-selector-year"
                     v-model="selectedYear"
                     class="form-select car-selector__select"
                     :disabled="!yearOptions.length"
                 >
-                    <option value="" disabled>Год</option>
+                    <option value="" disabled>{{ $t('carSelector.year') }}</option>
                     <option
                         v-for="year in yearOptions"
                         :key="year"
@@ -61,7 +61,7 @@
                 :disabled="!canSubmit"
                 @click="goToCatalog"
             >
-                Подобрать
+                {{ $t('carSelector.submit') }}
             </button>
         </div>
     </div>

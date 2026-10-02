@@ -4,6 +4,7 @@
             <a class="navbar-brand" href="/">
                 <strong style="letter-spacing: 3px;">UNISTORE</strong>
             </a>
+            <LanguageSwitcher class="order-lg-2" />
             <button type="button" class="btn btn-link nav-cart-btn text-white position-relative" @click="openCart">
                 <i class="fas fa-shopping-cart"></i>
                 <span
@@ -53,6 +54,7 @@
 <script>
 import { Link } from '@inertiajs/vue3';
 import CartModal from '@/Components/Client/CartModal.vue';
+import LanguageSwitcher from '@/Components/Client/LanguageSwitcher.vue';
 import { cartState, openCart, fetchCart } from '@/Components/Stores/Cart';
 
 export default {
@@ -67,6 +69,7 @@ export default {
     components: {
         Link,
         CartModal,
+        LanguageSwitcher,
     },
 
     /**

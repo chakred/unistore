@@ -2,14 +2,14 @@
     <div>
         <div class="card">
             <div class="card-header">
-                <span>График работы:</span>
+                <span>{{ $t('sidebar.workHours.title') }}</span>
             </div>
             <div class="card-body">
                 <i class="far fa-calendar-alt"></i>
-                <span>Пн - Вс</span>
+                <span>{{ $t('sidebar.workHours.days') }}</span>
                 <hr/>
                 <i class="far fa-clock"></i>
-                <span>c 9:00 - 18:00</span>
+                <span>{{ $t('sidebar.workHours.hours') }}</span>
             </div>
         </div>
     </div>

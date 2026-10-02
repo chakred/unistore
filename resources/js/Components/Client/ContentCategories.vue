@@ -1,7 +1,7 @@
 <template>
     <section class="category-section">
         <div class="category-section__header">
-            <h2 class="category-section__title">Категории товаров</h2>
+            <h2 class="category-section__title">{{ $t('home.categoriesTitle') }}</h2>
         </div>
         <div class="tile-grid">
             <ImageTile
@@ -19,7 +19,6 @@
 
 <script>
 import { imgStoragePath } from '@/Mixins/General';
-import { pluralizeRu } from '@/Mixins/General/Pluralize';
 import { defaultCategoryIcon } from '@/Mixins/Category/CategoryIcons';
 import ImageTile from '@/Components/Client/ImageTile.vue';
 
@@ -69,7 +68,7 @@ export default {
                 return '';
             }
 
-            return `${category.goods_count} ${pluralizeRu(category.goods_count, ['товар', 'товара', 'товаров'])}`;
+            return this.$t('home.goodsCount', { count: category.goods_count }, category.goods_count);
         },
     },
 }

@@ -1,12 +1,12 @@
 <template>
     <div class="card price-filter">
         <div class="card-header">
-            <span>Фильтр по цене:</span>
+            <span>{{ $t('sidebar.priceFilter.title') }}</span>
         </div>
         <div class="card-body">
             <div class="price-filter__values">
-                <span>от {{ minValue }}</span>
-                <span>до {{ maxValue }}</span>
+                <span>{{ $t('sidebar.priceFilter.from') }} {{ minValue }}</span>
+                <span>{{ $t('sidebar.priceFilter.to') }} {{ maxValue }}</span>
             </div>
             <div class="price-filter__slider">
                 <input
@@ -32,14 +32,14 @@
                     class="price-filter__reset"
                     @click="resetFilter"
                 >
-                    <i class="fa-solid fa-rotate-left"></i> Сбросить
+                    <i class="fa-solid fa-rotate-left"></i> {{ $t('actions.reset') }}
                 </button>
                 <button
                     type="button"
                     class="btn btn-dark btn-sm price-filter__apply"
                     @click="applyFilter"
                 >
-                    Применить
+                    {{ $t('actions.apply') }}
                 </button>
             </div>
         </div>

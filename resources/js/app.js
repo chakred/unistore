@@ -9,6 +9,7 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import 'vue3-easy-data-table/dist/style.css';
+import { i18n } from './i18n';
 
 // import { Mark } from './Components/Stores/Mark'
 
@@ -28,6 +29,7 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .use(store)
+            .use(i18n)
             .mount(el);
     },
     progress: {

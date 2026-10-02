@@ -1,19 +1,19 @@
 <template>
     <div class="card sorter-block mb-3 border-0 bg-transparent">
         <div class="card-body d-flex justify-content-end align-items-center">
-            <label for="sort" class="me-2 mb-0">Сортировать:</label>
+            <label for="sort" class="me-2 mb-0">{{ $t('sidebar.sorter.label') }}</label>
             <select
                 id="sort"
                 v-model="sort"
                 class="form-select w-auto"
                 @change="applySort"
             >
-                <option value="">По умолчанию</option>
-                <option value="price_desc">Цена: сначала дороже</option>
-                <option value="price_asc">Цена: сначала дешевле</option>
-                <option value="availability">По наличию</option>
-                <option value="discount">По размеру скидки</option>
-                <option value="new">Сначала новые</option>
+                <option value="">{{ $t('sidebar.sorter.default') }}</option>
+                <option value="price_desc">{{ $t('sidebar.sorter.priceDesc') }}</option>
+                <option value="price_asc">{{ $t('sidebar.sorter.priceAsc') }}</option>
+                <option value="availability">{{ $t('sidebar.sorter.availability') }}</option>
+                <option value="discount">{{ $t('sidebar.sorter.discount') }}</option>
+                <option value="new">{{ $t('sidebar.sorter.new') }}</option>
             </select>
         </div>
     </div>

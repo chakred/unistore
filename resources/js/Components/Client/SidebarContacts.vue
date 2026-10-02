@@ -2,7 +2,7 @@
     <div>
         <div class="card">
             <div class="card-header">
-                <span>Cвязаться с нами:</span>
+                <span>{{ $t('sidebar.contacts.title') }}</span>
             </div>
             <div class="card-body">
                 <i class="fas fa-map-marker-alt"></i>
@@ -12,7 +12,7 @@
                 <a href="tel:+380936243391">+380936243391</a>
                 <hr>
                 <i class="fa fa-question-circle"></i>
-                <span>Тех. поддержка сайта</span>
+                <span>{{ $t('sidebar.contacts.support') }}</span>
                 <hr>
                 <i class="fas fa-phone-volume"></i>
                 <a href="tel:+380630658100">+380630658100</a>

@@ -4,7 +4,7 @@
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Корзина</h5>
+                        <h5 class="modal-title">{{ $t('cart.title') }}</h5>
                         <button type="button" class="close" aria-label="Close" @click="closeCart">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -14,11 +14,11 @@
                             <table class="table align-middle">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Картинка</th>
-                                        <th scope="col">Товар</th>
-                                        <th scope="col">Цена</th>
-                                        <th scope="col">Количество</th>
-                                        <th scope="col">Сумма</th>
+                                        <th scope="col">{{ $t('cart.image') }}</th>
+                                        <th scope="col">{{ $t('cart.product') }}</th>
+                                        <th scope="col">{{ $t('cart.price') }}</th>
+                                        <th scope="col">{{ $t('cart.quantity') }}</th>
+                                        <th scope="col">{{ $t('cart.total') }}</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
@@ -34,12 +34,12 @@
                                 </tbody>
                             </table>
                         </div>
-                        <p v-else class="text-center mb-0">Корзина пуста</p>
+                        <p v-else class="text-center mb-0">{{ $t('cart.empty') }}</p>
                     </div>
                     <div class="modal-footer d-flex justify-content-between align-items-center">
-                        <strong v-if="cartState.items.length">Итого: {{ cartState.total }} грн</strong>
+                        <strong v-if="cartState.items.length">{{ $t('cart.grandTotal', { total: cartState.total }) }}</strong>
                         <span v-else></span>
-                        <button type="button" class="btn btn-secondary" @click="closeCart">Закрыть</button>
+                        <button type="button" class="btn btn-secondary" @click="closeCart">{{ $t('cart.close') }}</button>
                     </div>
                 </div>
             </div>

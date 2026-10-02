@@ -25,13 +25,13 @@
                         v-if="isOutOfStock(good)"
                         class="good-card__badge good-card__badge--out"
                     >
-                        Нет в наличии
+                        {{ $t('stock.out') }}
                     </span>
                     <span
                         v-else-if="isLowStock(good)"
                         class="good-card__badge good-card__badge--low"
                     >
-                        Заканчивается
+                        {{ $t('stock.low') }}
                     </span>
                 </a>
                 <div class="good-card__body">
@@ -42,19 +42,19 @@
                         v-if="good.brand"
                         class="good-card__brand"
                     >
-                        TM: {{ good.brand }}
+                        {{ $t('common.tm', { brand: good.brand }) }}
                     </p>
                     <p class="good-card__desc">
                         {{ good.desc }}
                     </p>
                 </div>
                 <div class="good-card__footer">
-                    <div class="good-card__price">{{ good.price_uah }} грн</div>
+                    <div class="good-card__price">{{ good.price_uah }} {{ $t('common.currency') }}</div>
                     <div class="good-card__actions">
                         <button
                             type="button"
                             class="good-card__btn good-card__btn--cart"
-                            title="В корзину"
+                            :title="$t('goodCard.addToCart')"
                             :disabled="isOutOfStock(good)"
                             @click="addToCart(good.id)"
                         >
@@ -66,7 +66,7 @@
                             :disabled="isOutOfStock(good)"
                             @click="buyNow(good.id)"
                         >
-                            Купить
+                            {{ $t('goodCard.buy') }}
                         </button>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
         class="row justify-content-center"
     >
         <div class="d-flex justify-content-center">
-            Nothing found!
+            {{ $t('goodCard.nothingFound') }}
         </div>
     </div>
 </template>

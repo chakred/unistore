@@ -144,7 +144,7 @@ export default {
      */
     computed: {
         breadcrumbItems() {
-            const items = [{ label: 'Главная', href: '/' }];
+            const items = [{ label: this.$t('common.home'), href: '/' }];
 
             if (this.heading) {
                 items.push({ label: this.heading });
