@@ -1,66 +1,68 @@
 <template>
-    <div class="card car-selector">
-        <div class="card-body">
-            <h2 class="car-selector__title">Подбор запчастей по автомобилю</h2>
-            <div class="row g-2 align-items-end">
-                <div class="col-md-4">
-                    <label class="form-label" for="car-selector-mark">Марка</label>
-                    <select
-                        id="car-selector-mark"
-                        v-model="selectedMarkId"
-                        class="form-select"
-                    >
-                        <option value="" disabled>Выберите марку</option>
-                        <option
-                            v-for="mark in marksList"
-                            :key="mark.id"
-                            :value="mark.id"
-                        >{{ mark.name }}</option>
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label" for="car-selector-model">Модель</label>
-                    <select
-                        id="car-selector-model"
-                        v-model="selectedModelId"
-                        class="form-select"
-                        :disabled="!selectedMarkId"
-                    >
-                        <option value="" disabled>Выберите модель</option>
-                        <option
-                            v-for="model in modelsForSelectedMark"
-                            :key="model.id"
-                            :value="model.id"
-                        >{{ model.name }}</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <label class="form-label" for="car-selector-year">Год</label>
-                    <select
-                        id="car-selector-year"
-                        v-model="selectedYear"
-                        class="form-select"
-                        :disabled="!yearOptions.length"
-                    >
-                        <option value="" disabled>Год</option>
-                        <option
-                            v-for="year in yearOptions"
-                            :key="year"
-                            :value="year"
-                        >{{ year }}</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <button
-                        type="button"
-                        class="btn btn-primary w-100"
-                        :disabled="!canSubmit"
-                        @click="goToCatalog"
-                    >
-                        Подобрать
-                    </button>
-                </div>
+    <div class="car-selector">
+        <div class="car-selector__heading">
+            <span class="car-selector__icon"><i class="fa-solid fa-car"></i></span>
+            <div>
+                <h2 class="car-selector__title">Подбор запчастей по автомобилю</h2>
+                <p class="car-selector__subtitle">Укажите марку, модель и год — покажем только подходящие товары</p>
             </div>
+        </div>
+        <div class="car-selector__fields">
+            <div class="car-selector__field">
+                <label class="car-selector__label" for="car-selector-mark">Марка</label>
+                <select
+                    id="car-selector-mark"
+                    v-model="selectedMarkId"
+                    class="form-select car-selector__select"
+                >
+                    <option value="" disabled>Выберите марку</option>
+                    <option
+                        v-for="mark in marksList"
+                        :key="mark.id"
+                        :value="mark.id"
+                    >{{ mark.name }}</option>
+                </select>
+            </div>
+            <div class="car-selector__field">
+                <label class="car-selector__label" for="car-selector-model">Модель</label>
+                <select
+                    id="car-selector-model"
+                    v-model="selectedModelId"
+                    class="form-select car-selector__select"
+                    :disabled="!selectedMarkId"
+                >
+                    <option value="" disabled>Выберите модель</option>
+                    <option
+                        v-for="model in modelsForSelectedMark"
+                        :key="model.id"
+                        :value="model.id"
+                    >{{ model.name }}</option>
+                </select>
+            </div>
+            <div class="car-selector__field car-selector__field--year">
+                <label class="car-selector__label" for="car-selector-year">Год</label>
+                <select
+                    id="car-selector-year"
+                    v-model="selectedYear"
+                    class="form-select car-selector__select"
+                    :disabled="!yearOptions.length"
+                >
+                    <option value="" disabled>Год</option>
+                    <option
+                        v-for="year in yearOptions"
+                        :key="year"
+                        :value="year"
+                    >{{ year }}</option>
+                </select>
+            </div>
+            <button
+                type="button"
+                class="car-selector__submit"
+                :disabled="!canSubmit"
+                @click="goToCatalog"
+            >
+                Подобрать
+            </button>
         </div>
     </div>
 </template>
@@ -178,10 +180,111 @@ export default {
 <style scoped>
 .car-selector {
     margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #212529 0%, #343a40 100%);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .18);
+}
+
+.car-selector__heading {
+    display: flex;
+    align-items: center;
+    gap: .9rem;
+    margin-bottom: 1.25rem;
+}
+
+.car-selector__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .12);
+    color: #fff;
+    font-size: 1.2rem;
+    flex-shrink: 0;
 }
 
 .car-selector__title {
     font-size: 1.25rem;
-    margin-bottom: 1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: .2rem;
+}
+
+.car-selector__subtitle {
+    font-size: .85rem;
+    color: rgba(255, 255, 255, .65);
+    margin-bottom: 0;
+}
+
+.car-selector__fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: .75rem;
+    align-items: end;
+}
+
+@media (min-width: 768px) {
+    .car-selector__fields {
+        grid-template-columns: 1fr 1fr .6fr auto;
+    }
+}
+
+.car-selector__field--year {
+    grid-column: span 2;
+}
+
+@media (min-width: 768px) {
+    .car-selector__field--year {
+        grid-column: auto;
+    }
+}
+
+.car-selector__label {
+    display: block;
+    font-size: .72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    color: rgba(255, 255, 255, .6);
+    margin-bottom: .3rem;
+}
+
+.car-selector__select {
+    border: none;
+    border-radius: 6px;
+    padding-top: .55rem;
+    padding-bottom: .55rem;
+}
+
+.car-selector__submit {
+    grid-column: span 2;
+    border: none;
+    border-radius: 6px;
+    padding: .55rem 1.5rem;
+    font-weight: 700;
+    color: #212529;
+    background: #ffc107;
+    transition: background-color .15s ease, transform .15s ease;
+    white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+    .car-selector__submit {
+        grid-column: auto;
+    }
+}
+
+.car-selector__submit:hover:not(:disabled) {
+    background: #ffca2c;
+    transform: translateY(-1px);
+}
+
+.car-selector__submit:disabled {
+    background: #6c757d;
+    color: rgba(255, 255, 255, .7);
+    cursor: not-allowed;
 }
 </style>
