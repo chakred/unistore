@@ -5,15 +5,6 @@
                 <strong style="letter-spacing: 3px;">UNISTORE</strong>
             </a>
             <LanguageSwitcher class="order-lg-2" />
-            <button type="button" class="btn btn-link nav-cart-btn text-white position-relative" @click="openCart">
-                <i class="fas fa-shopping-cart"></i>
-                <span
-                    v-if="cartState.count"
-                    class="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle"
-                >
-                    {{ cartState.count }}
-                </span>
-            </button>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -24,25 +15,36 @@
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
+<!--                        <li class="nav-item">-->
+<!--                            <a class="nav-link active" aria-current="page" href="#">Home</a>-->
+<!--                        </li>-->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
+                            <button type="button" class="btn btn-link nav-cart-btn text-white position-relative" @click="openCart">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span
+                                    v-if="cartState.count"
+                                    class="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle"
+                                >
+                                    {{ cartState.count }}
+                                </span>
+                            </button>
                         </li>
+<!--                        <li class="nav-item">-->
+<!--                            <a class="nav-link" href="#">Link</a>-->
+<!--                        </li>-->
+<!--                        <li class="nav-item dropdown">-->
+<!--                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                                Dropdown-->
+<!--                            </a>-->
+<!--                            <ul class="dropdown-menu dropdown-menu-dark">-->
+<!--                                <li><a class="dropdown-item" href="#">Action</a></li>-->
+<!--                                <li><a class="dropdown-item" href="#">Another action</a></li>-->
+<!--                                <li>-->
+<!--                                    <hr class="dropdown-divider">-->
+<!--                                </li>-->
+<!--                                <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
                     </ul>
                 </div>
             </div>

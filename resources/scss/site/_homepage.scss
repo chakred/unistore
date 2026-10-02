@@ -186,7 +186,8 @@ body *{
     }
 }
 .card-header {
-    background: #212529 !important;
+    background: linear-gradient(135deg, #212529 0%, #343a40 100%) !important;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .18);
     color: white !important;
     font-weight: bold;
     button {
