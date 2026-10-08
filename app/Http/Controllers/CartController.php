@@ -106,6 +106,7 @@ class CartController extends Controller
 
             $items[] = [
                 'id' => $good->id,
+                'slug' => $good->slug,
                 'name' => $good->name,
                 'image' => $good->img_path,
                 'brand' => $good->brand,

@@ -34,8 +34,8 @@
                             />
                             <img
                                 v-else
-                                src="http://dummyimage.com/450x350/ffffff/545454&text=No+image"
-                                class="good-page__img"
+                                src="../../../images/Client/mechanical_parts_gray_vector.svg"
+                                class="good-page__img good-page__img--placeholder"
                             />
                         </div>
                         <div class="col-md-7">
@@ -224,6 +224,11 @@ export default {
     max-width: 100%;
     max-height: 320px;
     object-fit: contain;
+}
+
+.good-page__img--placeholder {
+    width: 160px;
+    height: 160px;
 }
 
 .good-page__title {

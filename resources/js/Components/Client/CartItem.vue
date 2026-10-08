@@ -9,11 +9,11 @@
             <img
                 v-else
                 width="60"
-                src="http://dummyimage.com/60x60/ffffff/545454&text=No+image"
+                src="../../../images/Client/mechanical_parts_gray_vector.svg"
             />
         </td>
         <td>
-            {{ item.name }}
+            <a :href="route('home.good', item.slug)">{{ item.name }}</a>
             <div v-if="item.brand" class="text-muted small">{{ $t('common.tm', { brand: item.brand }) }}</div>
         </td>
         <td>{{ item.price }} {{ item.currency }}</td>
