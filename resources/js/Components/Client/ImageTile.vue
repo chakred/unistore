@@ -1,7 +1,14 @@
 <template>
     <a :href="href" class="image-tile">
-        <div class="image-tile__media">
-            <img :src="imgSrc || placeholder" :alt="title" />
+        <div
+            class="image-tile__media"
+            :class="{ 'image-tile__media--no-image': !imgSrc }"
+        >
+            <img
+                :src="imgSrc || placeholder"
+                :class="{ 'image-tile__media-placeholder': !imgSrc }"
+                :alt="title"
+            />
             <div v-if="icon" class="image-tile__icon">
                 <i :class="icon"></i>
             </div>
@@ -17,8 +24,7 @@
 </template>
 
 <script>
-// Matches this component's own .image-tile__media aspect-ratio (4:3).
-const placeholder = 'https://dummyimage.com/400x300/ffffff/545454&text=No+image';
+import placeholder from '../../../images/Client/mechanical_parts_gray_vector.svg';
 
 export default {
     /**
@@ -91,6 +97,19 @@ export default {
     height: 100%;
     object-fit: cover;
     transition: transform .3s ease;
+}
+
+.image-tile__media--no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+}
+
+.image-tile__media .image-tile__media-placeholder {
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
 }
 
 .image-tile:hover .image-tile__media img {

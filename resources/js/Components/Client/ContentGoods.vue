@@ -12,14 +12,19 @@
                 class="good-card"
                 :class="{ 'good-card--out-of-stock': isOutOfStock(good) }"
             >
-                <a :href="route('home.good', good.slug)" class="good-card__media">
+                <a
+                    :href="route('home.good', good.slug)"
+                    class="good-card__media"
+                    :class="{ 'good-card__media--no-image': !good.img_path }"
+                >
                     <img
                         v-if="good.img_path"
                         :src="`${imgStoragePath + good.img_path}`"
                     />
                     <img
                         v-else
-                        src="https://dummyimage.com/400x300/ffffff/545454&text=No+image"
+                        class="good-card__media-placeholder"
+                        src="../../../images/Client/mechanical_parts_gray_vector.svg"
                     />
                     <span
                         v-if="isOutOfStock(good)"
@@ -171,6 +176,19 @@ export default {
     height: 100%;
     object-fit: cover;
     transition: transform .3s ease;
+}
+
+.good-card__media--no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+}
+
+.good-card__media .good-card__media-placeholder {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
 }
 
 .good-card:hover .good-card__media img {
