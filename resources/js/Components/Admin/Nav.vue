@@ -1,9 +1,9 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <Link :href="route('dashboard')" class="navbar-brand">
                 <strong style="letter-spacing: 3px;">UNISTORE</strong>
-            </a>
+            </Link>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -51,7 +51,7 @@
         <div class="container pt-4">
             <div class="row gx-5 pb-3">
                 <div class="col-10">
-                    {{ pageName }}
+                    {{ displayPageName }}
                 </div>
                 <div
                     v-if="createButtonAction"
@@ -84,24 +84,43 @@ export default {
      */
     extends: Nav,
 
-    computed: {
-        currentRouteName() {
-            return this.$route.name;
-        }
-    },
-
     /**
      * props.
      */
     props: {
         pageName: {
             type: String,
-            default: 'Page name',
+            default: '',
         },
         createButtonAction: {
             type: String,
             default: null,
         }
-    }
+    },
+
+    computed: {
+        displayPageName() {
+            if (this.pageName) {
+                return this.pageName;
+            }
+
+            const section = (this.route().current() || '').split('.')[0];
+
+            const titles = {
+                dashboard: 'Dashboard',
+                mark: 'Mark',
+                model: 'Model',
+                category: 'Categories',
+                good: 'Goods',
+                currentcurrency: 'Currency',
+            };
+
+            if (titles[section]) {
+                return titles[section];
+            }
+
+            return section ? section.charAt(0).toUpperCase() + section.slice(1) : 'Page name';
+        },
+    },
 }
 </script>

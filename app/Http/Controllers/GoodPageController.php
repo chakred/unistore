@@ -19,6 +19,8 @@ class GoodPageController extends Controller
             ->where('active', true)
             ->firstOrFail();
 
+        $goodEntity->increment('views');
+
         $similarGoods = Good::with(['model.mark', 'category'])
             ->where('category_id', $goodEntity->category_id)
             ->where('id', '!=', $goodEntity->id)

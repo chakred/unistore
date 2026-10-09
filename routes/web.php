@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CategoryGoodsController;
 use App\Http\Controllers\GoodPageController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\DashboardController;
 use Modules\Good\Http\Controllers\SearchController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -47,9 +48,9 @@ Route::prefix('cart')->name('cart.')->group(function () {
     Route::delete('/{good}', [CartController::class, 'destroy'])->name('destroy');
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Admin/Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', DashboardController::class)
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
