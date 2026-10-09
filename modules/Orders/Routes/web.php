@@ -1,5 +1,9 @@
 <?php
 
+use Modules\Orders\Http\Controllers\IndexController;
+use Modules\Orders\Http\Controllers\UpdateController;
+use Modules\Orders\Http\Controllers\SearchGoodsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,5 +16,7 @@
 */
 
 Route::prefix('orders')->group(function() {
-    Route::get('/', 'OrdersController@index');
+    Route::get('/', IndexController::class)->name('order.index');
+    Route::get('/goods-search', SearchGoodsController::class)->name('order.goods.search');
+    Route::put('/update/{order}', UpdateController::class)->name('order.update');
 });
