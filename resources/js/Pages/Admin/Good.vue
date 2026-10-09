@@ -14,6 +14,17 @@
         </div>
         <div class="row">
             <div class="col-12">
+                <GoodsFilters
+                    :categories="categories"
+                    :models="models"
+                    :brands="brands"
+                    :countries="countries"
+                    :query="request"
+                />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
                 <table
                     v-if="hasGoods"
                     class="table sortable-table"
@@ -115,6 +126,7 @@ import CreateGoodModal from '@/Components/Admin/CreateGoodModal.vue';
 import UpdateGoodModal from '@/Components/Admin/UpdateGoodModal.vue';
 import DeleteItemModal from '@/Components/Admin/DeleteItemModal.vue';
 import Searcher from '@/Components/Admin/Searcher.vue';
+import GoodsFilters from '@/Components/Admin/GoodsFilters.vue';
 import SortableTh from '@/Components/Admin/SortableTh.vue';
 import Pagination from '@/Components/Pagination.vue';
 
@@ -130,6 +142,7 @@ export default {
     components: {
         Pagination,
         Searcher,
+        GoodsFilters,
         SortableTh,
         CreateGoodModal,
         UpdateGoodModal,
@@ -176,6 +189,10 @@ export default {
         categories: {
             type: Object,
             default: {},
+        },
+        brands: {
+            type: Array,
+            default: () => [],
         },
         request: {
             type: Object,

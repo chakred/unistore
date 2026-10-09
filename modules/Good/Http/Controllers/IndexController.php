@@ -32,11 +32,22 @@ class IndexController extends Controller
             : 'id';
         $sortDir = $request->input('sort_dir') === 'desc' ? 'desc' : 'asc';
 
+        $goodsQuery = Good::with('mark', 'model', 'category')
+            ->when($request->filled('keyWord'), function ($query) use ($request) {
+                $query->where(function ($query) use ($request) {
+                    $query->where('name', 'like', '%'.$request->keyWord.'%')
+                        ->orWhere('desc', 'like', '%'.$request->keyWord.'%');
+                });
+            })
+            ->when($request->filled('category_id'), fn ($query) => $query->where('category_id', $request->input('category_id')))
+            ->when($request->filled('model_id'), fn ($query) => $query->where('model_id', $request->input('model_id')))
+            ->when($request->filled('brand'), fn ($query) => $query->where('brand', $request->input('brand')))
+            ->when($request->filled('country'), fn ($query) => $query->where('country', $request->input('country')))
+            ->when($request->filled('active'), fn ($query) => $query->where('active', $request->input('active')))
+            ->orderBy($sortBy, $sortDir);
+
         return Inertia::render('Admin/Good', [
-            'goods'      => Good::with('mark', 'model', 'category')
-                ->where('name', 'like', '%'.$request->keyWord.'%')
-                ->orWhere('desc','like', '%'.$request->keyWord.'%')
-                ->orderBy($sortBy, $sortDir)
+            'goods'      => $goodsQuery
                 ->paginate(5)
                 ->appends($request->query()),
             'request' => $request->all(),
@@ -47,7 +58,12 @@ class IndexController extends Controller
             'models'     => Model::with('mark')->get(),
             'marks'      => Mark::pluck('name','id'),
             'countries'  => Country::pluck('name'),
-            'categories' => Category::pluck('name','id')
+            'categories' => Category::pluck('name','id'),
+            'brands'     => Good::whereNotNull('brand')
+                ->where('brand', '!=', '')
+                ->distinct()
+                ->orderBy('brand')
+                ->pluck('brand'),
         ]);
     }
 }
