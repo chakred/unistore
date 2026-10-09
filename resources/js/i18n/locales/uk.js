@@ -6,9 +6,10 @@ export default {
     },
 
     search: {
+        title: 'Пошук товарів',
         placeholder: 'Пошук',
-        label: 'пошук...',
         clear: 'Очистити пошук',
+        submit: 'Знайти',
     },
 
     sidebar: {

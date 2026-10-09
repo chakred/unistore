@@ -6,9 +6,10 @@ export default {
     },
 
     search: {
+        title: 'Поиск товаров',
         placeholder: 'Поиск',
-        label: 'поиск...',
         clear: 'Очистить поиск',
+        submit: 'Найти',
     },
 
     sidebar: {
