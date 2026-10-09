@@ -49,7 +49,7 @@ class CartSession
             }
 
             $quantity = (int) $line['quantity'];
-            $subtotal = $quantity * $good->getPrice();
+            $subtotal = round($quantity * $good->getPrice(), 2);
 
             $items[] = [
                 'id' => $good->id,
@@ -68,7 +68,7 @@ class CartSession
 
         return [
             'items' => $items,
-            'total' => $total,
+            'total' => round($total, 2),
             'count' => array_sum(array_column($items, 'quantity')),
         ];
     }

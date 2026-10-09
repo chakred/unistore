@@ -39,7 +39,7 @@
                     <div class="modal-footer d-flex justify-content-between align-items-center">
                         <strong v-if="cartState.items.length">{{ $t('cart.grandTotal', { total: cartState.total }) }}</strong>
                         <span v-else></span>
-                        <div>
+                        <div class="d-flex gap-2">
                             <button type="button" class="btn btn-secondary" @click="closeCart">{{ $t('cart.close') }}</button>
                             <Link
                                 v-if="cartState.items.length"
