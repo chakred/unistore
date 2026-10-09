@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\CartSession;
 use Binafy\LaravelCart\LaravelCart;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ class CartController extends Controller
 {
     public function index(): JsonResponse
     {
-        return response()->json($this->cartPayload());
+        return response()->json(CartSession::payload());
     }
 
     public function store(Request $request): JsonResponse
@@ -24,105 +25,39 @@ class CartController extends Controller
         $good = Good::findOrFail($validated['good_id']);
         $quantity = $validated['quantity'] ?? 1;
 
-        if ($this->findCartLine($good)) {
-            LaravelCart::increaseQuantity($good, $quantity, $this->resolveUserId());
+        if (CartSession::findLine($good)) {
+            LaravelCart::increaseQuantity($good, $quantity, CartSession::resolveUserId());
         } else {
-            LaravelCart::storeItem(['itemable' => $good, 'quantity' => $quantity], $this->resolveUserId());
+            LaravelCart::storeItem(['itemable' => $good, 'quantity' => $quantity], CartSession::resolveUserId());
         }
 
-        return response()->json($this->cartPayload());
+        return response()->json(CartSession::payload());
     }
 
     public function increase(Good $good): JsonResponse
     {
-        LaravelCart::increaseQuantity($good, 1, $this->resolveUserId());
+        LaravelCart::increaseQuantity($good, 1, CartSession::resolveUserId());
 
-        return response()->json($this->cartPayload());
+        return response()->json(CartSession::payload());
     }
 
     public function decrease(Good $good): JsonResponse
     {
-        $line = $this->findCartLine($good);
+        $line = CartSession::findLine($good);
 
         if ($line && (int) $line['quantity'] <= 1) {
-            LaravelCart::removeItem($good, $this->resolveUserId());
+            LaravelCart::removeItem($good, CartSession::resolveUserId());
         } else {
-            LaravelCart::decreaseQuantity($good, 1, $this->resolveUserId());
+            LaravelCart::decreaseQuantity($good, 1, CartSession::resolveUserId());
         }
 
-        return response()->json($this->cartPayload());
+        return response()->json(CartSession::payload());
     }
 
     public function destroy(Good $good): JsonResponse
     {
-        LaravelCart::removeItem($good, $this->resolveUserId());
+        LaravelCart::removeItem($good, CartSession::resolveUserId());
 
-        return response()->json($this->cartPayload());
-    }
-
-    private function resolveUserId(): string
-    {
-        return auth()->id() ? (string) auth()->id() : session()->getId();
-    }
-
-    /**
-     * The session driver has no public accessor for the raw cart lines,
-     * so we read the session under the same key it writes to.
-     */
-    private function rawCartLines(): array
-    {
-        return session('cart_'.$this->resolveUserId(), []);
-    }
-
-    private function findCartLine(Good $good): ?array
-    {
-        foreach ($this->rawCartLines() as $line) {
-            if ($line['itemable_type'] === Good::class && $line['itemable_id'] === $good->getKey()) {
-                return $line;
-            }
-        }
-
-        return null;
-    }
-
-    private function cartPayload(): array
-    {
-        $items = [];
-        $total = 0;
-
-        foreach ($this->rawCartLines() as $line) {
-            if ($line['itemable_type'] !== Good::class) {
-                continue;
-            }
-
-            $good = Good::find($line['itemable_id']);
-
-            if (! $good) {
-                continue;
-            }
-
-            $quantity = (int) $line['quantity'];
-            $subtotal = $quantity * $good->getPrice();
-
-            $items[] = [
-                'id' => $good->id,
-                'slug' => $good->slug,
-                'name' => $good->name,
-                'image' => $good->img_path,
-                'brand' => $good->brand,
-                'price' => $good->getPrice(),
-                'currency' => 'грн',
-                'quantity' => $quantity,
-                'subtotal' => $subtotal,
-            ];
-
-            $total += $subtotal;
-        }
-
-        return [
-            'items' => $items,
-            'total' => $total,
-            'count' => array_sum(array_column($items, 'quantity')),
-        ];
+        return response()->json(CartSession::payload());
     }
 }

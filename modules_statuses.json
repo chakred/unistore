@@ -4,5 +4,6 @@
     "Category": true,
     "ModuleName": true,
     "Good": true,
-    "CurrentCurrency": true
+    "CurrentCurrency": true,
+    "Orders": true
 }

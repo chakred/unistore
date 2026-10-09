@@ -111,5 +111,13 @@ export default {
         empty: 'Корзина пуста',
         grandTotal: 'Итого: {total} грн',
         close: 'Закрыть',
+        checkout: 'Оформить заказ',
+    },
+
+    checkout: {
+        title: 'Оформление заказа',
+        name: 'Ваше имя',
+        phone: 'Номер телефона',
+        submit: 'Подтвердить заказ',
     },
 };

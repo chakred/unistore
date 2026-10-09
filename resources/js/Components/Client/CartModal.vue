@@ -39,7 +39,17 @@
                     <div class="modal-footer d-flex justify-content-between align-items-center">
                         <strong v-if="cartState.items.length">{{ $t('cart.grandTotal', { total: cartState.total }) }}</strong>
                         <span v-else></span>
-                        <button type="button" class="btn btn-secondary" @click="closeCart">{{ $t('cart.close') }}</button>
+                        <div>
+                            <button type="button" class="btn btn-secondary" @click="closeCart">{{ $t('cart.close') }}</button>
+                            <Link
+                                v-if="cartState.items.length"
+                                :href="route('checkout')"
+                                class="btn btn-dark"
+                                @click="closeCart"
+                            >
+                                {{ $t('cart.checkout') }}
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -49,6 +59,7 @@
 </template>
 
 <script>
+import { Link } from '@inertiajs/vue3';
 import CartItem from '@/Components/Client/CartItem.vue';
 import {
     cartState,
@@ -68,6 +79,7 @@ export default {
      * Components.
      */
     components: {
+        Link,
         CartItem,
     },
 

@@ -15,6 +15,28 @@
                 </div>
             </div>
             <div class="col-md-4">
+                <div class="dashboard-stat-card dashboard-stat-card--info">
+                    <div class="dashboard-stat-card__icon">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </div>
+                    <div>
+                        <div class="dashboard-stat-card__value">{{ stats.totalOrders }}</div>
+                        <div class="dashboard-stat-card__label">Total orders</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="dashboard-stat-card dashboard-stat-card--success">
+                    <div class="dashboard-stat-card__icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <div class="dashboard-stat-card__value">{{ stats.soldGoods }}</div>
+                        <div class="dashboard-stat-card__label">Goods sold</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
                 <div class="dashboard-stat-card dashboard-stat-card--danger">
                     <div class="dashboard-stat-card__icon">
                         <i class="fa-solid fa-triangle-exclamation"></i>
@@ -83,7 +105,13 @@ export default {
     props: {
         stats: {
             type: Object,
-            default: () => ({ totalGoods: 0, outOfStock: 0, lowStock: 0 }),
+            default: () => ({
+                totalGoods: 0,
+                outOfStock: 0,
+                lowStock: 0,
+                totalOrders: 0,
+                soldGoods: 0,
+            }),
         },
         topViewedGoods: {
             type: Array,
@@ -125,6 +153,16 @@ export default {
 .dashboard-stat-card--warning .dashboard-stat-card__icon {
     background: #fff3cd;
     color: #c99a1b;
+}
+
+.dashboard-stat-card--info .dashboard-stat-card__icon {
+    background: #cfe2ff;
+    color: #0d6efd;
+}
+
+.dashboard-stat-card--success .dashboard-stat-card__icon {
+    background: #d1e7dd;
+    color: #198754;
 }
 
 .dashboard-stat-card__value {

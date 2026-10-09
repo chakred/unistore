@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryGoodsController;
 use App\Http\Controllers\GoodPageController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CheckoutController;
 use Modules\Good\Http\Controllers\SearchController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,9 @@ Route::prefix('cart')->name('cart.')->group(function () {
     Route::patch('/{good}/decrease', [CartController::class, 'decrease'])->name('decrease');
     Route::delete('/{good}', [CartController::class, 'destroy'])->name('destroy');
 });
+
+Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout');
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
 Route::get('/dashboard', DashboardController::class)
     ->middleware(['auth', 'verified'])
